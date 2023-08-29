@@ -1,15 +1,10 @@
-﻿//
-//  Copyright 2022 David Randolph
+﻿//**********************************************************************
 //
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using BusinessCheckBook.DataStore;
 
 namespace BusinessCheckBook

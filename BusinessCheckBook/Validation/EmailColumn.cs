@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessCheckBook.Validation
 {

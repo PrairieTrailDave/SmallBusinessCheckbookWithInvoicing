@@ -1,12 +1,11 @@
-﻿//
-//  Copyright 2021 David Randolph
+﻿//**********************************************************************
 //
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace BusinessCheckBook.DataStore
 {

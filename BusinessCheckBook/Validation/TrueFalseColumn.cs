@@ -1,9 +1,9 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 
 namespace BusinessCheckBook.Validation
 {

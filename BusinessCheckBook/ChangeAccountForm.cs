@@ -1,13 +1,11 @@
-﻿using BusinessCheckBook.DataStore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
+using BusinessCheckBook.DataStore;
+
 
 namespace BusinessCheckBook
 {

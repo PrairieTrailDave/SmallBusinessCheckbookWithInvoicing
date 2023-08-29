@@ -1,16 +1,11 @@
-﻿using BusinessCheckBook.Settings;
+﻿//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 using BusinessCheckBook.Validation;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Math;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace BusinessCheckBook.DataStore
 {

@@ -1,15 +1,12 @@
-﻿//
-//  Copyright 2023 David Randolph
+﻿//**********************************************************************
 //
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 using BusinessCheckBook.Validation;
 using ClosedXML.Excel;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessCheckBook.DataStore
 {

@@ -1,5 +1,8 @@
-using System.Net.Mail;
-using System.Net;
+//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
 
 namespace BusinessCheckBook.DataStore
 {

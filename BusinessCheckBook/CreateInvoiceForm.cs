@@ -1,6 +1,9 @@
-﻿//
-//  Copyright 2023 David Randolph
+﻿//**********************************************************************
 //
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
 using BusinessCheckBook.DataStore;
 using System.Data;
 using System.Drawing.Printing;
