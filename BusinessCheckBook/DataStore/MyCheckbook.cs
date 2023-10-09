@@ -20,10 +20,18 @@ namespace BusinessCheckBook.DataStore
         internal PayToList ToPayTo { get; set; } = new();
         internal CompanyParameters CompanyInformation { get; set; } = new();
 
+
+        // other variables
+
+        ActivityLogger Logger { get; set; } = new("");
+
         public MyCheckbook()
         {
         }
-
+        public MyCheckbook(ActivityLogger myLog)
+        {
+            Logger = myLog;
+        }
 
 
         internal void CreateNewCheckBook(decimal InitialBalance, int FirstCheckNumber, int FirstInvoiceNumber)

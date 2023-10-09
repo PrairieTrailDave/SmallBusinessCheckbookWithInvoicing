@@ -8,6 +8,7 @@ using BusinessCheckBook.DataStore;
 using BusinessCheckBook.Reports;
 using BusinessCheckBook.Settings;
 using ClosedXML.Excel;
+using System.Windows.Forms;
 
 
 namespace BusinessCheckBook
@@ -15,7 +16,8 @@ namespace BusinessCheckBook
     public partial class MainForm : Form
     {
         public MyCheckbook ActiveBook;
-        //string CurrentActiveFile;
+        
+        string CurrentActiveFile = string.Empty;
 
         public MainForm()
         {
@@ -30,20 +32,26 @@ namespace BusinessCheckBook
         // File Menu
         private void FileNewMenuItem_Click(object sender, EventArgs e)
         {
-            ActiveBook = new MyCheckbook();
 
-            InitialBalanceForm IBF = new();
-            IBF.ShowDialog();
-            try
+            // ask where the checkbook will be created
+            saveFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ActiveBook.CreateNewCheckBook(IBF.InitialBalance, IBF.FirstCheckNumber, IBF.FirstInvoiceNumber);
-                // open the business data entry screen
-                BusinessDataToolStripMenuItem_Click(sender, e);
+                CurrentActiveFile = saveFileDialog.FileName;
+                ActiveBook = new MyCheckbook();
 
-                EnableButtons();
+                InitialBalanceForm IBF = new();
+                IBF.ShowDialog();
+                try
+                {
+                    ActiveBook.CreateNewCheckBook(IBF.InitialBalance, IBF.FirstCheckNumber, IBF.FirstInvoiceNumber);
+                    // open the business data entry screen
+                    BusinessDataToolStripMenuItem_Click(sender, e);
+
+                    EnableButtons();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
 
         private async void FileOpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,6 +83,7 @@ namespace BusinessCheckBook
 
         private void FileSaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog.OverwritePrompt = false;
             saveFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -210,7 +219,7 @@ namespace BusinessCheckBook
 
         private void Federal1120ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Federal1120Form RF = new ();
+            Federal1120Form RF = new();
             RF.Setup(ActiveBook);
             RF.ShowDialog();
         }
@@ -308,13 +317,13 @@ namespace BusinessCheckBook
 
         private async Task<bool> ReadJournalFile(string FileName)
         {
-                bool result = false;
-                await Task.Run(() =>
-                {
-                    result = ActiveBook.ReadJournalFile(FileName);
-                });
+            bool result = false;
+            await Task.Run(() =>
+            {
+                result = ActiveBook.ReadJournalFile(FileName);
+            });
 
-                return result;
+            return result;
         }
 
 

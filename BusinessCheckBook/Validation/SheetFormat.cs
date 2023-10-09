@@ -4,6 +4,8 @@
 //
 //**********************************************************************
 
+//using ClosedXML.Excel;
+
 
 namespace BusinessCheckBook.Validation
 {
@@ -38,5 +40,16 @@ namespace BusinessCheckBook.Validation
         {
             return ColumnFormats[formatItem];
         }
+
+        //internal void AddColumnFormatting(IXLWorksheet CurrentWorksheet)
+        //{
+        //    foreach (ColumnFormat cf in ColumnFormats)
+        //    {
+        //        if (cf.CurrentFieldType == ColumnFormat.ColumnFieldType.Date.ToString())
+        //        {
+        //            CurrentWorksheet.Columns(cf.ColumnNumber).Style.DateFormat.Format = "mm/dd/yyyy"; ;
+        //        }
+        //    }
+        //}
     }
 }

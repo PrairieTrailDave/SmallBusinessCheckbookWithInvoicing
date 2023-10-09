@@ -464,7 +464,7 @@ namespace BusinessCheckBook.DataStore
                 Account? TAccount = (from tcc in CurrentAccountList
                                      where tcc.Name == EntryAccount
                                      select tcc).FirstOrDefault();
-                if (TAccount == null)
+                if (TAccount == null && EntryAccount != "Split")
                 {
                     string ErrorMessage = "The account " + EntryAccount +
                         " is not found in the chart of accounts for "

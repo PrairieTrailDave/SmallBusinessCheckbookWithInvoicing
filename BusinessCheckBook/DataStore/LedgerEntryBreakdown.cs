@@ -141,7 +141,9 @@ namespace BusinessCheckBook.DataStore
             Col = SubColumnsFormat.Column(XLAccountName)!;
             AccountName = XRow.Cell(Col.ColumnNumber ).GetString();
             Col = SubColumnsFormat.Column(XLAmount)!;
-            Amount = Decimal.Parse(XRow.Cell(Col.ColumnNumber).GetString());
+            string amountstr = XRow.Cell(Col.ColumnNumber).GetString();
+            if (amountstr.Length == 0) amountstr = "0.00";
+            Amount = Decimal.Parse(amountstr);
             Col = SubColumnsFormat.Column(XLMemo)!;
             Memo = XRow.Cell(Col.ColumnNumber).GetString();
             return NumberOfColumnsInLedgerEntryBreakdown;

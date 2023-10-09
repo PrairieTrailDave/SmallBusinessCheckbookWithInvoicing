@@ -81,6 +81,18 @@ namespace BusinessCheckBook.DataStore
             }
         }
 
+        internal void ApplyPaymentToInvoice (int InvoiceNum, decimal Payment)
+        {
+            Invoice? Inv = (from invc in CurrentInvoices
+                           where invc.InvoiceNumber == InvoiceNum
+                           select invc).FirstOrDefault();
+            if (Inv != null)
+            {
+                Inv.AmountPaid += Payment;
+                if (Inv.AmountPaid == Inv.Total)
+                    Inv.Paid = true;
+            }
+        }
 
         internal List<Invoice> GetInvoicesForAYear(int Year)
         {
@@ -273,6 +285,10 @@ namespace BusinessCheckBook.DataStore
             // add the chart of accounts worksheet
             CheckBookXlsx.AddWorksheet(InvoiceListFormat.SheetName);
             IXLWorksheet InvoicesWorksheet = CheckBookXlsx.Worksheet(InvoiceListFormat.SheetName);
+
+            // add any column formatting needed
+
+            //InvoiceListFormat.AddColumnFormatting(InvoicesWorksheet);
 
             // first build the header
             int breakdowns = GetMaxBreakdowns();

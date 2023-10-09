@@ -80,21 +80,21 @@
             // FileNewMenuItem
             // 
             FileNewMenuItem.Name = "FileNewMenuItem";
-            FileNewMenuItem.Size = new Size(270, 34);
+            FileNewMenuItem.Size = new Size(169, 34);
             FileNewMenuItem.Text = "New";
             FileNewMenuItem.Click += FileNewMenuItem_Click;
             // 
             // FileOpenToolStripMenuItem
             // 
             FileOpenToolStripMenuItem.Name = "FileOpenToolStripMenuItem";
-            FileOpenToolStripMenuItem.Size = new Size(270, 34);
+            FileOpenToolStripMenuItem.Size = new Size(169, 34);
             FileOpenToolStripMenuItem.Text = "Open";
             FileOpenToolStripMenuItem.Click += FileOpenToolStripMenuItem_Click;
             // 
             // FileSaveToolStripMenuItem
             // 
             FileSaveToolStripMenuItem.Name = "FileSaveToolStripMenuItem";
-            FileSaveToolStripMenuItem.Size = new Size(270, 34);
+            FileSaveToolStripMenuItem.Size = new Size(169, 34);
             FileSaveToolStripMenuItem.Text = "Save";
             FileSaveToolStripMenuItem.Click += FileSaveToolStripMenuItem_Click;
             // 
@@ -102,7 +102,7 @@
             // 
             ImportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { IIFFileImportToolStripMenuItem, JournalExcelFileImportToolStripMenuItem });
             ImportToolStripMenuItem.Name = "ImportToolStripMenuItem";
-            ImportToolStripMenuItem.Size = new Size(270, 34);
+            ImportToolStripMenuItem.Size = new Size(169, 34);
             ImportToolStripMenuItem.Text = "Import";
             // 
             // IIFFileImportToolStripMenuItem
@@ -122,13 +122,13 @@
             // ExportToolStripMenuItem
             // 
             ExportToolStripMenuItem.Name = "ExportToolStripMenuItem";
-            ExportToolStripMenuItem.Size = new Size(270, 34);
+            ExportToolStripMenuItem.Size = new Size(169, 34);
             ExportToolStripMenuItem.Text = "Export";
             // 
             // ExitToolStripMenuItem
             // 
             ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            ExitToolStripMenuItem.Size = new Size(270, 34);
+            ExitToolStripMenuItem.Size = new Size(169, 34);
             ExitToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
@@ -141,35 +141,35 @@
             // chartOfAccountsToolStripMenuItem
             // 
             chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            chartOfAccountsToolStripMenuItem.Size = new Size(270, 34);
+            chartOfAccountsToolStripMenuItem.Size = new Size(259, 34);
             chartOfAccountsToolStripMenuItem.Text = "Chart Of Accounts";
             chartOfAccountsToolStripMenuItem.Click += ChartOfAccountsToolStripMenuItem_Click;
             // 
             // customerListToolStripMenuItem
             // 
             customerListToolStripMenuItem.Name = "customerListToolStripMenuItem";
-            customerListToolStripMenuItem.Size = new Size(270, 34);
+            customerListToolStripMenuItem.Size = new Size(259, 34);
             customerListToolStripMenuItem.Text = "Customer List";
             customerListToolStripMenuItem.Click += CustomerListToolStripMenuItem_Click;
             // 
             // ListOfPayTosToolStripMenuItem
             // 
             ListOfPayTosToolStripMenuItem.Name = "ListOfPayTosToolStripMenuItem";
-            ListOfPayTosToolStripMenuItem.Size = new Size(270, 34);
+            ListOfPayTosToolStripMenuItem.Size = new Size(259, 34);
             ListOfPayTosToolStripMenuItem.Text = "List of Pay To's";
             ListOfPayTosToolStripMenuItem.Click += ListOfPayTosToolStripMenuItem_Click;
             // 
             // businessDataToolStripMenuItem
             // 
             businessDataToolStripMenuItem.Name = "businessDataToolStripMenuItem";
-            businessDataToolStripMenuItem.Size = new Size(270, 34);
+            businessDataToolStripMenuItem.Size = new Size(259, 34);
             businessDataToolStripMenuItem.Text = "Business Data";
             businessDataToolStripMenuItem.Click += BusinessDataToolStripMenuItem_Click;
             // 
             // invoiceSettingsToolStripMenuItem1
             // 
             invoiceSettingsToolStripMenuItem1.Name = "invoiceSettingsToolStripMenuItem1";
-            invoiceSettingsToolStripMenuItem1.Size = new Size(270, 34);
+            invoiceSettingsToolStripMenuItem1.Size = new Size(259, 34);
             invoiceSettingsToolStripMenuItem1.Text = "Invoice Settings";
             invoiceSettingsToolStripMenuItem1.Click += InvoiceSettingsToolStripMenuItem1_Click;
             // 
@@ -190,21 +190,21 @@
             // compareIncomeToolStripMenuItem
             // 
             compareIncomeToolStripMenuItem.Name = "compareIncomeToolStripMenuItem";
-            compareIncomeToolStripMenuItem.Size = new Size(270, 34);
+            compareIncomeToolStripMenuItem.Size = new Size(251, 34);
             compareIncomeToolStripMenuItem.Text = "Compare Income";
             compareIncomeToolStripMenuItem.Click += CompareIncomeToolStripMenuItem_Click;
             // 
             // federal1120ToolStripMenuItem
             // 
             federal1120ToolStripMenuItem.Name = "federal1120ToolStripMenuItem";
-            federal1120ToolStripMenuItem.Size = new Size(270, 34);
+            federal1120ToolStripMenuItem.Size = new Size(251, 34);
             federal1120ToolStripMenuItem.Text = "Federal 1120";
             federal1120ToolStripMenuItem.Click += Federal1120ToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(270, 34);
+            toolStripMenuItem2.Size = new Size(251, 34);
             toolStripMenuItem2.Text = "1099 / 1096";
             toolStripMenuItem2.Click += TaxReport1099_Click;
             // 

@@ -81,7 +81,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(45, 122);
+            label3.Location = new Point(369, 323);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(91, 15);
@@ -90,8 +90,8 @@
             // 
             // CurrnetBalanceTextBox
             // 
-            CurrnetBalanceTextBox.Location = new Point(166, 121);
-            CurrnetBalanceTextBox.Margin = new Padding(2, 2, 2, 2);
+            CurrnetBalanceTextBox.Location = new Point(490, 322);
+            CurrnetBalanceTextBox.Margin = new Padding(2);
             CurrnetBalanceTextBox.Name = "CurrnetBalanceTextBox";
             CurrnetBalanceTextBox.Size = new Size(122, 23);
             CurrnetBalanceTextBox.TabIndex = 5;
@@ -99,7 +99,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(45, 150);
+            label4.Location = new Point(45, 118);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(77, 15);
@@ -108,8 +108,8 @@
             // 
             // AmountPaidTextBox
             // 
-            AmountPaidTextBox.Location = new Point(166, 150);
-            AmountPaidTextBox.Margin = new Padding(2, 2, 2, 2);
+            AmountPaidTextBox.Location = new Point(166, 118);
+            AmountPaidTextBox.Margin = new Padding(2);
             AmountPaidTextBox.Name = "AmountPaidTextBox";
             AmountPaidTextBox.Size = new Size(122, 23);
             AmountPaidTextBox.TabIndex = 7;
@@ -117,19 +117,19 @@
             // 
             // SaveButton
             // 
-            SaveButton.Location = new Point(327, 395);
-            SaveButton.Margin = new Padding(2, 2, 2, 2);
+            SaveButton.Location = new Point(310, 118);
+            SaveButton.Margin = new Padding(2);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(78, 20);
+            SaveButton.Size = new Size(100, 23);
             SaveButton.TabIndex = 9;
-            SaveButton.Text = "Save";
+            SaveButton.Text = "Post Payment";
             SaveButton.UseVisualStyleBackColor = true;
-            SaveButton.Click += SaveButton_Click;
+            SaveButton.Click += PostPaymentButton_Click;
             // 
             // DoneButton
             // 
             DoneButton.Location = new Point(666, 395);
-            DoneButton.Margin = new Padding(2, 2, 2, 2);
+            DoneButton.Margin = new Padding(2);
             DoneButton.Name = "DoneButton";
             DoneButton.Size = new Size(78, 20);
             DoneButton.TabIndex = 10;
@@ -139,10 +139,10 @@
             // 
             // PartialPaymentButton
             // 
-            PartialPaymentButton.Location = new Point(466, 395);
-            PartialPaymentButton.Margin = new Padding(2, 2, 2, 2);
+            PartialPaymentButton.Location = new Point(449, 118);
+            PartialPaymentButton.Margin = new Padding(2);
             PartialPaymentButton.Name = "PartialPaymentButton";
-            PartialPaymentButton.Size = new Size(146, 20);
+            PartialPaymentButton.Size = new Size(168, 23);
             PartialPaymentButton.TabIndex = 11;
             PartialPaymentButton.Text = "Accept Partial Payment";
             PartialPaymentButton.UseVisualStyleBackColor = true;
@@ -151,7 +151,7 @@
             // OutstandingInvoicesDataGridView
             // 
             OutstandingInvoicesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OutstandingInvoicesDataGridView.Location = new Point(140, 203);
+            OutstandingInvoicesDataGridView.Location = new Point(140, 158);
             OutstandingInvoicesDataGridView.Name = "OutstandingInvoicesDataGridView";
             OutstandingInvoicesDataGridView.RowTemplate.Height = 25;
             OutstandingInvoicesDataGridView.Size = new Size(557, 150);
@@ -161,7 +161,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 421);
+            ClientSize = new Size(806, 436);
             Controls.Add(OutstandingInvoicesDataGridView);
             Controls.Add(PartialPaymentButton);
             Controls.Add(DoneButton);

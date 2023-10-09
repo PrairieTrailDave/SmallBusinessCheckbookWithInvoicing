@@ -26,7 +26,7 @@ namespace BusinessCheckBook.DataStore
         public decimal Tax { get; set;} = decimal.Zero;
         public decimal Total { get; set;} = decimal.Zero;
         public decimal AmountPaid { get; set;}= decimal.Zero;
-        public decimal BalanceDue { get; set; } = decimal.Zero;
+        public decimal BalanceDue { get; set; } = decimal.Zero;  // not saved in database, Included here so that we can print it
 
    
         // adding all this below allows one file to contain the names of all the fields and all the formats 
@@ -490,9 +490,9 @@ namespace BusinessCheckBook.DataStore
             ThisColumn = InvoiceListFormat.Column(XLTax)!;
             Tax = ThisColumn.GetValue(XRow.Cell(ThisColumn.ColumnNumber).GetString());
             ThisColumn = InvoiceListFormat.Column(XLTotal)!;
-            Total = ThisColumn.GetValue(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            Total = Decimal.Round(ThisColumn.GetValue(XRow.Cell(ThisColumn.ColumnNumber).GetString()), 2);
             ThisColumn = InvoiceListFormat.Column(XLAmountPaid)!;
-            AmountPaid = ThisColumn.GetValue(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            AmountPaid = Decimal.Round(ThisColumn.GetValue(XRow.Cell(ThisColumn.ColumnNumber).GetString()), 2);
 
                 // parse the breakdown
 

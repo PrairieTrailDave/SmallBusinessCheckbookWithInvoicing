@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            DateTimePicker = new DateTimePicker();
             CheckNumberLabel = new Label();
             CompanyAddress4Label = new Label();
             MatchingListBox = new ListBox();
@@ -58,7 +59,6 @@
             AddToBatchButton = new Button();
             PrintBatchButton = new Button();
             DoneButton = new Button();
-            DateTimePicker = new DateTimePicker();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CheckBreakdownDataGridView).BeginInit();
@@ -92,13 +92,21 @@
             panel1.Size = new Size(1138, 322);
             panel1.TabIndex = 0;
             // 
+            // DateTimePicker
+            // 
+            DateTimePicker.Format = DateTimePickerFormat.Short;
+            DateTimePicker.Location = new Point(894, 55);
+            DateTimePicker.Name = "DateTimePicker";
+            DateTimePicker.Size = new Size(200, 23);
+            DateTimePicker.TabIndex = 1;
+            // 
             // CheckNumberLabel
             // 
             CheckNumberLabel.AutoSize = true;
             CheckNumberLabel.Location = new Point(966, 16);
             CheckNumberLabel.Name = "CheckNumberLabel";
             CheckNumberLabel.Size = new Size(47, 15);
-            CheckNumberLabel.TabIndex = 20;
+            CheckNumberLabel.TabIndex = 95;
             CheckNumberLabel.Text = "Check#";
             // 
             // CompanyAddress4Label
@@ -107,7 +115,7 @@
             CompanyAddress4Label.Location = new Point(46, 76);
             CompanyAddress4Label.Name = "CompanyAddress4Label";
             CompanyAddress4Label.Size = new Size(38, 15);
-            CompanyAddress4Label.TabIndex = 19;
+            CompanyAddress4Label.TabIndex = 94;
             CompanyAddress4Label.Text = "label1";
             // 
             // MatchingListBox
@@ -164,7 +172,7 @@
             MemoTextBox.Location = new Point(78, 276);
             MemoTextBox.Name = "MemoTextBox";
             MemoTextBox.Size = new Size(304, 23);
-            MemoTextBox.TabIndex = 12;
+            MemoTextBox.TabIndex = 4;
             // 
             // MemoNameLabel
             // 
@@ -181,7 +189,7 @@
             ToWhomAddress3Label.Location = new Point(78, 242);
             ToWhomAddress3Label.Name = "ToWhomAddress3Label";
             ToWhomAddress3Label.Size = new Size(38, 15);
-            ToWhomAddress3Label.TabIndex = 10;
+            ToWhomAddress3Label.TabIndex = 99;
             ToWhomAddress3Label.Text = "label1";
             // 
             // ToWhomAddress2Label
@@ -190,7 +198,7 @@
             ToWhomAddress2Label.Location = new Point(78, 227);
             ToWhomAddress2Label.Name = "ToWhomAddress2Label";
             ToWhomAddress2Label.Size = new Size(38, 15);
-            ToWhomAddress2Label.TabIndex = 9;
+            ToWhomAddress2Label.TabIndex = 98;
             ToWhomAddress2Label.Text = "label1";
             // 
             // ToWhomAddress1Label
@@ -199,7 +207,7 @@
             ToWhomAddress1Label.Location = new Point(78, 212);
             ToWhomAddress1Label.Name = "ToWhomAddress1Label";
             ToWhomAddress1Label.Size = new Size(38, 15);
-            ToWhomAddress1Label.TabIndex = 8;
+            ToWhomAddress1Label.TabIndex = 97;
             ToWhomAddress1Label.Text = "label1";
             // 
             // ToWhomNameLabel
@@ -208,7 +216,7 @@
             ToWhomNameLabel.Location = new Point(78, 197);
             ToWhomNameLabel.Name = "ToWhomNameLabel";
             ToWhomNameLabel.Size = new Size(38, 15);
-            ToWhomNameLabel.TabIndex = 7;
+            ToWhomNameLabel.TabIndex = 96;
             ToWhomNameLabel.Text = "label1";
             // 
             // AmountTextBox
@@ -216,7 +224,7 @@
             AmountTextBox.Location = new Point(976, 116);
             AmountTextBox.Name = "AmountTextBox";
             AmountTextBox.Size = new Size(118, 23);
-            AmountTextBox.TabIndex = 6;
+            AmountTextBox.TabIndex = 3;
             AmountTextBox.Leave += AmountTextBox_Leave;
             // 
             // ToWhomTextBox
@@ -224,7 +232,7 @@
             ToWhomTextBox.Location = new Point(90, 116);
             ToWhomTextBox.Name = "ToWhomTextBox";
             ToWhomTextBox.Size = new Size(789, 23);
-            ToWhomTextBox.TabIndex = 5;
+            ToWhomTextBox.TabIndex = 2;
             ToWhomTextBox.KeyPress += ToWhomTextBox_KeyPress;
             ToWhomTextBox.PreviewKeyDown += ToWhomTextBox_PreviewKeyDown;
             // 
@@ -234,7 +242,7 @@
             CompanyAddress3Label.Location = new Point(46, 61);
             CompanyAddress3Label.Name = "CompanyAddress3Label";
             CompanyAddress3Label.Size = new Size(38, 15);
-            CompanyAddress3Label.TabIndex = 3;
+            CompanyAddress3Label.TabIndex = 93;
             CompanyAddress3Label.Text = "label1";
             // 
             // CompanyAddress2Label
@@ -243,7 +251,7 @@
             CompanyAddress2Label.Location = new Point(46, 46);
             CompanyAddress2Label.Name = "CompanyAddress2Label";
             CompanyAddress2Label.Size = new Size(38, 15);
-            CompanyAddress2Label.TabIndex = 2;
+            CompanyAddress2Label.TabIndex = 92;
             CompanyAddress2Label.Text = "label1";
             // 
             // CompanyAddressLabel
@@ -252,7 +260,7 @@
             CompanyAddressLabel.Location = new Point(46, 31);
             CompanyAddressLabel.Name = "CompanyAddressLabel";
             CompanyAddressLabel.Size = new Size(38, 15);
-            CompanyAddressLabel.TabIndex = 1;
+            CompanyAddressLabel.TabIndex = 91;
             CompanyAddressLabel.Text = "label1";
             // 
             // CompanyNameLabel
@@ -261,7 +269,7 @@
             CompanyNameLabel.Location = new Point(46, 16);
             CompanyNameLabel.Name = "CompanyNameLabel";
             CompanyNameLabel.Size = new Size(38, 15);
-            CompanyNameLabel.TabIndex = 0;
+            CompanyNameLabel.TabIndex = 90;
             CompanyNameLabel.Text = "label1";
             // 
             // panel2
@@ -291,7 +299,7 @@
             DetailTotalTextBox.Location = new Point(93, 6);
             DetailTotalTextBox.Name = "DetailTotalTextBox";
             DetailTotalTextBox.Size = new Size(109, 23);
-            DetailTotalTextBox.TabIndex = 2;
+            DetailTotalTextBox.TabIndex = 89;
             // 
             // DetailTotalLabel
             // 
@@ -318,7 +326,7 @@
             PrintCheckButton.Location = new Point(80, 12);
             PrintCheckButton.Name = "PrintCheckButton";
             PrintCheckButton.Size = new Size(105, 23);
-            PrintCheckButton.TabIndex = 2;
+            PrintCheckButton.TabIndex = 20;
             PrintCheckButton.Text = "Print Check";
             PrintCheckButton.UseVisualStyleBackColor = true;
             PrintCheckButton.Click += PrintCheckButton_Click;
@@ -332,7 +340,7 @@
             AddToBatchButton.Location = new Point(298, 12);
             AddToBatchButton.Name = "AddToBatchButton";
             AddToBatchButton.Size = new Size(97, 23);
-            AddToBatchButton.TabIndex = 3;
+            AddToBatchButton.TabIndex = 21;
             AddToBatchButton.Text = "Add To Batch";
             AddToBatchButton.UseVisualStyleBackColor = true;
             AddToBatchButton.Click += AddToBatchButton_Click;
@@ -342,7 +350,7 @@
             PrintBatchButton.Location = new Point(524, 12);
             PrintBatchButton.Name = "PrintBatchButton";
             PrintBatchButton.Size = new Size(75, 23);
-            PrintBatchButton.TabIndex = 4;
+            PrintBatchButton.TabIndex = 22;
             PrintBatchButton.Text = "Print Batch";
             PrintBatchButton.UseVisualStyleBackColor = true;
             PrintBatchButton.Click += PrintBatchButton_Click;
@@ -352,18 +360,10 @@
             DoneButton.Location = new Point(995, 12);
             DoneButton.Name = "DoneButton";
             DoneButton.Size = new Size(75, 23);
-            DoneButton.TabIndex = 5;
+            DoneButton.TabIndex = 50;
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
             DoneButton.Click += DoneButton_Click;
-            // 
-            // DateTimePicker
-            // 
-            DateTimePicker.Format = DateTimePickerFormat.Short;
-            DateTimePicker.Location = new Point(894, 55);
-            DateTimePicker.Name = "DateTimePicker";
-            DateTimePicker.Size = new Size(200, 23);
-            DateTimePicker.TabIndex = 21;
             // 
             // WriteCheckForm
             // 

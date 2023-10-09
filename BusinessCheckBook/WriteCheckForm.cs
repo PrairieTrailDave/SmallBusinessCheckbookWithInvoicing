@@ -374,8 +374,13 @@ namespace BusinessCheckBook
 
         private void CategoryListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckBreakdownDataGridView.Rows[CategoryRow].Cells[0].Value = CategoryListBox.SelectedItem!.ToString()!.Trim();
-            CurrentCheckToPrint.Breakdown[CategoryRow].AccountName = CategoryListBox.SelectedItem!.ToString()!.Trim();
+            string Account = CategoryListBox.SelectedItem!.ToString()!.Trim();
+            if (Account.Contains(':'))
+            {
+                Account = Account.Split(':')[1];
+            }
+            CheckBreakdownDataGridView.Rows[CategoryRow].Cells[0].Value = Account;
+            CurrentCheckToPrint.Breakdown[CategoryRow].AccountName = Account;
             CheckBreakdownDataGridView.CurrentCell = CheckBreakdownDataGridView.Rows[CategoryRow].Cells[1];
             CategoryListBox.Visible = false;
             CheckBreakdownDataGridView.InvalidateRow(CategoryRow);
@@ -390,14 +395,14 @@ namespace BusinessCheckBook
         // support routines
 
 
-        private void SaveCheckInLedger (CheckToPrint TCheck)
+        private void SaveCheckInLedger(CheckToPrint TCheck)
         {
             string Category;
             if (TCheck.Breakdown.Count > 1)
             {
-                Category = "Split"; 
+                Category = "Split";
             }
-            else 
+            else
                 Category = TCheck.Breakdown[0]?.AccountName ?? "Unknown";
 
             LedgerEntry NEntry = ActiveBook.CurrentTransactionLedger.CreateLedgerEntry
@@ -405,10 +410,10 @@ namespace BusinessCheckBook
                 DateTime.Parse(TCheck.DateToPrint),
                 TCheck.CheckNumber,
                 TCheck.ToTheOrderOf,
-                decimal.Parse(TCheck.AmountToPrint),
+                decimal.Parse(CleanAmount(TCheck.AmountToPrint)),
                 0.00M,
                 0.00M,   // the balance gets adjusted during insertion
-                decimal.Parse(TCheck.AmountToPrint),
+                decimal.Parse(CleanAmount(TCheck.AmountToPrint)),
                 Category,
                 TCheck.Breakdown
             );
@@ -418,6 +423,7 @@ namespace BusinessCheckBook
             NEntry.SubAccounts = new();
             foreach (LedgerEntryBreakdown LE in TCheck.Breakdown)
             {
+                if (LE.AccountName.Length == 0 && LE.Amount == 0.00M) break;
                 NEntry.SubAccounts.Add(LE);
             }
 
@@ -425,11 +431,11 @@ namespace BusinessCheckBook
         }
         private void StartNewCheck()
         {
+            ClearOtherLabelsOnCheck();
             CurrentCheckNumber++;
             CheckNumberLabel.Text = CurrentCheckNumber.ToString();
             DateTimePicker.Text = DateTime.Now.ToShortDateString();
             WriteCompanyInformation();
-            ClearOtherLabelsOnCheck();
             CreateSubCategoryList();
         }
 
@@ -681,7 +687,7 @@ namespace BusinessCheckBook
         private void FillInCurrentCheckToPrint(CheckToPrint ToPrint)
         {
             ToPrint.CheckNumber = CheckNumberLabel.Text;
-            ToPrint.DateToPrint = DateTimePicker.Text;
+            ToPrint.DateToPrint = DateTimePicker.Value.ToShortDateString();
             ToPrint.ToTheOrderOf = ToWhomTextBox.Text;
             ToPrint.AmountToPrint = AmountTextBox.Text;
             while (ToPrint.AmountToPrint.Length < 8) ToPrint.AmountToPrint = "*" + ToPrint.AmountToPrint;
@@ -693,6 +699,17 @@ namespace BusinessCheckBook
             ToPrint.Memo = MemoTextBox.Text;
             ClearBreakdown(ToPrint);
             PullInBreakdown(ToPrint);
+        }
+        private static string CleanAmount(string Amount)
+        {
+            string results = "";
+            foreach (char c in Amount)
+            {
+                if (Char.IsDigit(c)) results += c;
+                if (c == '-') results += c;
+                if (c == '.') results += c;
+            }
+            return results;
         }
 
         private void FillInFromLastTransaction(string MatchedName)

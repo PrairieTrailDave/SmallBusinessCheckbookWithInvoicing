@@ -19,11 +19,27 @@ namespace BusinessCheckBook.DataStore
 
         // some standard accounts that get used in reconciliation
 
-        public static string InterestEarnedAccount = "InterestEarned";
-        public static string BankFeesAccount = "BankFee";
+        public const string InterestEarnedAccount = "InterestEarned";
+        public const string BankFeesAccount = "BankFee";
         public static string MainIncomeAccount = "Consulting";
 
+        ActivityLogger? Logger { get; set; } = null;
+        string sNewAccount = "New Account";
+        string sAccountModified = "Account Modified";
+        string sAccount = "Account";
+
         public ChartOfAccounts()
+        {
+            Initialize();
+        }
+
+        public ChartOfAccounts(ActivityLogger logger)
+        {
+            Logger = logger;
+            Initialize();
+        }
+
+        internal void Initialize()
         {
             CurrentAccounts = new List<Account>();
             SetSheetFormat();
@@ -48,6 +64,7 @@ namespace BusinessCheckBook.DataStore
             {
                 if (account.Name == AccountToTest) return true;
             }
+            if (AccountToTest.ToLower() == "split") return true;
             return false;   
         }
 
@@ -75,18 +92,26 @@ namespace BusinessCheckBook.DataStore
         internal void AddIIFAccount(string[] fields)
         {
             Account IIFAccount = new();
-            if(IIFAccount.ParseIIFRow(fields) != null)
+            if (IIFAccount.ParseIIFRow(fields) != null)
+            {
                 CurrentAccounts.Add(IIFAccount);
+                Logger?.LogObject(sNewAccount, sAccount, IIFAccount);
+            }
         }
 
         internal void InsertAccount (Account NewAccount)
         {
+            // because we use the insert while reading the existing file
+            // we don't want to log all those inserts every time
+            // make sure the log file is null when reading the Excel file
+
             bool Inserted;
             switch (NewAccount.WhatType)
             {
                 case Account.Type.CheckingAccount:
                     // put as the first account in the list
                     CurrentAccounts.Insert(0, NewAccount);
+                    Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
                 case Account.Type.Income:
                     // find the income account that is more than this one and add before that
@@ -99,12 +124,14 @@ namespace BusinessCheckBook.DataStore
                         if (Acc.WhatType != Account.Type.Income)
                         {
                             CurrentAccounts.Insert (i, NewAccount);
+                            Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                             Inserted = true;
                             break;
                         }
                         if (string.Compare(NewAccount.Name, Acc.Name,StringComparison.CurrentCulture) < 0)
                         {
                             CurrentAccounts.Insert(i, NewAccount);
+                            Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                             Inserted = true;
                             break;
                         }
@@ -113,7 +140,8 @@ namespace BusinessCheckBook.DataStore
                     // there aren't any accounts in the chart
                     if (!Inserted)
                     {
-                            CurrentAccounts.Add(NewAccount);
+                        CurrentAccounts.Add(NewAccount);
+                        Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     }
                     break;
                 case Account.Type.Expense:
@@ -129,6 +157,7 @@ namespace BusinessCheckBook.DataStore
                             if (string.Compare(NewAccount.Name, Acc.Name, StringComparison.CurrentCulture) < 0)
                             {
                                 CurrentAccounts.Insert(i, NewAccount);
+                                Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                 Inserted = true;
                                 break;
                             }
@@ -136,7 +165,10 @@ namespace BusinessCheckBook.DataStore
                     }
                     // add if not inserted
                     if (!Inserted)
-                        CurrentAccounts.Add (NewAccount);
+                    {
+                        CurrentAccounts.Add(NewAccount);
+                        Logger?.LogObject(sNewAccount, sAccount, NewAccount);
+                    }
                     break;
                 case Account.Type.SubAccount:
                     // find the expense that this is a sub account to
@@ -157,27 +189,34 @@ namespace BusinessCheckBook.DataStore
                                     if (Acc.WhatType !=  Account.Type.SubAccount)
                                     {
                                         CurrentAccounts.Insert(j, NewAccount);
+                                        Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                         Inserted = true;
                                         break;
                                     }
                                     if (string.Compare(NewAccount.Name, Acc.Name, StringComparison.CurrentCulture) < 0)
                                     {
                                         CurrentAccounts.Insert(j, NewAccount);
+                                        Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                         Inserted = true;
                                         break;
                                     }
                                 }
                                 if (!Inserted)
+                                {
                                     CurrentAccounts.Add(NewAccount);
+                                    Logger?.LogObject(sNewAccount, sAccount, NewAccount);
+                                }
                             }
-                        }
+                            }
                     }
                     break;
                 case Account.Type.Withholdings:
                     CurrentAccounts.Add(NewAccount);
+                    Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
                 default:
                     CurrentAccounts.Add(NewAccount);
+                    Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
             }
         }

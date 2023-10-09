@@ -26,6 +26,7 @@ namespace BusinessCheckBook
 
         decimal InvoiceTotal = 0.00M;
         int CurrentBreakdownRow = 0;
+        int InvoiceNumber = 0;  // because we need to increment the invoice number before we add to ledger
 
 
         // identifiers for company information to print
@@ -59,7 +60,8 @@ namespace BusinessCheckBook
             {
                 CustomerComboBox.Items.Add(customer.AccountName);
             }
-            InvoiceNumberTextBox.Text = ActiveBook.GetNextInvoiceNumber().ToString();
+            InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
+            InvoiceNumberTextBox.Text = InvoiceNumber.ToString();
             List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfAccounts();
             AccountListBox.Items.Clear();
             foreach (string account in Accounts)
@@ -73,53 +75,55 @@ namespace BusinessCheckBook
             if (ValidateInputs())
             {
                 CurrentInvoice = new();
-                BuildInvoiceToSave(CurrentInvoice);
-            }
-            // before allowing an invoice to be printed, make sure that there is an invoice to print
+                // before allowing an invoice to be printed, make sure that there is an invoice to print
 
-            if (CustomerComboBox.Text.Length > 0)
-            {
-
-                // Allow the user to choose the page range he or she would
-                // like to print.
-                PrintInvoiceDialog.AllowSomePages = true;
-
-                // Show the help button.
-                PrintInvoiceDialog.ShowHelp = true;
-
-                // Set the Document property to the PrintDocument for 
-                // which the PrintPage Event has been handled. To display the
-                // dialog, either this property or the PrinterSettings property 
-                // must be set 
-                PrintInvoiceDialog.PrinterSettings = new();
-                //PrintCheckDialog.Document = docToPrint;
-
-                DialogResult result = PrintInvoiceDialog.ShowDialog();
-
-                // If the result is OK then print the document.
-                if (result == DialogResult.OK)
+                if (CustomerComboBox.Text.Length > 0)
                 {
 
-                    try
+                    // Allow the user to choose the page range he or she would
+                    // like to print.
+                    PrintInvoiceDialog.AllowSomePages = true;
+
+                    // Show the help button.
+                    PrintInvoiceDialog.ShowHelp = true;
+
+                    // Set the Document property to the PrintDocument for 
+                    // which the PrintPage Event has been handled. To display the
+                    // dialog, either this property or the PrinterSettings property 
+                    // must be set 
+                    PrintInvoiceDialog.PrinterSettings = new();
+                    //PrintCheckDialog.Document = docToPrint;
+
+                    DialogResult result = PrintInvoiceDialog.ShowDialog();
+
+                    // If the result is OK then print the document.
+                    if (result == DialogResult.OK)
                     {
-                        CurrentInvoice = new();
-                        BuildInvoiceToSave(CurrentInvoice);
-                        BuildInvoiceLayout();
+
+                        try
+                        {
+                            CurrentInvoice = new();
+                            BuildInvoiceToSave(CurrentInvoice);
+                            BuildInvoiceLayout();
 
 
-                        PrintDocument pd = new();
-                        pd.PrintPage += new PrintPageEventHandler(this.Pd_PrintPage);
-                        pd.Print();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
+                            PrintDocument pd = new();
+                            pd.PrintPage += new PrintPageEventHandler(this.Pd_PrintPage);
+                            pd.Print();
+                            ActiveBook.CurrentInvoices.AddInvoice(CurrentInvoice);
+                            InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
+                            ResetScreen();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please enter an invoice before attempting to print.");
+                else
+                {
+                    MessageBox.Show("Please enter an invoice before attempting to print.");
+                }
             }
         }
         private void SaveToBatchButton_Click(object sender, EventArgs e)
@@ -129,6 +133,7 @@ namespace BusinessCheckBook
                 CurrentInvoice = new();
                 BuildInvoiceToSave(CurrentInvoice);
                 InvoiceBatch.Add(CurrentInvoice);
+                InvoiceNumber++;
                 ResetScreen();
             }
         }
@@ -188,6 +193,7 @@ namespace BusinessCheckBook
                 CurrentInvoice = new();
                 BuildInvoiceToSave(CurrentInvoice);
                 ActiveBook.CurrentInvoices.AddInvoice(CurrentInvoice);
+                InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
                 ResetScreen();
             }
         }
@@ -216,11 +222,18 @@ namespace BusinessCheckBook
         // The PrintPage event is raised for each page to be printed.
         private void Pd_PrintBatch(object sender, PrintPageEventArgs ev)
         {
+            // define a local variable to keep thread clean
 
-            CurrentInvoice = InvoiceBatch[BatchInvoiceNum++];
+            Invoice BatchInvoice;
+
+            BatchInvoice = InvoiceBatch[BatchInvoiceNum++];
 
             // Format that Invoice
-            FormatInvoice(CurrentInvoice, CurrentPrintLayout, ev);
+            FormatInvoice(BatchInvoice, CurrentPrintLayout, ev);
+
+            // save that invoice in the list of invoices
+
+            ActiveBook.CurrentInvoices.AddInvoice(BatchInvoice);
 
             // If more lines exist, print another page.
             if (BatchInvoiceNum < InvoiceBatch.Count)
@@ -309,7 +322,8 @@ namespace BusinessCheckBook
                         }
                     }
                 }
-                TotalTextBox.Text = InvoiceTotal.ToString();
+                TotalTextBox.Text = InvoiceTotal.ToString("0.00");
+                BalanceDueTextBox.Text = InvoiceTotal.ToString("0.00");
             }
 
         }
@@ -349,6 +363,7 @@ namespace BusinessCheckBook
             {
                 InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
                     AccountListBox.Text;
+                AccountListBox.Visible = false;
                 InvoiceDetailDataGridView.Focus();
                 InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[1].Selected = true;
                 InvoiceDetailDataGridView.BeginEdit(true);
@@ -361,6 +376,7 @@ namespace BusinessCheckBook
             {
                 InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
                     AccountListBox.Text;
+                AccountListBox.Visible = false;
             }
         }
 
@@ -380,7 +396,7 @@ namespace BusinessCheckBook
             BillToAddress3TextBox.Text = "";
             BillToAddress4TextBox.Text = "";
             BillToAddress5TextBox.Text = "";
-            InvoiceNumberTextBox.Text = ActiveBook.GetNextInvoiceNumber().ToString();
+            InvoiceNumberTextBox.Text = InvoiceNumber.ToString();
 
             ResetBreakdown();
 

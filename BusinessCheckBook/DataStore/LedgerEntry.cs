@@ -419,7 +419,8 @@ namespace BusinessCheckBook.DataStore
             }
         }
 
-
+        // Note: when Excel modifies an amount, there might be some small decimal digits on that amount.
+        // Thus, when reading the file, round to two decimal digits to clean out those digits 
         internal void ParseExcelRow(IXLRow XRow, SheetFormat LedgerFormat)
         {
             ColumnFormat ThisColumn;
@@ -435,13 +436,21 @@ namespace BusinessCheckBook.DataStore
             ThisColumn = LedgerFormat.Column(XLCleared)!;
             Cleared = TrueFalseColumn.Parse(XRow.Cell(ThisColumn.ColumnNumber).GetString());
             ThisColumn = LedgerFormat.Column(XLDebit)!;
-            Debit = Decimal.Parse(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            string debitstr = XRow.Cell(ThisColumn.ColumnNumber).GetString();
+            if (debitstr.Length == 0) debitstr = "0.00";
+            Debit = Decimal.Round(Decimal.Parse(debitstr), 2);
             ThisColumn = LedgerFormat.Column(XLCredit)!;
-            Credit = Decimal.Parse(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            string creditstr = XRow.Cell(ThisColumn.ColumnNumber).GetString();
+            if (creditstr.Length == 0) creditstr = "0.00";
+            Credit = Decimal.Round(Decimal.Parse(creditstr), 2);
             ThisColumn = LedgerFormat.Column(XLBalance)!;
-            Balance = Decimal.Parse(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            string balancestr = XRow.Cell(ThisColumn.ColumnNumber).GetString();
+            if (balancestr.Length == 0) balancestr = "0.00";
+            Balance = Decimal.Round(Decimal.Parse(balancestr), 2);
             ThisColumn = LedgerFormat.Column(XLAmount)!;
-            Amount = Decimal.Parse(XRow.Cell(ThisColumn.ColumnNumber).GetString());
+            string amountstr = XRow.Cell(ThisColumn.ColumnNumber).GetString();
+            if (amountstr.Length == 0) amountstr = "0.00";
+            Amount = Decimal.Round(Decimal.Parse(amountstr), 2);
             ThisColumn = LedgerFormat.Column(XLAccount)!;
             Account = XRow.Cell(ThisColumn.ColumnNumber).GetString();
             ThisColumn = LedgerFormat.Column(XLMemo)!;
@@ -490,6 +499,7 @@ namespace BusinessCheckBook.DataStore
             int Breakdown = 0;
             foreach(LedgerEntryBreakdown CE in SubAccounts)
             {
+                if (CE.AccountName.Length == 0) break;
                 CE.WriteExcelColumns(XRow, LedgerFormat.SubFormats[Breakdown++]);
             }
         }

@@ -5,6 +5,7 @@
 //**********************************************************************
 
 using BusinessCheckBook.DataStore;
+using BusinessCheckBook.Extensions;
 
 namespace BusinessCheckBook
 {
@@ -21,8 +22,17 @@ namespace BusinessCheckBook
 
         }
 
+
         // variables filled from the main window
         public MyCheckbook ActiveBook { get; set; } = new();
+
+
+        // local variables
+
+        string CurrentPayer = string.Empty;
+        decimal AmountPaid;
+        List<Invoice> OutstandingInvoices = new();
+        List<DisplayInvoice> DispInvoices = new();
 
         public ReceivePaymentsForm()
         {
@@ -36,18 +46,21 @@ namespace BusinessCheckBook
             List<Customer> customerList = ActiveBook.Customers.GetCurrentList();
             foreach (Customer customer in customerList)
             {
-                CustomerComboBox.Items.Add(customer.AccountName);
+                CustomerComboBox.Items.Add(new DropDownItem(customer.AccountName, customer.CustomerIdentifier));
             }
         }
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // find that customer
-            string SelectedCustomer = CustomerComboBox.Text;
+            if (CustomerComboBox.SelectedItem == null) return;
+
+            DropDownItem SelectedCustomer = (DropDownItem)CustomerComboBox.SelectedItem;
+            CurrentPayer = SelectedCustomer.Value;
 
             // build the current balance from all invoices minus all payments
 
-            List<Invoice> OutstandingInvoices = ActiveBook.CurrentInvoices.GetOutstandingInvoicesForACustomer(SelectedCustomer);
+            OutstandingInvoices = ActiveBook.CurrentInvoices.GetOutstandingInvoicesForACustomer(CurrentPayer);
             decimal CurrentBalance = 0.00M;
             foreach (Invoice inv in OutstandingInvoices)
             {
@@ -56,7 +69,7 @@ namespace BusinessCheckBook
             CurrnetBalanceTextBox.Text = CurrentBalance.ToString();
 
             // show outstanding invoices
-            List<DisplayInvoice> DispInvoices = new();
+            DispInvoices = new();
             foreach (Invoice inv in OutstandingInvoices)
             {
                 DispInvoices.Add(new DisplayInvoice()
@@ -74,16 +87,84 @@ namespace BusinessCheckBook
             OutstandingInvoicesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+
+        // Button clicks
+
+
+        private void PostPaymentButton_Click(object sender, EventArgs e)
         {
-            // build ledger entry
-            // mark invoice as paid
+            if (CurrentPayer != null)
+            {
+                AmountPaid = Decimal.Parse(AmountPaidTextBox.Text);
+
+                // find the invoice this amount matches or is more than
+                // first go through and find an exact match
+
+                foreach (Invoice Inv in OutstandingInvoices)
+                {
+                    if ((Inv.Total - Inv.AmountPaid) == AmountPaid)
+                    {
+                        // build ledger entry
+                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid));
+
+                        // mark invoice as paid
+
+                        ActiveBook.CurrentInvoices.ApplyPaymentToInvoice(Inv.InvoiceNumber, AmountPaid);
+
+                        // mark invoice on screen as paid
+
+                        UpdateDisplayInvoice(Inv.InvoiceNumber, AmountPaid, true);
+                        return;
+                    }
+                }
+
+                // otherwise, start at the first invoice and start applying payment to the invoices
+
+                foreach (Invoice Inv in OutstandingInvoices)
+                {
+                    decimal BalanceDue = Inv.Total - Inv.AmountPaid;
+                    if (BalanceDue <= AmountPaid)
+                    {
+                        // build ledger entry
+                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(BalanceDue));
+
+                        // mark invoice as paid
+
+                        ActiveBook.CurrentInvoices.ApplyPaymentToInvoice(Inv.InvoiceNumber, BalanceDue);
+
+                        // mark invoice on screen as paid
+
+                        UpdateDisplayInvoice(Inv.InvoiceNumber, BalanceDue, true);
+
+                        AmountPaid -= BalanceDue;
+                    }
+                    if (AmountPaid == 0.00M)
+                        return;
+                }
+                if (AmountPaid > 0)
+                {
+                    MessageBox.Show("You have more payment than outstanding invoices. Give the customer credit.");
+                }
+
+            }
         }
 
         private void PartialPaymentButton_Click(object sender, EventArgs e)
         {
-            // build ledger entry
+            Invoice Inv = OutstandingInvoices[0];
+            if (Inv != null)
+            {
+                // build ledger entry
+                ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid));
 
+                // post as partial payment
+
+                ActiveBook.CurrentInvoices.ApplyPaymentToInvoice(Inv.InvoiceNumber, AmountPaid);
+
+                // mark invoice on screen as paid
+
+                UpdateDisplayInvoice(Inv.InvoiceNumber, AmountPaid, false);
+            }
         }
 
         private void DoneButton_Click(object sender, EventArgs e)
@@ -91,10 +172,51 @@ namespace BusinessCheckBook
             Close();
         }
 
+
+        // Key Presses
+
         private void AmountPaidTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // allow only decimal keys
             if ((e.KeyChar != '.') && !Char.IsDigit(e.KeyChar)) { e.Handled = true; }
+        }
+
+
+        // support routines
+
+        internal LedgerEntry BuildLedgerEntry (decimal AmountToPost)
+        {
+
+            return ActiveBook.CurrentTransactionLedger.CreateLedgerEntry
+                    (
+                        PostingDateTimePicker.Value.Date,
+                        "",                 // check number
+                        CurrentPayer,
+                        0.00M,              // debit amount - should always be zero
+                        AmountToPost,
+                        0.00M,              // resulting balance get recalculated
+                        AmountToPost,
+                        ChartOfAccounts.MainIncomeAccount,
+                        null                // ledger breakdown
+                    );
+
+        }
+        internal void UpdateDisplayInvoice (int InvoiceNumber, decimal AmountPaid, bool ifPaid)
+        {
+            OutstandingInvoicesDataGridView.DataSource = null;
+            string strInvNum = InvoiceNumber.ToString();
+            foreach (DisplayInvoice DI in DispInvoices)
+            {
+                if (DI.InvoiceNumber == strInvNum)
+                {
+                    DI.Paid = ifPaid;
+                    DI.AmountPaid += AmountPaid;
+                }
+            }
+            OutstandingInvoicesDataGridView.DataSource = DispInvoices;
+            OutstandingInvoicesDataGridView.AutoResizeColumns();
+            OutstandingInvoicesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
     }
 }

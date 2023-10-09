@@ -33,7 +33,7 @@ USE THIS PROGRAM AT YOUR OWN RISK!!!!
 I wrote this for my own use. Your use of this program may open you up to financial mistakes. 
 If you take this program and try to sell it, you will have to handle all the customer support issues, any legal challenges from Intuit, and the headaches of adding all the customer requests. I have no interest in handling customer service issues. I won't charge you to use this and I won't take your calls for help.
 
-For those Intuit Lawyers with more time on their hands:
+For you Intuit Lawyers with more time on your hands:
 BUY QUICKBOOKS!
 If you need an accounting package, BUY QUICKBOOKS.
 If you have any employees, you need an accounting package. BUY QUICKBOOKS.
@@ -78,6 +78,9 @@ WARNING: Because this program is a checking program and not an accounting progra
 WARNING: When importing payroll liability checks, put the employee withholdings into a withholding account and the business portion of the check into the tax: business portion of that tax. WARNING
 
 When importing checks, the check numbers have to be actual numbers. When I had "EFTPS" as the check number, it failed.
+
+I thought long about adding logging to this program. I actually started adding logging. Then, I realized that with an "open database", logging is meaningless. The value of the open database is that you, as the owner, can use Excel to modify the database when you have made a mistake. There is no way to log what you do when doing such modification. Ergo, logging is useless as it can't properly capture all changes to the database.
+
 
 The Chart of Accounts can be connected to the Federal 1120 form. The following are the acceptable values for that field.
 1. "B:EIN"

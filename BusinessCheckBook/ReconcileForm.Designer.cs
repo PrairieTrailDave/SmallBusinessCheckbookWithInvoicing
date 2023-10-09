@@ -55,9 +55,10 @@
             // 
             // ChangeTransactionValueButton
             // 
-            ChangeTransactionValueButton.Location = new Point(60, 404);
+            ChangeTransactionValueButton.Location = new Point(42, 242);
+            ChangeTransactionValueButton.Margin = new Padding(2, 2, 2, 2);
             ChangeTransactionValueButton.Name = "ChangeTransactionValueButton";
-            ChangeTransactionValueButton.Size = new Size(343, 45);
+            ChangeTransactionValueButton.Size = new Size(240, 27);
             ChangeTransactionValueButton.TabIndex = 35;
             ChangeTransactionValueButton.Text = "Change the value of a transaction";
             ChangeTransactionValueButton.UseVisualStyleBackColor = true;
@@ -65,9 +66,10 @@
             // 
             // AddFeesAndInterestButton
             // 
-            AddFeesAndInterestButton.Location = new Point(59, 296);
+            AddFeesAndInterestButton.Location = new Point(41, 178);
+            AddFeesAndInterestButton.Margin = new Padding(2, 2, 2, 2);
             AddFeesAndInterestButton.Name = "AddFeesAndInterestButton";
-            AddFeesAndInterestButton.Size = new Size(343, 50);
+            AddFeesAndInterestButton.Size = new Size(240, 30);
             AddFeesAndInterestButton.TabIndex = 34;
             AddFeesAndInterestButton.Text = "Add fees and interest to Ledger";
             AddFeesAndInterestButton.UseVisualStyleBackColor = true;
@@ -76,25 +78,28 @@
             // ReconciliationDateTimePicker
             // 
             ReconciliationDateTimePicker.CustomFormat = "MM/dd/yyyy";
-            ReconciliationDateTimePicker.Location = new Point(252, 56);
+            ReconciliationDateTimePicker.Location = new Point(176, 34);
+            ReconciliationDateTimePicker.Margin = new Padding(2, 2, 2, 2);
             ReconciliationDateTimePicker.Name = "ReconciliationDateTimePicker";
-            ReconciliationDateTimePicker.Size = new Size(150, 31);
+            ReconciliationDateTimePicker.Size = new Size(106, 23);
             ReconciliationDateTimePicker.TabIndex = 33;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(59, 56);
+            label13.Location = new Point(41, 34);
+            label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
-            label13.Size = new Size(162, 25);
+            label13.Size = new Size(109, 15);
             label13.TabIndex = 32;
             label13.Text = "Reconciliation Date";
             // 
             // AddMissingTransactionButton
             // 
-            AddMissingTransactionButton.Location = new Point(60, 352);
+            AddMissingTransactionButton.Location = new Point(42, 211);
+            AddMissingTransactionButton.Margin = new Padding(2, 2, 2, 2);
             AddMissingTransactionButton.Name = "AddMissingTransactionButton";
-            AddMissingTransactionButton.Size = new Size(343, 45);
+            AddMissingTransactionButton.Size = new Size(240, 27);
             AddMissingTransactionButton.TabIndex = 31;
             AddMissingTransactionButton.Text = "Add A Missing Transaction";
             AddMissingTransactionButton.UseVisualStyleBackColor = true;
@@ -102,26 +107,29 @@
             // 
             // ClearedBalanceTextBox
             // 
-            ClearedBalanceTextBox.Location = new Point(252, 244);
+            ClearedBalanceTextBox.Location = new Point(176, 146);
+            ClearedBalanceTextBox.Margin = new Padding(2, 2, 2, 2);
             ClearedBalanceTextBox.Name = "ClearedBalanceTextBox";
             ClearedBalanceTextBox.ReadOnly = true;
-            ClearedBalanceTextBox.Size = new Size(150, 31);
+            ClearedBalanceTextBox.Size = new Size(106, 23);
             ClearedBalanceTextBox.TabIndex = 30;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(59, 244);
+            label5.Location = new Point(41, 146);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(135, 25);
+            label5.Size = new Size(91, 15);
             label5.TabIndex = 29;
             label5.Text = "Cleared Balance";
             // 
             // InterestEarnedTextBox
             // 
-            InterestEarnedTextBox.Location = new Point(252, 199);
+            InterestEarnedTextBox.Location = new Point(176, 119);
+            InterestEarnedTextBox.Margin = new Padding(2, 2, 2, 2);
             InterestEarnedTextBox.Name = "InterestEarnedTextBox";
-            InterestEarnedTextBox.Size = new Size(150, 31);
+            InterestEarnedTextBox.Size = new Size(106, 23);
             InterestEarnedTextBox.TabIndex = 28;
             InterestEarnedTextBox.KeyPress += InterestEarnedTextBox_KeyPress;
             InterestEarnedTextBox.Leave += InterestEarnedTextBox_Leave;
@@ -129,17 +137,19 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(59, 202);
+            label4.Location = new Point(41, 121);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(130, 25);
+            label4.Size = new Size(85, 15);
             label4.TabIndex = 27;
             label4.Text = "Interest Earned";
             // 
             // BankFeesTextBox
             // 
-            BankFeesTextBox.Location = new Point(252, 161);
+            BankFeesTextBox.Location = new Point(176, 97);
+            BankFeesTextBox.Margin = new Padding(2, 2, 2, 2);
             BankFeesTextBox.Name = "BankFeesTextBox";
-            BankFeesTextBox.Size = new Size(150, 31);
+            BankFeesTextBox.Size = new Size(106, 23);
             BankFeesTextBox.TabIndex = 26;
             BankFeesTextBox.KeyPress += BankFeesTextBox_KeyPress;
             BankFeesTextBox.Leave += BankFeesTextBox_Leave;
@@ -147,17 +157,19 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(59, 164);
+            label3.Location = new Point(41, 98);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(90, 25);
+            label3.Size = new Size(59, 15);
             label3.TabIndex = 25;
             label3.Text = "Bank Fees";
             // 
             // EndingBalanceTextBox
             // 
-            EndingBalanceTextBox.Location = new Point(252, 124);
+            EndingBalanceTextBox.Location = new Point(176, 74);
+            EndingBalanceTextBox.Margin = new Padding(2, 2, 2, 2);
             EndingBalanceTextBox.Name = "EndingBalanceTextBox";
-            EndingBalanceTextBox.Size = new Size(150, 31);
+            EndingBalanceTextBox.Size = new Size(106, 23);
             EndingBalanceTextBox.TabIndex = 24;
             EndingBalanceTextBox.KeyPress += EndingBalanceTextBox_KeyPress;
             EndingBalanceTextBox.Leave += EndingBalanceTextBox_Leave;
@@ -165,34 +177,38 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(59, 127);
+            label2.Location = new Point(41, 76);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(131, 25);
+            label2.Size = new Size(88, 15);
             label2.TabIndex = 23;
             label2.Text = "Ending Balance";
             // 
             // LastReconciledBalanceTextBox
             // 
-            LastReconciledBalanceTextBox.Location = new Point(252, 87);
+            LastReconciledBalanceTextBox.Location = new Point(176, 52);
+            LastReconciledBalanceTextBox.Margin = new Padding(2, 2, 2, 2);
             LastReconciledBalanceTextBox.Name = "LastReconciledBalanceTextBox";
             LastReconciledBalanceTextBox.ReadOnly = true;
-            LastReconciledBalanceTextBox.Size = new Size(150, 31);
+            LastReconciledBalanceTextBox.Size = new Size(106, 23);
             LastReconciledBalanceTextBox.TabIndex = 22;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(59, 87);
+            label1.Location = new Point(41, 52);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(196, 25);
+            label1.Size = new Size(133, 15);
             label1.TabIndex = 21;
             label1.Text = "Last Reconciled Balance";
             // 
             // CancelFormButton
             // 
-            CancelFormButton.Location = new Point(724, 508);
+            CancelFormButton.Location = new Point(507, 305);
+            CancelFormButton.Margin = new Padding(2, 2, 2, 2);
             CancelFormButton.Name = "CancelFormButton";
-            CancelFormButton.Size = new Size(111, 33);
+            CancelFormButton.Size = new Size(78, 20);
             CancelFormButton.TabIndex = 37;
             CancelFormButton.Text = "Cancel";
             CancelFormButton.UseVisualStyleBackColor = true;
@@ -200,9 +216,10 @@
             // 
             // DoneButton
             // 
-            DoneButton.Location = new Point(504, 506);
+            DoneButton.Location = new Point(353, 304);
+            DoneButton.Margin = new Padding(2, 2, 2, 2);
             DoneButton.Name = "DoneButton";
-            DoneButton.Size = new Size(111, 33);
+            DoneButton.Size = new Size(78, 20);
             DoneButton.TabIndex = 36;
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
@@ -211,48 +228,52 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(599, 24);
+            label6.Location = new Point(419, 14);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(212, 25);
+            label6.Size = new Size(141, 15);
             label6.TabIndex = 39;
             label6.Text = "Outstanding Transactions";
             // 
             // ChecksDataGridView
             // 
             ChecksDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ChecksDataGridView.Location = new Point(427, 55);
+            ChecksDataGridView.Location = new Point(299, 33);
+            ChecksDataGridView.Margin = new Padding(2, 2, 2, 2);
             ChecksDataGridView.Name = "ChecksDataGridView";
             ChecksDataGridView.RowHeadersWidth = 62;
             ChecksDataGridView.RowTemplate.Height = 33;
-            ChecksDataGridView.Size = new Size(796, 440);
+            ChecksDataGridView.Size = new Size(646, 264);
             ChecksDataGridView.TabIndex = 38;
             ChecksDataGridView.CellClick += ChecksDataGridView_CellClick;
             // 
             // DepositsDataGridView
             // 
             DepositsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DepositsDataGridView.Location = new Point(1255, 56);
+            DepositsDataGridView.Location = new Point(949, 34);
+            DepositsDataGridView.Margin = new Padding(2, 2, 2, 2);
             DepositsDataGridView.Name = "DepositsDataGridView";
             DepositsDataGridView.RowHeadersWidth = 62;
             DepositsDataGridView.RowTemplate.Height = 33;
-            DepositsDataGridView.Size = new Size(637, 440);
+            DepositsDataGridView.Size = new Size(446, 264);
             DepositsDataGridView.TabIndex = 40;
             DepositsDataGridView.CellClick += DepositsDataGridView_CellClick;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(1399, 28);
+            label7.Location = new Point(1050, 17);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(82, 25);
+            label7.Size = new Size(52, 15);
             label7.TabIndex = 41;
             label7.Text = "Deposits";
             // 
             // ReconcileForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1921, 551);
+            ClientSize = new Size(1427, 331);
             Controls.Add(label7);
             Controls.Add(DepositsDataGridView);
             Controls.Add(label6);
@@ -274,6 +295,7 @@
             Controls.Add(label2);
             Controls.Add(LastReconciledBalanceTextBox);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "ReconcileForm";
             Text = "Reconcile Checks with Bank Statement";
             Shown += ReconcileForm_Shown;
