@@ -101,6 +101,7 @@ namespace BusinessCheckBook.DataStore
 
             // go through the columns for the breakdown 
 
+            InvoiceListFormat.SubFormats = new();
             int LastColumn = InvoiceListFormat.Count();
             while (LastColumn < TransactionsWorksheet.ColumnsUsed().Count())
             {

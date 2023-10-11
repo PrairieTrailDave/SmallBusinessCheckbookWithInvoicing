@@ -253,7 +253,7 @@ namespace BusinessCheckBook.DataStore
                 InvoiceItem IIB = new()
                 {
                     Account = JournalWorksheet.Cell(NextRow, AccountCol).GetString(),
-                    ItemPrice = GetDecimalValue(JournalWorksheet.Cell(NextRow, DebitCol).GetString()),
+                    ItemPrice = 0.00M - GetDecimalValue(JournalWorksheet.Cell(NextRow, DebitCol).GetString()),
                     ItemDescription = JournalWorksheet.Cell(NextRow, MemoCol).GetString()
                 };
                 if (IIB.ItemPrice == 0.00M)

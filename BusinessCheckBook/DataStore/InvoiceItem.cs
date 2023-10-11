@@ -175,7 +175,7 @@ namespace BusinessCheckBook.DataStore
             InvoiceListFormat.Add(new TextColumn(2 + offset, XLDescription, 1000, ColumnFormat.ColumnIsRequired, ColumnFormat.FieldIsOptional));
             InvoiceListFormat.Add(new DecimalColumn(3 + offset, XLCost, 20, ColumnFormat.ColumnIsOptional, ColumnFormat.FieldIsOptional));
             InvoiceListFormat.Add(new DecimalColumn(4 + offset, XLQuantity, 20, ColumnFormat.ColumnIsOptional, ColumnFormat.FieldIsOptional));
-            InvoiceListFormat.Add(new DecimalColumn(5 + offset, XLTax, 20, ColumnFormat.ColumnIsOptional, ColumnFormat.FieldIsRequired));
+            InvoiceListFormat.Add(new DecimalColumn(5 + offset, XLTax, 20, ColumnFormat.ColumnIsOptional, ColumnFormat.FieldIsOptional));
             InvoiceListFormat.Add(new DecimalColumn(6 + offset, XLPrice, 20, ColumnFormat.ColumnIsOptional, ColumnFormat.FieldIsRequired));
 
         }

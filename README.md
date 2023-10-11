@@ -30,7 +30,7 @@ Right now, the functions include
 
 USE THIS PROGRAM AT YOUR OWN RISK!!!!
 
-I wrote this for my own use. Your use of this program may open you up to financial mistakes. 
+I wrote this for my own use. Your use of this program may open you up to financial mistakes. In other words, I ain't liable for any mistakes, omissions, or bugs if you use this. I'm using it for my business.
 If you take this program and try to sell it, you will have to handle all the customer support issues, any legal challenges from Intuit, and the headaches of adding all the customer requests. I have no interest in handling customer service issues. I won't charge you to use this and I won't take your calls for help.
 
 For you Intuit Lawyers with more time on your hands:
@@ -119,3 +119,5 @@ The Chart of Accounts can be connected to the Federal 1120 form. The following a
 Known Issues:
 
 Quickbooks does not export long items in invoices. Therefore they are not available to import.
+When importing from a journal file, the pay to people are not validated.
+When importing from a journal file, the accounts on an invoice are not validated to make sure they are in the chart of accounts.

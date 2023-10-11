@@ -483,8 +483,9 @@ namespace BusinessCheckBook.DataStore
             // Fill in the billing address from the customer list
 
             Customer? TCustomer = Customers.GetCustomerByID(Inv.CustomerIdentifier);
-            // before adding the invoice, see if this invoice number is already in the list
+            // TBD - before adding the invoice, see if this invoice number is already in the list
 
+            // make sure that the customer is on file
             if (TCustomer == null)
             {
                 if (MessageBox.Show("Invoice is for a customer not on file," + Inv.CustomerIdentifier + " Add?", "Unknown Customer", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -631,7 +632,9 @@ namespace BusinessCheckBook.DataStore
 
             if (!CurrentTransactionLedger.CheckPayTo(ToPayTo.GetCurrentList())) return false;
 
-            // make sure all deposits are from some entity in the Customer list
+            // TBD - make sure all deposits are from some entity in the Customer list
+
+            // TBD - make sure all accounts listed on an invoice are in the chart of accounts
 
             return true;
         }
