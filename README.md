@@ -1,5 +1,5 @@
 # Business Checking
-A Business Checkbook application with user interface, Excel database, prints checks, and manages invoices
+A Business Checkbook application with user interface, prints checks, and manages invoices using an Excel database.
 
 This is a quick and dirty checkbook program that I wrote to replace my old QuickBooks program. I was tired of QuickBooks constantly telling me to upgrade and I didn't want to pay for the latest version. No, I'm not buying the online version either.
 This is NOT AN ACCOUNTING PACKAGE. It is a checkbook program. This is useful only for CASH ONLY business.
@@ -16,18 +16,19 @@ This program also is able to import data from Quickbooks IIF files and exported 
 
 Right now, the functions include
 
-1. Pull in the database and compute the current balance
-2. Add a transaction to the database and continue the balance
-3. Put the transaction in a category
-4. Remember the last transaction to a payee and auto fill this transaction with that data
-5. Reconcile the ledger with the bank statement
-6. Allow transactions to be broken up into multiple sub-categories
-7. Reporting split up by category (helps with taxes)
-8. Import some values from QuickBooks
-9. Print Checks
-10. Print Invoices
-11. Receive payments and marks invoices as paid
+1. Create a new company
+2. Read the current database
+3. Import from Quickbooks journal xlsx file
+4. Create and print a check
+5. Create and print an invoice
+6. Receive payments and mark the invoice as paid
+7. Reconcile with bank statement
+8. Create compare this year with last year report
+9. Create 1120 report
+10. Create 1099 report
 
+
+Here are some words to try to keep lawyer type people from coming after me for letting anyone else use this.
 USE THIS PROGRAM AT YOUR OWN RISK!!!!
 
 I wrote this for my own use. Your use of this program may open you up to financial mistakes. In other words, I ain't liable for any mistakes, omissions, or bugs if you use this. I'm using it for my business.
@@ -42,17 +43,22 @@ If you can't afford Quickbooks, you are not in business yet.
 
 
 Example user interface:
-Main screen showing the current ledger
+Main screen 
 
 
 How to add a transaction to the ledger
 
 Adding transaction with split categories
 
+Create a check
+
+Create an Invoice
+
+Receive Payments
 
 Reconciliation Screen
 
-Report Screen
+Reports
 
 
 
@@ -121,3 +127,4 @@ Known Issues:
 Quickbooks does not export long items in invoices. Therefore they are not available to import.
 When importing from a journal file, the pay to people are not validated.
 When importing from a journal file, the accounts on an invoice are not validated to make sure they are in the chart of accounts.
+Export not implemented yet (and might not be ever)

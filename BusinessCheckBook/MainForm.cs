@@ -23,7 +23,6 @@ namespace BusinessCheckBook
         {
             InitializeComponent();
             ActiveBook = new MyCheckbook();
-            //CurrentActiveFile = "";
         }
 
 
@@ -65,6 +64,7 @@ namespace BusinessCheckBook
                 {
                     this.UseWaitCursor = true;
                     Application.DoEvents();
+                    CurrentActiveFile = openFileDialog.SafeFileName;
                     if (await ReadDataFile(openFileDialog.FileName))
                     {
                         MessageBox.Show("File read"); ;
@@ -85,6 +85,7 @@ namespace BusinessCheckBook
         {
             saveFileDialog.OverwritePrompt = false;
             saveFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            saveFileDialog.FileName = CurrentActiveFile;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try

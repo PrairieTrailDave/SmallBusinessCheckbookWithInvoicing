@@ -40,24 +40,27 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(41, 27);
+            label1.Location = new Point(29, 16);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(163, 25);
+            label1.Size = new Size(108, 15);
             label1.TabIndex = 0;
             label1.Text = "Tax Report for Year:";
             // 
             // ReportYearTextBox
             // 
-            ReportYearTextBox.Location = new Point(210, 24);
+            ReportYearTextBox.Location = new Point(147, 14);
+            ReportYearTextBox.Margin = new Padding(2, 2, 2, 2);
             ReportYearTextBox.Name = "ReportYearTextBox";
-            ReportYearTextBox.Size = new Size(81, 31);
+            ReportYearTextBox.Size = new Size(58, 23);
             ReportYearTextBox.TabIndex = 1;
             // 
             // RefreshButton
             // 
-            RefreshButton.Location = new Point(366, 22);
+            RefreshButton.Location = new Point(256, 13);
+            RefreshButton.Margin = new Padding(2, 2, 2, 2);
             RefreshButton.Name = "RefreshButton";
-            RefreshButton.Size = new Size(112, 34);
+            RefreshButton.Size = new Size(78, 24);
             RefreshButton.TabIndex = 2;
             RefreshButton.Text = "Refresh";
             RefreshButton.UseVisualStyleBackColor = true;
@@ -66,18 +69,20 @@
             // ReportDataGridView
             // 
             ReportDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ReportDataGridView.Location = new Point(41, 78);
+            ReportDataGridView.Location = new Point(29, 47);
+            ReportDataGridView.Margin = new Padding(2, 2, 2, 2);
             ReportDataGridView.Name = "ReportDataGridView";
             ReportDataGridView.RowHeadersWidth = 62;
             ReportDataGridView.RowTemplate.Height = 33;
-            ReportDataGridView.Size = new Size(949, 642);
+            ReportDataGridView.Size = new Size(664, 385);
             ReportDataGridView.TabIndex = 3;
             // 
             // ExportButton
             // 
-            ExportButton.Location = new Point(591, 22);
+            ExportButton.Location = new Point(414, 13);
+            ExportButton.Margin = new Padding(2, 2, 2, 2);
             ExportButton.Name = "ExportButton";
-            ExportButton.Size = new Size(153, 34);
+            ExportButton.Size = new Size(107, 24);
             ExportButton.TabIndex = 4;
             ExportButton.Text = "Export To CSV";
             ExportButton.UseVisualStyleBackColor = true;
@@ -85,14 +90,15 @@
             // 
             // Federal1120Form
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1146, 803);
+            ClientSize = new Size(802, 482);
             Controls.Add(ExportButton);
             Controls.Add(ReportDataGridView);
             Controls.Add(RefreshButton);
             Controls.Add(ReportYearTextBox);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Federal1120Form";
             Text = "Federal1120Form";
             ((System.ComponentModel.ISupportInitialize)ReportDataGridView).EndInit();

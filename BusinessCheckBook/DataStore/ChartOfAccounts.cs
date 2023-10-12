@@ -25,7 +25,7 @@ namespace BusinessCheckBook.DataStore
 
         ActivityLogger? Logger { get; set; } = null;
         string sNewAccount = "New Account";
-        string sAccountModified = "Account Modified";
+        //string sAccountModified = "Account Modified";
         string sAccount = "Account";
 
         public ChartOfAccounts()

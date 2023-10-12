@@ -4,10 +4,12 @@
 //
 //**********************************************************************
 
-using BusinessCheckBook.DataStore;
 using System.Data;
 using System.Drawing.Printing;
 using System.Reflection;
+
+using BusinessCheckBook.DataStore;
+using BusinessCheckBook.Extensions;
 
 namespace BusinessCheckBook
 {
@@ -58,7 +60,7 @@ namespace BusinessCheckBook
             List<Customer> customerList = ActiveBook.Customers.GetCurrentList();
             foreach (Customer customer in customerList)
             {
-                CustomerComboBox.Items.Add(customer.AccountName);
+                CustomerComboBox.Items.Add(new DropDownItem(customer.AccountName, customer.CustomerIdentifier));
             }
             InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
             InvoiceNumberTextBox.Text = InvoiceNumber.ToString();
@@ -506,7 +508,8 @@ namespace BusinessCheckBook
         }
         internal void BuildInvoiceToSave(Invoice ToSave)
         {
-            ToSave.CustomerIdentifier = CustomerComboBox.Text;
+            DropDownItem SelectededCustomer = (DropDownItem)CustomerComboBox.SelectedItem;
+            ToSave.CustomerIdentifier = SelectededCustomer.Value;
             ToSave.BillingAddress1 = BillToAddress1TextBox.Text;
             ToSave.BillingAddress2 = BillToAddress2TextBox.Text;
             ToSave.BillingAddress3 = BillToAddress3TextBox.Text;
