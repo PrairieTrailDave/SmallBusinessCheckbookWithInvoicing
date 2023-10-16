@@ -37,39 +37,44 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(33, 43);
+            label1.Location = new Point(23, 26);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(140, 25);
+            label1.Size = new Size(93, 15);
             label1.TabIndex = 0;
             label1.Text = "Select Customer";
             // 
             // SelectCustomerComboBox
             // 
             SelectCustomerComboBox.FormattingEnabled = true;
-            SelectCustomerComboBox.Location = new Point(190, 40);
+            SelectCustomerComboBox.Location = new Point(133, 24);
+            SelectCustomerComboBox.Margin = new Padding(2, 2, 2, 2);
             SelectCustomerComboBox.Name = "SelectCustomerComboBox";
-            SelectCustomerComboBox.Size = new Size(263, 33);
+            SelectCustomerComboBox.Size = new Size(185, 23);
             SelectCustomerComboBox.TabIndex = 1;
             SelectCustomerComboBox.SelectedIndexChanged += SelectCustomerComboBox_SelectedIndexChanged;
             // 
             // InvoicesDataGridView
             // 
             InvoicesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            InvoicesDataGridView.Location = new Point(66, 115);
+            InvoicesDataGridView.Location = new Point(46, 69);
+            InvoicesDataGridView.Margin = new Padding(2, 2, 2, 2);
             InvoicesDataGridView.Name = "InvoicesDataGridView";
             InvoicesDataGridView.RowHeadersWidth = 62;
             InvoicesDataGridView.RowTemplate.Height = 33;
-            InvoicesDataGridView.Size = new Size(1039, 355);
+            InvoicesDataGridView.Size = new Size(727, 213);
             InvoicesDataGridView.TabIndex = 2;
+            InvoicesDataGridView.CellContentClick += InvoicesDataGridView_CellContentClick;
             // 
             // ViewInvoicesForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1183, 510);
+            ClientSize = new Size(828, 306);
             Controls.Add(InvoicesDataGridView);
             Controls.Add(SelectCustomerComboBox);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "ViewInvoicesForm";
             Text = "View Invoices";
             ((System.ComponentModel.ISupportInitialize)InvoicesDataGridView).EndInit();

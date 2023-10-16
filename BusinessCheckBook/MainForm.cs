@@ -18,6 +18,7 @@ namespace BusinessCheckBook
         public MyCheckbook ActiveBook;
         
         string CurrentActiveFile = string.Empty;
+        string InputFolder = string.Empty;
 
         public MainForm()
         {
@@ -37,6 +38,7 @@ namespace BusinessCheckBook
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 CurrentActiveFile = saveFileDialog.FileName;
+                InputFolder = Path.GetDirectoryName(saveFileDialog.FileName) ?? "";
                 ActiveBook = new MyCheckbook();
 
                 InitialBalanceForm IBF = new();
@@ -49,7 +51,11 @@ namespace BusinessCheckBook
 
                     EnableButtons();
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                catch (Exception ex) 
+                { 
+                    MessageBox.Show(ex.Message);
+                    ShowWarningIncomplete();
+                }
             }
         }
 
@@ -65,6 +71,7 @@ namespace BusinessCheckBook
                     this.UseWaitCursor = true;
                     Application.DoEvents();
                     CurrentActiveFile = openFileDialog.SafeFileName;
+                    InputFolder = Path.GetDirectoryName(openFileDialog.FileName) ?? "";
                     if (await ReadDataFile(openFileDialog.FileName))
                     {
                         MessageBox.Show("File read"); ;
@@ -76,6 +83,7 @@ namespace BusinessCheckBook
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occured " + ex.Message);
+                    ShowWarningIncomplete();
                 }
             }
         }
@@ -86,6 +94,7 @@ namespace BusinessCheckBook
             saveFileDialog.OverwritePrompt = false;
             saveFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             saveFileDialog.FileName = CurrentActiveFile;
+            saveFileDialog.InitialDirectory = InputFolder;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -120,6 +129,9 @@ namespace BusinessCheckBook
                         MessageBox.Show("File imported");
                         EnableButtons();
                     }
+                    else
+                        ShowWarningIncomplete();
+
                     this.Cursor = Cursors.Default;
                     this.UseWaitCursor = false;
                 }
@@ -146,6 +158,9 @@ namespace BusinessCheckBook
                         MessageBox.Show("File imported");
                         EnableButtons();
                     }
+                    else
+                        ShowWarningIncomplete();
+
                     this.Cursor = Cursors.Default;
                     this.UseWaitCursor = false;
                 }
@@ -275,7 +290,10 @@ namespace BusinessCheckBook
         // Support Routines
 
 
-
+        private void ShowWarningIncomplete()
+        {
+            MessageBox.Show("The operation was incomplete. The file in memory is likely to be corrupted. Please restart.");
+        }
         private async Task<bool> ReadDataFile(string FileName)
         {
             try

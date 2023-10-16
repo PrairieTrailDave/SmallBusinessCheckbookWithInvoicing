@@ -57,5 +57,21 @@ namespace BusinessCheckBook
             InvoicesDataGridView.DataSource = ToShow;
             InvoicesDataGridView.AutoResizeColumns();
         }
+
+        private void InvoicesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int GridRow = e.RowIndex;
+            int InvoiceNumber = (int)InvoicesDataGridView.Rows[GridRow].Cells[0].Value;
+
+            // get that invoice
+            Invoice ToShow = ActiveBook.CurrentInvoices.GetInvoice(InvoiceNumber);
+
+            // display on Show Invoice screen
+
+            ShowInvoiceForm SIF = new();
+            SIF.SetUp(ActiveBook, ToShow);
+            SIF.ShowDialog();
+
+        }
     }
 }

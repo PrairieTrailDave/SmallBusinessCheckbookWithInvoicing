@@ -24,6 +24,14 @@ namespace BusinessCheckBook.DataStore
             SetSheetFormat();
         }
 
+        internal Invoice GetInvoice(int InvNum)
+        {
+            Invoice? LInvoice = (from ci in CurrentInvoices
+                                 where ci.InvoiceNumber == InvNum
+                                 select ci).LastOrDefault();
+            if (LInvoice == null) { return new Invoice(); }
+            return LInvoice;
+        }
 
         internal int GetlastInvoiceNumber ()
         {
