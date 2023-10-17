@@ -1,11 +1,10 @@
-# Business Checking
-A Business Checkbook application with user interface, prints checks, and manages invoices using an Excel database.
+# Small Business Checking with invoicing and tax reports
+A Business Checkbook application with user interface, prints checks, manages invoices and produces 1120 and 1099 reports using an Excel database.
 
 This is a quick and dirty checkbook program that I wrote to replace my old QuickBooks program. I was tired of QuickBooks constantly telling me to upgrade and I didn't want to pay for the latest version. No, I'm not buying the online version either.
 This is NOT AN ACCOUNTING PACKAGE. It is a checkbook program. This is useful only for CASH ONLY business.
+This program is NOT a multi-user program. It is a single user program.
 
-
-When I looked at the C# checkbook programs here, most lacked a user interface and weren't attractive to me.
 
 This program uses an Excel .XLSX file as the database. That offers several benefits:
 1. The user can write their own reports in Excel or in Power BI
@@ -44,6 +43,7 @@ If you can't afford Quickbooks, you are not in business yet.
 
 Example user interface:
 Main screen 
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/f589c15e-7122-480e-859f-d881cee06f26)
 
 
 How to add a transaction to the ledger
@@ -51,8 +51,13 @@ How to add a transaction to the ledger
 Adding transaction with split categories
 
 Create a check
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/5616236e-f501-4ddb-9ad4-5cb315095493)
+
+Managing Customer List
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/243fbd8b-9453-4a18-aec7-31c68920445c)
 
 Create an Invoice
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/70170c94-d0e6-4c68-ba0b-1fa9a2e7868d)
 
 Receive Payments
 
