@@ -105,7 +105,7 @@ namespace BusinessCheckBook
                     if ((Inv.Total - Inv.AmountPaid) == AmountPaid)
                     {
                         // build ledger entry
-                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid));
+                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid, Inv));
 
                         // mark invoice as paid
 
@@ -126,7 +126,7 @@ namespace BusinessCheckBook
                     if (BalanceDue <= AmountPaid)
                     {
                         // build ledger entry
-                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(BalanceDue));
+                        ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(BalanceDue, Inv));
 
                         // mark invoice as paid
 
@@ -155,7 +155,7 @@ namespace BusinessCheckBook
             if (Inv != null)
             {
                 // build ledger entry
-                ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid));
+                ActiveBook.CurrentTransactionLedger.InsertTransaction(BuildLedgerEntry(AmountPaid, Inv));
 
                 // post as partial payment
 
@@ -184,8 +184,13 @@ namespace BusinessCheckBook
 
         // support routines
 
-        internal LedgerEntry BuildLedgerEntry (decimal AmountToPost)
+        internal LedgerEntry BuildLedgerEntry (decimal AmountToPost, Invoice Inv)
         {
+            string Account;
+            if (Inv.InvoiceBreakdown.Count > 0)
+                Account = Inv.InvoiceBreakdown[0].Account ?? ChartOfAccounts.MainIncomeAccount;
+            else
+                Account = ChartOfAccounts.MainIncomeAccount;
 
             return ActiveBook.CurrentTransactionLedger.CreateLedgerEntry
                     (
@@ -196,7 +201,7 @@ namespace BusinessCheckBook
                         AmountToPost,
                         0.00M,              // resulting balance get recalculated
                         AmountToPost,
-                        ChartOfAccounts.MainIncomeAccount,
+                        Account,
                         null                // ledger breakdown
                     );
 
