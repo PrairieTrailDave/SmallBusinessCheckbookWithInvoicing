@@ -510,7 +510,7 @@ namespace BusinessCheckBook.DataStore
             CurrentAccounts.Add(new Account(true, Account.Type.Income, "InitialBalance", "Initial Balance", "", "L1b. Cash"));
             CurrentAccounts.Add(new Account(true, Account.Type.Income, "CashSales", "Cash Sales", "", "1a. Gross Receipts"));
             CurrentAccounts.Add(new Account(true, Account.Type.Income, "Consulting", "Consulting", "", "1a. Gross Receipts"));
-            CurrentAccounts.Add(new Account(true, Account.Type.Income, InterestEarnedAccount, "Interest Earned", "", "5. Interest"));
+            CurrentAccounts.Add(new Account(true, Account.Type.Income, InterestEarnedAccount, "Interest Earned", "", "5. Interest Income"));
             CurrentAccounts.Add(new Account(true, Account.Type.Income, "Loan", "Borrowing", "", "1a. Gross Receipts"));
             CurrentAccounts.Add(new Account(true, Account.Type.Income, "ServiceIncome", "Income from services rendered", "", "1a. Gross Receipts"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, BankFeesAccount, "Bank fees", "", "18. Interest"));

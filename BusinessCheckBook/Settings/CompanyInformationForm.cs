@@ -113,7 +113,7 @@ namespace BusinessCheckBook.Settings
                 CompanyAddressTextBox.Focus();
                 return false;
             }
-            if (!CompanyInformation.ValidateCompanyAddress(CompanyAddress2TextBox.Text))
+            if (!CompanyInformation.ValidateCompanyAddress2(CompanyAddress2TextBox.Text))
             {
                 MessageBox.Show("Please enter a valid company address2");
                 CompanyAddress2TextBox.Focus();

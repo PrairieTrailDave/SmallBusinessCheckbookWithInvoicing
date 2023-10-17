@@ -23,57 +23,76 @@ namespace BusinessCheckBook.DataStore
         private const string XLValue = "Value";
 
         // Parameter Names
+        
+        internal class ParameterName
+        {
+            internal string Name { get; set; } = string.Empty;
+            internal bool IsRequired { get; set; }
+            internal string DefaultValue { get; set; } = string.Empty;
+            internal ParameterName (string nm, bool isRequired, string defaultv)
+            {
+                Name = nm;
+                IsRequired = isRequired;
+                DefaultValue = defaultv;
+            }
+        }
+        List<ParameterName> ParameterNameList { get; set; } = new();
 
-        internal const string ParmCompanyName = "CompanyName";
-        internal const string ParmCompanyAddr = "Address";
-        internal const string ParmCompanyAdr2 = "Address2";
-        internal const string ParmCompanyCity = "City";
-        internal const string ParmCompanyState = "State";
-        internal const string ParmCompanyZip = "ZipCode";
-        internal const string ParmCompanyPhone = "Phone";
-        internal const string ParmCompanyEIN = "EIN";
-        internal const string CheckFormat = "CheckFormat";
-        internal const string FirstInvoiceNumber = "FirstInvoice";
+        readonly ParameterName ParmCompanyName = new("CompanyName", true, "");
+        readonly ParameterName ParmCompanyAddr = new("Address", true, "");
+        readonly ParameterName ParmCompanyAdr2 = new("Address2", false, "");
+        readonly ParameterName ParmCompanyCity = new("City", true, "");
+        readonly ParameterName ParmCompanyState = new("State", true, "");
+        readonly ParameterName ParmCompanyZip = new("ZipCode", true, "");
+        readonly ParameterName ParmCompanyPhone = new("Phone", true, "");
+        readonly ParameterName ParmCompanyEIN = new("EIN", true, "");
+        readonly ParameterName CheckFormat = new("CheckFormat", false, "Laser 1PT");
+        readonly ParameterName FirstInvoiceNumber = new("FirstInvoice", true, "1");
 
 
         internal CompanyParameters() 
         {
             SetSheetFormat();
+            ParameterNameList = new List<ParameterName>();
+            ParameterNameList.Add(ParmCompanyName);
+            ParameterNameList.Add(ParmCompanyAddr);
+            ParameterNameList.Add(ParmCompanyAdr2);
+            ParameterNameList.Add(ParmCompanyCity);
+            ParameterNameList.Add(ParmCompanyState);
+            ParameterNameList.Add(ParmCompanyZip);
+            ParameterNameList.Add(ParmCompanyPhone);
+            ParameterNameList.Add(ParmCompanyEIN);
+            ParameterNameList.Add(CheckFormat);
+            ParameterNameList.Add(FirstInvoiceNumber);
         }
 
 
         internal void Clear()
         {
             ParameterList.Clear();
-            ParameterList.Add(ParmCompanyName, "");
-            ParameterList.Add(ParmCompanyAddr, "");
-            ParameterList.Add(ParmCompanyAdr2, "");
-            ParameterList.Add(ParmCompanyCity, "");
-            ParameterList.Add(ParmCompanyState, "");
-            ParameterList.Add(ParmCompanyZip, "");
-            ParameterList.Add(ParmCompanyEIN, "");
-            ParameterList.Add(ParmCompanyPhone, "");
-            ParameterList.Add(CheckFormat, "Laser 1PT");
-            ParameterList.Add(FirstInvoiceNumber, "2678");
+            foreach(ParameterName pn in  ParameterNameList)
+            {
+                ParameterList.Add(pn.Name, pn.DefaultValue);
+            }
         }
 
         internal string GetAddressLine(int LineNumber)
         {
             switch (LineNumber)
             {
-                case 0: return ParameterList[ParmCompanyName];
-                case 1: return ParameterList[ParmCompanyAddr];
+                case 0: return ParameterList[ParmCompanyName.Name];
+                case 1: return ParameterList[ParmCompanyAddr.Name];
                 case 2:
-                    if (ParameterList.TryGetValue(ParmCompanyAdr2, out string? results)) return results;
+                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out string? results)) return results;
                     else
-                        return ParameterList[ParmCompanyCity] + ", "
-                            + ParameterList[ParmCompanyState] + " "
-                            + ParameterList[ParmCompanyZip];
+                        return ParameterList[ParmCompanyCity.Name] + ", "
+                            + ParameterList[ParmCompanyState.Name] + " "
+                            + ParameterList[ParmCompanyZip.Name];
                 case 3:
-                    if (ParameterList.TryGetValue(ParmCompanyAdr2, out _))
-                        return ParameterList[ParmCompanyCity] + ", "
-                        + ParameterList[ParmCompanyState] + " "
-                        + ParameterList[ParmCompanyZip];
+                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out _))
+                        return ParameterList[ParmCompanyCity.Name] + ", "
+                        + ParameterList[ParmCompanyState.Name] + " "
+                        + ParameterList[ParmCompanyZip.Name];
                     else
                         return "";
             
@@ -146,7 +165,7 @@ namespace BusinessCheckBook.DataStore
 
                     ColumnFormat ThisColumn;
 
-                    // check the name - if no name, then skip this row
+                    // check the name - if no name, then done
 
                     ThisColumn = ParameterFormat.Column(XLName)!;
                     string TName = XRow.Cell(ThisColumn.ColumnNumber).GetString();
@@ -161,26 +180,46 @@ namespace BusinessCheckBook.DataStore
 
                     ThisColumn = ParameterFormat.Column(XLValue)!;
                     string TValue = XRow.Cell(ThisColumn.ColumnNumber).GetString();
-                    if (!ThisColumn.Valid(TValue))
+
+                    // find if this parameter is required
+                    foreach (ParameterName pn in ParameterNameList)
                     {
-                        ErrorMessage = "Invalid Parameter value in row " + Row.ToString() + " " + TValue;
-                        return false;
+                        if (pn.Name == TName)
+                        {
+                            if (pn.IsRequired)
+                            {
+                                if (!ThisColumn.Valid(TValue))
+                                {
+                                    ErrorMessage = "Invalid Parameter value in row " + Row.ToString() + " " + TValue;
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if (TValue.Trim().Length > 0)
+                                {
+                                    if (!ThisColumn.Valid(TValue))
+                                    {
+                                        ErrorMessage = "Invalid Parameter value in row " + Row.ToString() + " " + TValue;
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                     }
+
                     VParameterList.Add(TName, TValue);
                 }
 
                 // now check to make sure that all the required parameters are there
                 string MissingParameter = "Missing parameter ";
-                if (!VParameterList.TryGetValue(ParmCompanyName, out _)) { ErrorMessage = MissingParameter + ParmCompanyName; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyAddr, out _)) { ErrorMessage = MissingParameter + ParmCompanyAddr; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyCity, out _)) { ErrorMessage = MissingParameter + ParmCompanyCity; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyState, out _)) { ErrorMessage = MissingParameter + ParmCompanyState; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyZip, out _)) { ErrorMessage = MissingParameter + ParmCompanyZip; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyEIN, out _)) { ErrorMessage = MissingParameter + ParmCompanyEIN; return false; }
-                if (!VParameterList.TryGetValue(ParmCompanyPhone, out _)) { ErrorMessage = MissingParameter + ParmCompanyPhone; return false; }
-                if (!VParameterList.TryGetValue(FirstInvoiceNumber, out _)) { ErrorMessage = MissingParameter + FirstInvoiceNumber; return false; }
-
-
+                foreach (ParameterName pn in ParameterNameList)
+                {
+                    if (pn.IsRequired)
+                    {
+                        if (!VParameterList.TryGetValue(pn.Name, out _)) { ErrorMessage = MissingParameter + pn.Name; return false; }
+                    }
+                }
 
                 return true;
             }
@@ -203,6 +242,16 @@ namespace BusinessCheckBook.DataStore
             ColumnFormat Col = ParameterFormat.Column(XLValue)!;
             if (!Col.Valid(CompanyAddress))
                 return false;
+            return true;
+        }
+        internal bool ValidateCompanyAddress2(string CompanyAddress2)
+        {
+            if (CompanyAddress2.Trim().Length > 0)
+            {
+                ColumnFormat Col = ParameterFormat.Column(XLValue)!;
+                if (!Col.Valid(CompanyAddress2))
+                    return false;
+            }
             return true;
         }
         internal bool ValidateCompanyCity(string CompanyCity)
