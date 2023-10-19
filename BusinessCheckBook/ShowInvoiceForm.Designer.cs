@@ -60,6 +60,7 @@
             CustomerTextBox = new TextBox();
             InvoiceDateTextBox = new TextBox();
             InvoiceDueDateTextBox = new TextBox();
+            label12 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -335,11 +336,22 @@
             InvoiceDueDateTextBox.Size = new Size(136, 23);
             InvoiceDueDateTextBox.TabIndex = 32;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(12, 9);
+            label12.Name = "label12";
+            label12.Size = new Size(218, 15);
+            label12.TabIndex = 33;
+            label12.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label12.Visible = false;
+            // 
             // ShowInvoiceForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1284, 589);
+            Controls.Add(label12);
             Controls.Add(InvoiceDueDateTextBox);
             Controls.Add(InvoiceDateTextBox);
             Controls.Add(CustomerTextBox);
@@ -409,5 +421,6 @@
         private TextBox CustomerTextBox;
         private TextBox InvoiceDateTextBox;
         private TextBox InvoiceDueDateTextBox;
+        private Label label12;
     }
 }

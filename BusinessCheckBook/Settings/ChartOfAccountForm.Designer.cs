@@ -47,6 +47,7 @@
             ClearButton = new Button();
             CurrentAccountsDataGridView = new DataGridView();
             DoneButton = new Button();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CurrentAccountsDataGridView).BeginInit();
             SuspendLayout();
@@ -237,11 +238,22 @@
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(36, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(218, 15);
+            label7.TabIndex = 7;
+            label7.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label7.Visible = false;
+            // 
             // ChartOfAccountForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1417, 552);
+            Controls.Add(label7);
             Controls.Add(DoneButton);
             Controls.Add(CurrentAccountsDataGridView);
             Controls.Add(panel1);
@@ -251,6 +263,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CurrentAccountsDataGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -274,5 +287,6 @@
         private Button AddButton;
         private Button EnableButton;
         private Button DisableButton;
+        private Label label7;
     }
 }

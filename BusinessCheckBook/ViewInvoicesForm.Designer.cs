@@ -31,6 +31,7 @@
             label1 = new Label();
             SelectCustomerComboBox = new ComboBox();
             InvoicesDataGridView = new DataGridView();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)InvoicesDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             // 
             SelectCustomerComboBox.FormattingEnabled = true;
             SelectCustomerComboBox.Location = new Point(133, 24);
-            SelectCustomerComboBox.Margin = new Padding(2, 2, 2, 2);
+            SelectCustomerComboBox.Margin = new Padding(2);
             SelectCustomerComboBox.Name = "SelectCustomerComboBox";
             SelectCustomerComboBox.Size = new Size(185, 23);
             SelectCustomerComboBox.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             InvoicesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             InvoicesDataGridView.Location = new Point(46, 69);
-            InvoicesDataGridView.Margin = new Padding(2, 2, 2, 2);
+            InvoicesDataGridView.Margin = new Padding(2);
             InvoicesDataGridView.Name = "InvoicesDataGridView";
             InvoicesDataGridView.RowHeadersWidth = 62;
             InvoicesDataGridView.RowTemplate.Height = 33;
@@ -66,15 +67,26 @@
             InvoicesDataGridView.TabIndex = 2;
             InvoicesDataGridView.CellContentClick += InvoicesDataGridView_CellContentClick;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(12, -3);
+            label3.Name = "label3";
+            label3.Size = new Size(218, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Visible = false;
+            // 
             // ViewInvoicesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 306);
+            Controls.Add(label3);
             Controls.Add(InvoicesDataGridView);
             Controls.Add(SelectCustomerComboBox);
             Controls.Add(label1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "ViewInvoicesForm";
             Text = "View Invoices";
             ((System.ComponentModel.ISupportInitialize)InvoicesDataGridView).EndInit();
@@ -87,5 +99,6 @@
         private Label label1;
         private ComboBox SelectCustomerComboBox;
         private DataGridView InvoicesDataGridView;
+        private Label label3;
     }
 }

@@ -76,7 +76,7 @@ namespace BusinessCheckBook
 
         // support routines
 
-        private void DisplayCurrentLedger ()
+        private void DisplayCurrentLedger()
         {
             LedgerDataGridView.DataSource = null;
             LedgerDataGridView.DataSource = ActiveBook.CurrentTransactionLedger.GetCurrentList();

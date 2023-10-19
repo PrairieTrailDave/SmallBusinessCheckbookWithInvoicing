@@ -59,6 +59,7 @@
             AddToBatchButton = new Button();
             PrintBatchButton = new Button();
             DoneButton = new Button();
+            label3 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CheckBreakdownDataGridView).BeginInit();
@@ -365,11 +366,22 @@
             DoneButton.UseVisualStyleBackColor = true;
             DoneButton.Click += DoneButton_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(2, 37);
+            label3.Name = "label3";
+            label3.Size = new Size(218, 15);
+            label3.TabIndex = 51;
+            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Visible = false;
+            // 
             // WriteCheckForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1277, 582);
+            Controls.Add(label3);
             Controls.Add(DoneButton);
             Controls.Add(PrintBatchButton);
             Controls.Add(AddToBatchButton);
@@ -384,6 +396,7 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CheckBreakdownDataGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -419,5 +432,6 @@
         private Button PrintBatchButton;
         private Button DoneButton;
         private DateTimePicker DateTimePicker;
+        private Label label3;
     }
 }

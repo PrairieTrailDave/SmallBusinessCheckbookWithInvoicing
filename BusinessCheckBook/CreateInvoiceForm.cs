@@ -111,7 +111,7 @@ namespace BusinessCheckBook
                         {
                             CurrentInvoice = new();
                             BuildInvoiceToSave(CurrentInvoice);
-                            CurrentPrintLayout = InvoiceFormat.BuildInvoiceLayout(); 
+                            CurrentPrintLayout = InvoiceFormat.BuildInvoiceLayout();
 
 
                             PrintDocument pd = new();

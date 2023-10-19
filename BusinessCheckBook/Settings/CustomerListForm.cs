@@ -38,7 +38,7 @@ namespace BusinessCheckBook.Settings
             ShowCurrentCustomerList();
         }
 
-        internal void PutPassedCustomerOnScreen (Customer TCust)
+        internal void PutPassedCustomerOnScreen(Customer TCust)
         {
             DisplayThisCustomer(TCust);
         }
@@ -132,7 +132,7 @@ namespace BusinessCheckBook.Settings
 
         // Support Routines
 
-        private void ShowCurrentCustomerList ()
+        private void ShowCurrentCustomerList()
         {
             CustomerList Customers = ActiveBook.Customers;
             List<CustList> DisplayList = new();

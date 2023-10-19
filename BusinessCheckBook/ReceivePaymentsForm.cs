@@ -184,7 +184,7 @@ namespace BusinessCheckBook
 
         // support routines
 
-        internal LedgerEntry BuildLedgerEntry (decimal AmountToPost, Invoice Inv)
+        internal LedgerEntry BuildLedgerEntry(decimal AmountToPost, Invoice Inv)
         {
             string Account;
             if (Inv.InvoiceBreakdown.Count > 0)
@@ -206,7 +206,7 @@ namespace BusinessCheckBook
                     );
 
         }
-        internal void UpdateDisplayInvoice (int InvoiceNumber, decimal AmountPaid, bool ifPaid)
+        internal void UpdateDisplayInvoice(int InvoiceNumber, decimal AmountPaid, bool ifPaid)
         {
             OutstandingInvoicesDataGridView.DataSource = null;
             string strInvNum = InvoiceNumber.ToString();

@@ -1,4 +1,10 @@
-﻿using System;
+﻿//**********************************************************************
+//
+//          Copyright © 2023 Prairie Trail Software, Inc.
+//
+//**********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;

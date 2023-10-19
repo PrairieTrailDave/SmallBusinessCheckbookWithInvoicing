@@ -16,7 +16,7 @@ namespace BusinessCheckBook
     public partial class MainForm : Form
     {
         public MyCheckbook ActiveBook;
-        
+
         string CurrentActiveFile = string.Empty;
         string InputFolder = string.Empty;
 
@@ -51,8 +51,8 @@ namespace BusinessCheckBook
 
                     EnableButtons();
                 }
-                catch (Exception ex) 
-                { 
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message);
                     ShowWarningIncomplete();
                 }

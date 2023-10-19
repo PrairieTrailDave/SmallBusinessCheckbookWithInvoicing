@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label1 = new Label();
-            WhichLayoutLabel = new Label();
-            label2 = new Label();
-            ItemComboBox = new ComboBox();
-            label3 = new Label();
-            textBox1 = new TextBox();
-            label4 = new Label();
-            textBox2 = new TextBox();
-            label5 = new Label();
             textBox3 = new TextBox();
+            label5 = new Label();
+            textBox2 = new TextBox();
+            label4 = new Label();
+            textBox1 = new TextBox();
+            label3 = new Label();
+            ItemComboBox = new ComboBox();
+            label2 = new Label();
+            WhichLayoutLabel = new Label();
+            label1 = new Label();
             WhereToPlacePanel = new Panel();
+            label6 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,72 +61,12 @@
             panel1.Size = new Size(937, 70);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // textBox3
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(86, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Which Layout: ";
-            // 
-            // WhichLayoutLabel
-            // 
-            WhichLayoutLabel.AutoSize = true;
-            WhichLayoutLabel.Location = new Point(95, 9);
-            WhichLayoutLabel.Name = "WhichLayoutLabel";
-            WhichLayoutLabel.Size = new Size(22, 15);
-            WhichLayoutLabel.TabIndex = 1;
-            WhichLayoutLabel.Text = "Ch";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 33);
-            label2.Name = "label2";
-            label2.Size = new Size(105, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Item Being placed:";
-            // 
-            // ItemComboBox
-            // 
-            ItemComboBox.FormattingEnabled = true;
-            ItemComboBox.Location = new Point(114, 30);
-            ItemComboBox.Name = "ItemComboBox";
-            ItemComboBox.Size = new Size(167, 23);
-            ItemComboBox.TabIndex = 3;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(319, 33);
-            label3.Name = "label3";
-            label3.Size = new Size(60, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Y Position";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(385, 30);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(54, 23);
-            textBox1.TabIndex = 5;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(457, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(63, 15);
-            label4.TabIndex = 6;
-            label4.Text = "X Position:";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(526, 30);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(64, 23);
-            textBox2.TabIndex = 7;
+            textBox3.Location = new Point(676, 30);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(79, 23);
+            textBox3.TabIndex = 9;
             // 
             // label5
             // 
@@ -136,12 +77,72 @@
             label5.TabIndex = 8;
             label5.Text = "Width";
             // 
-            // textBox3
+            // textBox2
             // 
-            textBox3.Location = new Point(676, 30);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(79, 23);
-            textBox3.TabIndex = 9;
+            textBox2.Location = new Point(526, 30);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(64, 23);
+            textBox2.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(457, 33);
+            label4.Name = "label4";
+            label4.Size = new Size(63, 15);
+            label4.TabIndex = 6;
+            label4.Text = "X Position:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(385, 30);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(54, 23);
+            textBox1.TabIndex = 5;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(319, 33);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Y Position";
+            // 
+            // ItemComboBox
+            // 
+            ItemComboBox.FormattingEnabled = true;
+            ItemComboBox.Location = new Point(114, 30);
+            ItemComboBox.Name = "ItemComboBox";
+            ItemComboBox.Size = new Size(167, 23);
+            ItemComboBox.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 33);
+            label2.Name = "label2";
+            label2.Size = new Size(105, 15);
+            label2.TabIndex = 2;
+            label2.Text = "Item Being placed:";
+            // 
+            // WhichLayoutLabel
+            // 
+            WhichLayoutLabel.AutoSize = true;
+            WhichLayoutLabel.Location = new Point(95, 9);
+            WhichLayoutLabel.Name = "WhichLayoutLabel";
+            WhichLayoutLabel.Size = new Size(22, 15);
+            WhichLayoutLabel.TabIndex = 1;
+            WhichLayoutLabel.Text = "Ch";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Which Layout: ";
             // 
             // WhereToPlacePanel
             // 
@@ -150,11 +151,22 @@
             WhereToPlacePanel.Size = new Size(1728, 632);
             WhereToPlacePanel.TabIndex = 1;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, -6);
+            label6.Name = "label6";
+            label6.Size = new Size(218, 15);
+            label6.TabIndex = 7;
+            label6.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label6.Visible = false;
+            // 
             // LayoutEditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1752, 702);
+            Controls.Add(label6);
             Controls.Add(WhereToPlacePanel);
             Controls.Add(panel1);
             Name = "LayoutEditorForm";
@@ -162,6 +174,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -178,5 +191,6 @@
         private Label label3;
         private ComboBox ItemComboBox;
         private Panel WhereToPlacePanel;
+        private Label label6;
     }
 }

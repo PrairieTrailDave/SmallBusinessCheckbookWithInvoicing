@@ -40,6 +40,7 @@
             DoneButton = new Button();
             PartialPaymentButton = new Button();
             OutstandingInvoicesDataGridView = new DataGridView();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)OutstandingInvoicesDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -157,11 +158,22 @@
             OutstandingInvoicesDataGridView.Size = new Size(557, 150);
             OutstandingInvoicesDataGridView.TabIndex = 12;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(218, 15);
+            label5.TabIndex = 13;
+            label5.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label5.Visible = false;
+            // 
             // ReceivePaymentsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(806, 436);
+            Controls.Add(label5);
             Controls.Add(OutstandingInvoicesDataGridView);
             Controls.Add(PartialPaymentButton);
             Controls.Add(DoneButton);
@@ -195,5 +207,6 @@
         private Button DoneButton;
         private Button PartialPaymentButton;
         private DataGridView OutstandingInvoicesDataGridView;
+        private Label label5;
     }
 }

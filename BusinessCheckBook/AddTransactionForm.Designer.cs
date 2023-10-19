@@ -57,6 +57,7 @@ namespace BusinessCheckBook
             TransactionDateTimePicker = new DateTimePicker();
             DetailTotalLabel = new Label();
             DetailTotalTextBox = new TextBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)DetailDataGridView).BeginInit();
             DetailInputPanel.SuspendLayout();
             SuspendLayout();
@@ -344,11 +345,22 @@ namespace BusinessCheckBook
             DetailTotalTextBox.TabIndex = 23;
             DetailTotalTextBox.Visible = false;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 9);
+            label8.Name = "label8";
+            label8.Size = new Size(218, 15);
+            label8.TabIndex = 24;
+            label8.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label8.Visible = false;
+            // 
             // AddTransactionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(905, 687);
+            Controls.Add(label8);
             Controls.Add(DetailTotalTextBox);
             Controls.Add(DetailTotalLabel);
             Controls.Add(TransactionDateTimePicker);
@@ -412,5 +424,6 @@ namespace BusinessCheckBook
         private Label DetailTotalLabel;
         private TextBox DetailTotalTextBox;
         private Button DeleteButton;
+        private Label label8;
     }
 }

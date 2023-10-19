@@ -45,6 +45,7 @@
             label4 = new Label();
             SaveButton = new Button();
             label6 = new Label();
+            label7 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -201,11 +202,22 @@
             label6.TabIndex = 4;
             label6.Text = "All fields but the second addressl line are required";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(39, 4);
+            label7.Name = "label7";
+            label7.Size = new Size(218, 15);
+            label7.TabIndex = 7;
+            label7.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label7.Visible = false;
+            // 
             // CompanyInformationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(841, 504);
+            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(SaveButton);
             Controls.Add(groupBox2);
@@ -240,5 +252,6 @@
         private TextBox CompanyPhoneTextBox;
         private Label label5;
         private Label label6;
+        private Label label7;
     }
 }

@@ -56,7 +56,7 @@ namespace BusinessCheckBook.Reports
             List<LedgerEntry> PriorYearTransactions = TLedger.GetLedgerForAYear(PriorYear);
 
 
-            ReportLine getMonthValues (int month)
+            ReportLine getMonthValues(int month)
             {
                 ReportLine RL = new();
                 //Jan

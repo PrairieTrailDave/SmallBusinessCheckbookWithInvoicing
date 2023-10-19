@@ -34,6 +34,7 @@
             ReportDataGridView = new DataGridView();
             ExportButton = new Button();
             saveExportFileDialog = new SaveFileDialog();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)ReportDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             // ReportYearTextBox
             // 
             ReportYearTextBox.Location = new Point(147, 14);
-            ReportYearTextBox.Margin = new Padding(2, 2, 2, 2);
+            ReportYearTextBox.Margin = new Padding(2);
             ReportYearTextBox.Name = "ReportYearTextBox";
             ReportYearTextBox.Size = new Size(58, 23);
             ReportYearTextBox.TabIndex = 1;
@@ -58,7 +59,7 @@
             // RefreshButton
             // 
             RefreshButton.Location = new Point(256, 13);
-            RefreshButton.Margin = new Padding(2, 2, 2, 2);
+            RefreshButton.Margin = new Padding(2);
             RefreshButton.Name = "RefreshButton";
             RefreshButton.Size = new Size(78, 24);
             RefreshButton.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             ReportDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ReportDataGridView.Location = new Point(29, 47);
-            ReportDataGridView.Margin = new Padding(2, 2, 2, 2);
+            ReportDataGridView.Margin = new Padding(2);
             ReportDataGridView.Name = "ReportDataGridView";
             ReportDataGridView.RowHeadersWidth = 62;
             ReportDataGridView.RowTemplate.Height = 33;
@@ -80,7 +81,7 @@
             // ExportButton
             // 
             ExportButton.Location = new Point(414, 13);
-            ExportButton.Margin = new Padding(2, 2, 2, 2);
+            ExportButton.Margin = new Padding(2);
             ExportButton.Name = "ExportButton";
             ExportButton.Size = new Size(107, 24);
             ExportButton.TabIndex = 4;
@@ -88,17 +89,28 @@
             ExportButton.UseVisualStyleBackColor = true;
             ExportButton.Click += ExportButton_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(29, -3);
+            label3.Name = "label3";
+            label3.Size = new Size(218, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Visible = false;
+            // 
             // Federal1120Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(802, 482);
+            Controls.Add(label3);
             Controls.Add(ExportButton);
             Controls.Add(ReportDataGridView);
             Controls.Add(RefreshButton);
             Controls.Add(ReportYearTextBox);
             Controls.Add(label1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Federal1120Form";
             Text = "Federal1120Form";
             ((System.ComponentModel.ISupportInitialize)ReportDataGridView).EndInit();
@@ -114,5 +126,6 @@
         private DataGridView ReportDataGridView;
         private Button ExportButton;
         private SaveFileDialog saveExportFileDialog;
+        private Label label3;
     }
 }

@@ -35,6 +35,7 @@
             SaveButton = new Button();
             label3 = new Label();
             FirstInvoiceNumberTextBox = new TextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -95,11 +96,22 @@
             FirstInvoiceNumberTextBox.Size = new Size(100, 23);
             FirstInvoiceNumberTextBox.TabIndex = 3;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 9);
+            label4.Name = "label4";
+            label4.Size = new Size(218, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label4.Visible = false;
+            // 
             // InitialBalanceForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(465, 259);
+            Controls.Add(label4);
             Controls.Add(FirstInvoiceNumberTextBox);
             Controls.Add(label3);
             Controls.Add(SaveButton);
@@ -122,5 +134,6 @@
         private Button SaveButton;
         private Label label3;
         private TextBox FirstInvoiceNumberTextBox;
+        private Label label4;
     }
 }

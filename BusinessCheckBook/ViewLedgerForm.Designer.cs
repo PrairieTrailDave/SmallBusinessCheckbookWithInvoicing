@@ -32,6 +32,7 @@
             AddTransactionButton = new Button();
             EditTransactionButton = new Button();
             LedgerDataGridView = new DataGridView();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)LedgerDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -74,11 +75,22 @@
             LedgerDataGridView.Size = new Size(741, 403);
             LedgerDataGridView.TabIndex = 3;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(218, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Visible = false;
+            // 
             // ViewLedgerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(874, 569);
+            Controls.Add(label3);
             Controls.Add(LedgerDataGridView);
             Controls.Add(EditTransactionButton);
             Controls.Add(AddTransactionButton);
@@ -87,6 +99,7 @@
             Text = "View Ledger";
             ((System.ComponentModel.ISupportInitialize)LedgerDataGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -95,5 +108,6 @@
         private Button AddTransactionButton;
         private Button EditTransactionButton;
         private DataGridView LedgerDataGridView;
+        private Label label3;
     }
 }

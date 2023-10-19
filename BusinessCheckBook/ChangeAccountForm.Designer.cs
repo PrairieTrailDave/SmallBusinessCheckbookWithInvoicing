@@ -34,40 +34,45 @@
             DoneButton = new Button();
             label2 = new Label();
             ChangeToTextBox = new TextBox();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(38, 29);
+            label1.Location = new Point(27, 17);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(172, 25);
+            label1.Size = new Size(115, 15);
             label1.TabIndex = 0;
             label1.Text = "Account Not Found:";
             // 
             // AccountNotFoundTextBox
             // 
-            AccountNotFoundTextBox.Location = new Point(216, 26);
+            AccountNotFoundTextBox.Location = new Point(151, 16);
+            AccountNotFoundTextBox.Margin = new Padding(2, 2, 2, 2);
             AccountNotFoundTextBox.Name = "AccountNotFoundTextBox";
             AccountNotFoundTextBox.ReadOnly = true;
-            AccountNotFoundTextBox.Size = new Size(150, 31);
+            AccountNotFoundTextBox.Size = new Size(106, 23);
             AccountNotFoundTextBox.TabIndex = 1;
             // 
             // AccountsListBox
             // 
             AccountsListBox.FormattingEnabled = true;
-            AccountsListBox.ItemHeight = 25;
-            AccountsListBox.Location = new Point(70, 95);
+            AccountsListBox.ItemHeight = 15;
+            AccountsListBox.Location = new Point(49, 57);
+            AccountsListBox.Margin = new Padding(2, 2, 2, 2);
             AccountsListBox.Name = "AccountsListBox";
-            AccountsListBox.Size = new Size(599, 304);
+            AccountsListBox.Size = new Size(420, 184);
             AccountsListBox.TabIndex = 2;
             AccountsListBox.SelectedIndexChanged += AccountsListBox_SelectedIndexChanged;
             // 
             // DoneButton
             // 
-            DoneButton.Location = new Point(758, 355);
+            DoneButton.Location = new Point(531, 213);
+            DoneButton.Margin = new Padding(2, 2, 2, 2);
             DoneButton.Name = "DoneButton";
-            DoneButton.Size = new Size(112, 34);
+            DoneButton.Size = new Size(78, 20);
             DoneButton.TabIndex = 3;
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
@@ -76,30 +81,44 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(394, 29);
+            label2.Location = new Point(276, 17);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(99, 25);
+            label2.Size = new Size(66, 15);
             label2.TabIndex = 4;
             label2.Text = "Change To:";
             // 
             // ChangeToTextBox
             // 
-            ChangeToTextBox.Location = new Point(505, 26);
+            ChangeToTextBox.Location = new Point(354, 16);
+            ChangeToTextBox.Margin = new Padding(2, 2, 2, 2);
             ChangeToTextBox.Name = "ChangeToTextBox";
-            ChangeToTextBox.Size = new Size(365, 31);
+            ChangeToTextBox.Size = new Size(257, 23);
             ChangeToTextBox.TabIndex = 5;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(27, -1);
+            label3.Name = "label3";
+            label3.Size = new Size(218, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Visible = false;
             // 
             // ChangeAccountForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(964, 450);
+            ClientSize = new Size(675, 270);
+            Controls.Add(label3);
             Controls.Add(ChangeToTextBox);
             Controls.Add(label2);
             Controls.Add(DoneButton);
             Controls.Add(AccountsListBox);
             Controls.Add(AccountNotFoundTextBox);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "ChangeAccountForm";
             Text = "Change Account";
             ResumeLayout(false);
@@ -114,5 +133,6 @@
         private Button DoneButton;
         private Label label2;
         private TextBox ChangeToTextBox;
+        private Label label3;
     }
 }

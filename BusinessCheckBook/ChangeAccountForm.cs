@@ -21,14 +21,14 @@ namespace BusinessCheckBook
 
         public void Setup(List<Account> currentAccountList, string AccountNotFound)
         {
-            CurrentAccountList = currentAccountList;;
+            CurrentAccountList = currentAccountList; ;
             AccountsListBox.Items.Clear();
             foreach (Account Taccount in CurrentAccountList)
             {
                 string whatToShow = Taccount.Name;
-                if (Taccount.SubAccountOf.Length > 0) 
+                if (Taccount.SubAccountOf.Length > 0)
                 {
-                    whatToShow = Taccount.SubAccountOf + ":" + Taccount.Name; 
+                    whatToShow = Taccount.SubAccountOf + ":" + Taccount.Name;
                 }
                 AccountsListBox.Items.Add(whatToShow);
             }
@@ -41,7 +41,7 @@ namespace BusinessCheckBook
             ToChangeTo = AccountsListBox.Text;
             if (ToChangeTo.IndexOf(':') > -1)
             {
-                ToChangeTo = ToChangeTo[(ToChangeTo.IndexOf(":")+1)..];
+                ToChangeTo = ToChangeTo[(ToChangeTo.IndexOf(":") + 1)..];
             }
 
             ChangeToTextBox.Text = ToChangeTo;

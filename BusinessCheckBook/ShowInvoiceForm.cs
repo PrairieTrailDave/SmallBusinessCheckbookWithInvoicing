@@ -20,7 +20,7 @@ namespace BusinessCheckBook
 
         public Invoice CurrentInvoice { get; set; } = new();
         public InvoiceFormat CurrentInvoiceFormat { get; set; } = new();
-        InvoicePrintLayout CurrentPrintLayout { get; set; } = new();    
+        InvoicePrintLayout CurrentPrintLayout { get; set; } = new();
 
         public ShowInvoiceForm()
         {

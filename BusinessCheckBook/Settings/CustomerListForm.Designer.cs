@@ -57,6 +57,7 @@
             DisableButton = new Button();
             Address2TextBox = new TextBox();
             StateComboBox = new ComboBox();
+            label12 = new Label();
             ((System.ComponentModel.ISupportInitialize)CustDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -304,11 +305,22 @@
             StateComboBox.Size = new Size(41, 23);
             StateComboBox.TabIndex = 29;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(24, 8);
+            label12.Name = "label12";
+            label12.Size = new Size(218, 15);
+            label12.TabIndex = 30;
+            label12.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label12.Visible = false;
+            // 
             // CustomerListForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1451, 639);
+            Controls.Add(label12);
             Controls.Add(StateComboBox);
             Controls.Add(Address2TextBox);
             Controls.Add(DisableButton);
@@ -376,5 +388,6 @@
         private Button DisableButton;
         private TextBox Address2TextBox;
         private ComboBox StateComboBox;
+        private Label label12;
     }
 }
