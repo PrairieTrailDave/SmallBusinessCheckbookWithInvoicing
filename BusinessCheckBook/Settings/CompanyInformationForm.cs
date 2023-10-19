@@ -28,28 +28,28 @@ namespace BusinessCheckBook.Settings
 
         private void CompanyInformationForm_Shown(object sender, EventArgs e)
         {
-            CompanyNameTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyName);
-            CompanyAddressTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAddr);
-            CompanyAddress2TextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2);
-            CompanyCityTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyCity);
-            CompanyStateComboBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyState);
-            CompanyZipTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyZip);
-            CompanyPhoneTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone);
-            CompanyEINTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyEIN);
+            CompanyNameTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyName.Name);
+            CompanyAddressTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAddr.Name);
+            CompanyAddress2TextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2.Name);
+            CompanyCityTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyCity.Name);
+            CompanyStateComboBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyState.Name);
+            CompanyZipTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyZip.Name);
+            CompanyPhoneTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone.Name);
+            CompanyEINTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyEIN.Name);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (ValidData())
             {
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyName, CompanyNameTextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyAddr, CompanyAddressTextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyAdr2, CompanyAddress2TextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyCity, CompanyCityTextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyState, CompanyStateComboBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyZip, CompanyZipTextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyPhone, CompanyPhoneTextBox.Text);
-                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyEIN, CompanyEINTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyName.Name, CompanyNameTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyAddr.Name, CompanyAddressTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyAdr2.Name, CompanyAddress2TextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyCity.Name, CompanyCityTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyState.Name, CompanyStateComboBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyZip.Name, CompanyZipTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyPhone.Name, CompanyPhoneTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.ParmCompanyEIN.Name, CompanyEINTextBox.Text);
             }
         }
 

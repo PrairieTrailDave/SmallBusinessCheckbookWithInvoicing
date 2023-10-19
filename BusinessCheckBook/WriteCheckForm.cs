@@ -441,23 +441,23 @@ namespace BusinessCheckBook
 
         private void WriteCompanyInformation()
         {
-            CompanyNameLabel.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyName);
-            CompanyAddressLabel.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAddr);
-            string Adr2 = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2);
-            string CityState = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyCity)
-                + ", " + ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyState)
-                + " " + ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyZip);
+            CompanyNameLabel.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyName.Name);
+            CompanyAddressLabel.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAddr.Name);
+            string Adr2 = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2.Name);
+            string CityState = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyCity.Name)
+                + ", " + ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyState.Name)
+                + " " + ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyZip.Name);
 
             if (Adr2.Length > 0)
             {
-                CompanyAddress2Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2);
+                CompanyAddress2Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyAdr2.Name);
                 CompanyAddress3Label.Text = CityState;
-                CompanyAddress4Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone);
+                CompanyAddress4Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone.Name);
             }
             else
             {
                 CompanyAddress2Label.Text = CityState;
-                CompanyAddress3Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone);
+                CompanyAddress3Label.Text = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone.Name);
                 CompanyAddress4Label.Text = "";
             }
         }

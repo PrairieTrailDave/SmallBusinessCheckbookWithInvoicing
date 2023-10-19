@@ -45,7 +45,7 @@ namespace BusinessCheckBook.DataStore
             CurrentTransactionLedger.SetFirstCheckNumber(FirstCheckNumber);
             ToPayTo = new();
             CompanyInformation = new();
-            CompanyInformation.PutParameter(CompanyParameters.FirstInvoiceNumber, FirstInvoiceNumber.ToString());
+            CompanyInformation.PutParameter(CompanyParameters.FirstInvoiceNumber.Name, FirstInvoiceNumber.ToString());
         }
 
         public bool FileIsValid(XLWorkbook CurrentWorkbook, out string ErrorMessage)
@@ -643,7 +643,7 @@ namespace BusinessCheckBook.DataStore
         {
             int LastInvoiceNumber = CurrentInvoices.GetlastInvoiceNumber();
             if (LastInvoiceNumber == 0)
-                return Int32.Parse(CompanyInformation.GetParameter(CompanyParameters.FirstInvoiceNumber));
+                return Int32.Parse(CompanyInformation.GetParameter(CompanyParameters.FirstInvoiceNumber.Name));
             return LastInvoiceNumber + 1;
         }
 

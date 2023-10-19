@@ -589,7 +589,7 @@ namespace BusinessCheckBook
                 {
                     case idCompanyName:
                         WhatToPrint = ActiveBook.CompanyInformation.
-                            GetParameter(CompanyParameters.ParmCompanyName);
+                            GetParameter(CompanyParameters.ParmCompanyName.Name);
                         break;
                     case idCompanyAdr:
                         WhatToPrint = ActiveBook.CompanyInformation.
@@ -605,11 +605,11 @@ namespace BusinessCheckBook
                         break;
                     case idCompanyEIN:
                         WhatToPrint = ActiveBook.CompanyInformation.
-                            GetParameter(CompanyParameters.ParmCompanyEIN);
+                            GetParameter(CompanyParameters.ParmCompanyEIN.Name);
                         break;
                     case idCompanyPhone:
                         WhatToPrint = ActiveBook.CompanyInformation.
-                            GetParameter(CompanyParameters.ParmCompanyPhone);
+                            GetParameter(CompanyParameters.ParmCompanyPhone.Name);
                         break;
                 }
 

@@ -24,7 +24,7 @@ namespace BusinessCheckBook.DataStore
 
         // Parameter Names
         
-        internal class ParameterName
+        public class ParameterName
         {
             internal string Name { get; set; } = string.Empty;
             internal bool IsRequired { get; set; }
@@ -38,16 +38,16 @@ namespace BusinessCheckBook.DataStore
         }
         List<ParameterName> ParameterNameList { get; set; } = new();
 
-        readonly ParameterName ParmCompanyName = new("CompanyName", true, "");
-        readonly ParameterName ParmCompanyAddr = new("Address", true, "");
-        readonly ParameterName ParmCompanyAdr2 = new("Address2", false, "");
-        readonly ParameterName ParmCompanyCity = new("City", true, "");
-        readonly ParameterName ParmCompanyState = new("State", true, "");
-        readonly ParameterName ParmCompanyZip = new("ZipCode", true, "");
-        readonly ParameterName ParmCompanyPhone = new("Phone", true, "");
-        readonly ParameterName ParmCompanyEIN = new("EIN", true, "");
-        readonly ParameterName CheckFormat = new("CheckFormat", false, "Laser 1PT");
-        readonly ParameterName FirstInvoiceNumber = new("FirstInvoice", true, "1");
+        readonly internal static ParameterName ParmCompanyName = new("CompanyName", true, "");
+        readonly internal static ParameterName ParmCompanyAddr = new("Address", true, "");
+        readonly internal static ParameterName ParmCompanyAdr2 = new("Address2", false, "");
+        readonly internal static ParameterName ParmCompanyCity = new("City", true, "");
+        readonly internal static ParameterName ParmCompanyState = new("State", true, "");
+        readonly internal static ParameterName ParmCompanyZip = new("ZipCode", true, "");
+        readonly internal static ParameterName ParmCompanyPhone = new("Phone", true, "");
+        readonly internal static ParameterName ParmCompanyEIN = new("EIN", true, "");
+        readonly internal static ParameterName CheckFormat = new("CheckFormat", false, "Laser 1PT");
+        readonly internal static ParameterName FirstInvoiceNumber = new("FirstInvoice", true, "1");
 
 
         internal CompanyParameters() 

@@ -35,24 +35,7 @@ namespace BusinessCheckBook.Settings
         internal void SetUp(MyCheckbook PassedActiveBook)
         {
             ActiveBook = PassedActiveBook;
-            CustomerList Customers = ActiveBook.Customers;
-            List<CustList> DisplayList = new();
-            foreach (var Customer in Customers.GetCurrentList())
-            {
-                if (Customer.IsActive)
-                {
-                    CustList DisplayCust = new()
-                    {
-                        CustomerIdentifier = Customer.CustomerIdentifier,
-                        AccountName = Customer.AccountName,
-                        BusinessName = Customer.BusinessName,
-                        City = Customer.City
-                    };
-                    DisplayList.Add(DisplayCust);
-                }
-            }
-            CustDataGridView.DataSource = DisplayList;
-            CustDataGridView.AutoResizeColumns();
+            ShowCurrentCustomerList();
         }
 
         internal void PutPassedCustomerOnScreen (Customer TCust)
@@ -117,6 +100,7 @@ namespace BusinessCheckBook.Settings
                     TaxID = TaxIDTextBox.Text
                 };
                 ActiveBook.Customers.AddCustomer(TCustomer);
+                ShowCurrentCustomerList();
             }
         }
 
@@ -148,7 +132,27 @@ namespace BusinessCheckBook.Settings
 
         // Support Routines
 
-
+        private void ShowCurrentCustomerList ()
+        {
+            CustomerList Customers = ActiveBook.Customers;
+            List<CustList> DisplayList = new();
+            foreach (var Customer in Customers.GetCurrentList())
+            {
+                if (Customer.IsActive)
+                {
+                    CustList DisplayCust = new()
+                    {
+                        CustomerIdentifier = Customer.CustomerIdentifier,
+                        AccountName = Customer.AccountName,
+                        BusinessName = Customer.BusinessName,
+                        City = Customer.City
+                    };
+                    DisplayList.Add(DisplayCust);
+                }
+            }
+            CustDataGridView.DataSource = DisplayList;
+            CustDataGridView.AutoResizeColumns();
+        }
 
         private void DisplayThisCustomer(Customer TCust)
         {

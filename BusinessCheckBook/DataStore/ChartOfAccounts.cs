@@ -522,7 +522,6 @@ namespace BusinessCheckBook.DataStore
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "CostOfGoods", "Cost of goods sold", "", "2. Cost Of Goods"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "CostOfService", "Cost of service resold", "", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "CreditCardFees", "Merchant Service Fees", "", "26. Other deductions"));
-            CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Insurance", "Insurance", "", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "LicenseAndPermits", "Licenses and Permits", "", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Marketing", "Marketing", "", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Ads", "Advertising", "Marketing", "22. Advertising"));
