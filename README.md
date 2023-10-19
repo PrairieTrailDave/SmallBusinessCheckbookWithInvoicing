@@ -40,15 +40,23 @@ If you have any employees, you need an accounting package. BUY QUICKBOOKS.
 If you can't afford Quickbooks, you are not in business yet.
 
 
+Here are many of the screens:
 
-Example user interface:
+The menu options on the main screen at this time are:
+File                        Settings                Reconcile          Reports
+  New                         Chart of Accounts                          Compare Income
+  Open                        Customer List                              Federal 1120
+  Import                      List of Pay To's                           1099 / 1096
+     IIF file                 Business Data
+     Journal Excel file       Invoice Settings
+  Save
+  Export
+  Exit
+
+
 Main screen 
 ![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/f589c15e-7122-480e-859f-d881cee06f26)
 
-
-How to add a transaction to the ledger
-
-Adding transaction with split categories
 
 Create a check
 ![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/5616236e-f501-4ddb-9ad4-5cb315095493)
@@ -60,8 +68,10 @@ Create an Invoice
 ![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/70170c94-d0e6-4c68-ba0b-1fa9a2e7868d)
 
 Receive Payments
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/ee23e7f4-22ff-4a25-9463-dbac766560ec)
 
 Reconciliation Screen
+![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/19e8f51a-6424-4fb2-99a6-6d2a3d3fa109)
 
 Reports
 
