@@ -50,6 +50,7 @@ namespace BusinessCheckBook.Settings
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyZip.Name, CompanyZipTextBox.Text);
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyPhone.Name, CompanyPhoneTextBox.Text);
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyEIN.Name, CompanyEINTextBox.Text);
+                Close();
             }
         }
 

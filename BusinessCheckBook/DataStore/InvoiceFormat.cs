@@ -25,6 +25,8 @@ namespace BusinessCheckBook.DataStore
         internal const string idCompanyEIN = "CompEIN";
         internal const string idCompanyPhone = "CompPhone";
 
+        public InvoiceFormat() { }
+
         public InvoiceFormat(MyCheckbook nCheck)
         {
             ActiveBook = nCheck;
@@ -37,7 +39,7 @@ namespace BusinessCheckBook.DataStore
             if (CurrentPrintLayout.LogoFileName.IfToPrintThisItem)
             {
                 System.Drawing.Image img = System.Drawing.Image.FromFile(CurrentPrintLayout.LogoFileName.VariableNameToPrint);
-                Rectangle Rex = new Rectangle(CurrentPrintLayout.LogoFileName.XPos,
+                Rectangle Rex = new(CurrentPrintLayout.LogoFileName.XPos,
                     CurrentPrintLayout.LogoFileName.YPos,
                     CurrentPrintLayout.LogoFileName.Width,
                     CurrentPrintLayout.LogoFileName.Height);
@@ -128,8 +130,8 @@ namespace BusinessCheckBook.DataStore
                                 if (mthod != null)
                                 {
                                     string fieldvalue = mthod.Invoke(CurrentInvoiceToPrint, null)?.ToString() ?? "";
-                                    Rectangle Rex = new Rectangle(PIL.XPos, PIL.YPos, PIL.Width, PIL.Height);
-                                    StringFormat SRF = new StringFormat();
+                                    Rectangle Rex = new(PIL.XPos, PIL.YPos, PIL.Width, PIL.Height);
+                                    StringFormat SRF = new();
                                     switch (PIL.HowToJustify)
                                     {
                                         case PrintItemLayout.Justification.LeftJustify: break;
@@ -150,7 +152,7 @@ namespace BusinessCheckBook.DataStore
             FormatBreakdown(CurrentInvoiceToPrint, CurrentPrintLayout, ev);
         }
 
-        internal void FormatBreakdown(Invoice CurrentInvoiceToPrint, InvoicePrintLayout CurrentPrintLayout, PrintPageEventArgs ev)
+        internal static void FormatBreakdown(Invoice CurrentInvoiceToPrint, InvoicePrintLayout CurrentPrintLayout, PrintPageEventArgs ev)
         {
             string WhatToPrint;
             int XPos;
@@ -203,7 +205,7 @@ namespace BusinessCheckBook.DataStore
         }
 
 
-        internal InvoicePrintLayout BuildInvoiceLayout()
+        internal static InvoicePrintLayout BuildInvoiceLayout()
         {
             InvoicePrintLayout CurrentPrintLayout;
 

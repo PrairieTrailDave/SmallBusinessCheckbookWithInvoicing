@@ -53,17 +53,19 @@ namespace BusinessCheckBook.DataStore
         internal CompanyParameters() 
         {
             SetSheetFormat();
-            ParameterNameList = new List<ParameterName>();
-            ParameterNameList.Add(ParmCompanyName);
-            ParameterNameList.Add(ParmCompanyAddr);
-            ParameterNameList.Add(ParmCompanyAdr2);
-            ParameterNameList.Add(ParmCompanyCity);
-            ParameterNameList.Add(ParmCompanyState);
-            ParameterNameList.Add(ParmCompanyZip);
-            ParameterNameList.Add(ParmCompanyPhone);
-            ParameterNameList.Add(ParmCompanyEIN);
-            ParameterNameList.Add(CheckFormat);
-            ParameterNameList.Add(FirstInvoiceNumber);
+            ParameterNameList = new List<ParameterName>
+            {
+                ParmCompanyName,
+                ParmCompanyAddr,
+                ParmCompanyAdr2,
+                ParmCompanyCity,
+                ParmCompanyState,
+                ParmCompanyZip,
+                ParmCompanyPhone,
+                ParmCompanyEIN,
+                CheckFormat,
+                FirstInvoiceNumber
+            };
         }
 
 
@@ -83,16 +85,29 @@ namespace BusinessCheckBook.DataStore
                 case 0: return ParameterList[ParmCompanyName.Name];
                 case 1: return ParameterList[ParmCompanyAddr.Name];
                 case 2:
-                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out string? results)) return results;
+                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out string? results))
+                    {
+                        if (results.Trim().Length > 0)
+                            return results;
+                        else
+                            return ParameterList[ParmCompanyCity.Name] + ", "
+                                + ParameterList[ParmCompanyState.Name] + " "
+                                + ParameterList[ParmCompanyZip.Name];
+                    }
                     else
                         return ParameterList[ParmCompanyCity.Name] + ", "
                             + ParameterList[ParmCompanyState.Name] + " "
                             + ParameterList[ParmCompanyZip.Name];
                 case 3:
-                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out _))
-                        return ParameterList[ParmCompanyCity.Name] + ", "
-                        + ParameterList[ParmCompanyState.Name] + " "
-                        + ParameterList[ParmCompanyZip.Name];
+                    if (ParameterList.TryGetValue(ParmCompanyAdr2.Name, out string? Addr2))
+                    {
+                        if (Addr2.Trim().Length > 0)
+                            return ParameterList[ParmCompanyCity.Name] + ", "
+                            + ParameterList[ParmCompanyState.Name] + " "
+                            + ParameterList[ParmCompanyZip.Name];
+                        else
+                            return "";
+                    }
                     else
                         return "";
             

@@ -528,7 +528,6 @@ namespace BusinessCheckBook.DataStore
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Commissions", "Commissions to get sales", "Marketing", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "CustomerMeetings", "Costs of meeting with customer", "Marketing", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Internal", "Internal marketing costs", "Marketing", "22. Advertising"));
-            CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Internet", "Internet", "Marketing", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Phone", "Phone line costs", "Marketing", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Shows", "Show expenses", "Marketing", "22. Advertising"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Misc", "Miscellaneous", "", "26. Other deductions"));
@@ -538,7 +537,7 @@ namespace BusinessCheckBook.DataStore
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Internet", "Internet", "Office", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Insurance", "Insurance", "Office", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "MedicalInsurance", "Medical Insurance", "Office", "24. Employee Benefit programs"));
-            CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Phone", "Phone", "Office", "26. Other deductions"));
+            CurrentAccounts.Add(new Account(true, Account.Type.Expense, "OfficePhone", "Office Phone", "Office", "26. Other deductions"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Rent", "Rent paid", "Office", "16. Rents"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Repairs", "Repairs", "Office", "14. Repairs and maintenance"));
             CurrentAccounts.Add(new Account(true, Account.Type.Expense, "Subscriptions", "Subscriptions", "Office", "26. Other deductions"));

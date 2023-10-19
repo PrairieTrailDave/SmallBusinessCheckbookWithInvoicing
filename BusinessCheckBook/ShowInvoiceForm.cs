@@ -19,13 +19,12 @@ namespace BusinessCheckBook
         public MyCheckbook ActiveBook { get; set; } = new();
 
         public Invoice CurrentInvoice { get; set; } = new();
-        public InvoiceFormat invoiceFormat { get; set; }
+        public InvoiceFormat CurrentInvoiceFormat { get; set; } = new();
         InvoicePrintLayout CurrentPrintLayout { get; set; } = new();    
 
         public ShowInvoiceForm()
         {
             InitializeComponent();
-            invoiceFormat = new(ActiveBook);  // duplicate to make the compiler happy
         }
 
 
@@ -35,7 +34,7 @@ namespace BusinessCheckBook
         {
             ActiveBook = activeBook;
             CurrentInvoice = toPrint;
-            invoiceFormat = new(ActiveBook);
+            CurrentInvoiceFormat = new(ActiveBook);
             BuildScreen();
         }
 
@@ -43,7 +42,6 @@ namespace BusinessCheckBook
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            CurrentInvoice = new();
             // before allowing an invoice to be printed, make sure that there is an invoice to print
 
             if (CustomerTextBox.Text.Length > 0)
@@ -71,7 +69,7 @@ namespace BusinessCheckBook
 
                     try
                     {
-                        CurrentPrintLayout = invoiceFormat.BuildInvoiceLayout();
+                        CurrentPrintLayout = InvoiceFormat.BuildInvoiceLayout();
 
 
                         PrintDocument pd = new();
@@ -97,7 +95,7 @@ namespace BusinessCheckBook
         {
 
             // Format the Invoice
-            invoiceFormat.FormatInvoice(CurrentInvoice, CurrentPrintLayout, ev);
+            CurrentInvoiceFormat.FormatInvoice(CurrentInvoice, CurrentPrintLayout, ev);
 
             // If more lines exist, print another page.
             //if (line != null)
