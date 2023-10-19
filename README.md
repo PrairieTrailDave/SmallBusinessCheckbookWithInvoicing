@@ -44,15 +44,15 @@ Here are many of the screens:
 
 The menu options on the main screen at this time are:
 
-    File                        Settings                Reconcile          Reports
-      New                         Chart of Accounts                          Compare Income
-      Open                        Customer List                              Federal 1120
-      Import                      List of Pay To's                           1099 / 1096
-         IIF file                 Business Data
-         Journal Excel file       Invoice Settings
-      Save
-      Export
-      Exit
+            File                        Settings                Reconcile          Reports
+              New                         Chart of Accounts                          Compare Income
+              Open                        Customer List                              Federal 1120
+              Import                      List of Pay To's                           1099 / 1096
+                 IIF file                 Business Data
+                 Journal Excel file       Invoice Settings
+              Save
+              Export
+              Exit
 
 
 Main screen 
