@@ -5,7 +5,9 @@
 //**********************************************************************
 
 using System.Drawing.Printing;
+using System.Drawing.Text;
 using BusinessCheckBook.DataStore;
+using DocumentFormat.OpenXml.Vml;
 
 namespace BusinessCheckBook
 {
@@ -20,6 +22,7 @@ namespace BusinessCheckBook
         PayTo? Payee { get; set; } = new();
 
         decimal DetailSubTotal = 0.00M;
+        decimal CurrentLedgerBalance = 0.00M;
 
         private const int WordFillInLength = 150;
 
@@ -93,6 +96,8 @@ namespace BusinessCheckBook
             }
             CurrentCheckNumber = ActiveBook.CurrentTransactionLedger.GetLastCheckNumber() + 1;
             CheckNumberLabel.Text = CurrentCheckNumber.ToString();
+            CurrentLedgerBalance = ActiveBook.GetCurrentBalance();
+            CurrentBalanceLabel.Text = "$" + CurrentLedgerBalance.ToString("0.00");
         }
 
         // Button Clicks
@@ -151,6 +156,10 @@ namespace BusinessCheckBook
                         pd.Print();
 
                         SaveCheckInLedger(CurrentCheckToPrint);
+
+                        // start a new check
+
+                        StartNewCheck();
                     }
                     catch (Exception ex)
                     {
@@ -242,7 +251,51 @@ namespace BusinessCheckBook
                 MessageBox.Show("There are no checks to print");
         }
 
+        private void ClearCheckButton_Click(object sender, EventArgs e)
+        {
+            ClearCheck();
+        }
 
+        private void DeleteDetailLineButton_Click(object sender, EventArgs e)
+        {
+            void ClearThisLine(int line)
+            {
+                CheckBreakdownDataGridView.Rows[line].Cells[0].Value = "";
+                CheckBreakdownDataGridView.Rows[line].Cells[1].Value = "0.00";
+                CheckBreakdownDataGridView.Rows[line].Cells[2].Value = "";
+            }
+
+
+            int ThisRow = CheckBreakdownDataGridView.CurrentRow.Index;
+            if (ThisRow > -1)
+            {
+                int NextRow = ThisRow + 1;
+                if (NextRow < CheckBreakdownDataGridView.Rows.Count)
+                {
+                    if (CheckBreakdownDataGridView.Rows[NextRow].Cells[1].Value != null)
+                    {
+                        if ((decimal)CheckBreakdownDataGridView.Rows[NextRow].Cells[1].Value == 0.00M)
+                            ClearThisLine(ThisRow);
+                        else
+                        {
+                            while (NextRow < CheckBreakdownDataGridView.Rows.Count)
+                            {
+                                CheckBreakdownDataGridView.Rows[NextRow - 1].Cells[0].Value = CheckBreakdownDataGridView.Rows[NextRow].Cells[0].Value;
+                                CheckBreakdownDataGridView.Rows[NextRow - 1].Cells[1].Value = CheckBreakdownDataGridView.Rows[NextRow].Cells[1].Value;
+                                CheckBreakdownDataGridView.Rows[NextRow - 1].Cells[2].Value = CheckBreakdownDataGridView.Rows[NextRow].Cells[2].Value;
+                                NextRow++;
+                            }
+                            ClearThisLine(NextRow - 1);
+                        }
+                    }
+                    else
+                        ClearThisLine(ThisRow);
+                }
+                else
+                    ClearThisLine(ThisRow);
+            }
+
+        }
         private void DoneButton_Click(object sender, EventArgs e)
         {
             if (CheckBatch.Count > 0)
@@ -250,6 +303,7 @@ namespace BusinessCheckBook
                 if (MessageBox.Show("You still have checks to print in the batch. You will lose them if you leave. Are you sure?", "Still to Print", MessageBoxButtons.YesNo)
                     == DialogResult.Yes)
                     Close();
+                return;
             }
             Close();
         }
@@ -352,7 +406,7 @@ namespace BusinessCheckBook
             }
             else
                 CategoryListBox.Visible = false;
-            if (Col == 1)
+            if (Col == 1 || Col == 2)
                 CheckBreakdownDataGridView.BeginEdit(true);
         }
 
@@ -369,7 +423,10 @@ namespace BusinessCheckBook
                 UpdateBreakdownTotal();
                 CurrentCheckToPrint.Breakdown[WhichBreakdown].Amount = Decimal.Parse(CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[1].Value.ToString() ?? "0.00");
             }
-            CurrentCheckToPrint.Breakdown[WhichBreakdown].Memo = CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[2].Value.ToString()!.Trim();
+            if (CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[2].Value != null)
+                CurrentCheckToPrint.Breakdown[WhichBreakdown].Memo = CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[2].Value.ToString()!.Trim() ?? "";
+            else
+                CurrentCheckToPrint.Breakdown[WhichBreakdown].Memo = "";
         }
 
         private void CategoryListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -431,12 +488,19 @@ namespace BusinessCheckBook
         }
         private void StartNewCheck()
         {
-            ClearOtherLabelsOnCheck();
             CurrentCheckNumber++;
+            ClearCheck();
+        }
+
+        private void ClearCheck()
+        {
+            ClearOtherLabelsOnCheck();
             CheckNumberLabel.Text = CurrentCheckNumber.ToString();
             DateTimePicker.Text = DateTime.Now.ToShortDateString();
             WriteCompanyInformation();
             CreateSubCategoryList();
+            CurrentLedgerBalance = ActiveBook.GetCurrentBalance();
+            CurrentBalanceLabel.Text = "$" + CurrentLedgerBalance.ToString("0.00");
         }
 
         private void WriteCompanyInformation()
@@ -734,7 +798,7 @@ namespace BusinessCheckBook
                             {
                                 AccountName = LastTransaction.SubAccounts[subi].AccountName,
                                 Memo = LastTransaction.SubAccounts[subi].Memo,
-                                Amount = 0.00M - LastTransaction.SubAccounts[subi].Amount
+                                Amount = LastTransaction.SubAccounts[subi].Amount
                             };
                             tSubAccounts.Add(tEntry);
                             subi++;
@@ -855,7 +919,10 @@ namespace BusinessCheckBook
             {
                 TBreakdown.AccountName = CheckBreakdownDataGridView.Rows[RowNum].Cells[0].Value.ToString() ?? "";
                 TBreakdown.Amount = Decimal.Parse(CheckBreakdownDataGridView.Rows[RowNum].Cells[1].Value.ToString() ?? "");
-                TBreakdown.Memo = CheckBreakdownDataGridView.Rows[RowNum].Cells[2].Value.ToString() ?? "";
+                if (CheckBreakdownDataGridView.Rows[RowNum].Cells[2].Value != null)
+                    TBreakdown.Memo = CheckBreakdownDataGridView.Rows[RowNum].Cells[2].Value.ToString() ?? "";
+                else
+                    TBreakdown.Memo = "";
                 RowNum++;
             }
 

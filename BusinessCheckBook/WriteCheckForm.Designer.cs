@@ -60,6 +60,10 @@
             PrintBatchButton = new Button();
             DoneButton = new Button();
             label3 = new Label();
+            DeleteDetailLineButton = new Button();
+            ClearCheckButton = new Button();
+            CurrentBalanceTextLabel = new Label();
+            CurrentBalanceLabel = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CheckBreakdownDataGridView).BeginInit();
@@ -288,7 +292,7 @@
             // 
             CategoryListBox.FormattingEnabled = true;
             CategoryListBox.ItemHeight = 15;
-            CategoryListBox.Location = new Point(90, 60);
+            CategoryListBox.Location = new Point(3, 64);
             CategoryListBox.Name = "CategoryListBox";
             CategoryListBox.Size = new Size(292, 109);
             CategoryListBox.TabIndex = 3;
@@ -376,11 +380,54 @@
             label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
             label3.Visible = false;
             // 
+            // DeleteDetailLineButton
+            // 
+            DeleteDetailLineButton.Location = new Point(1195, 506);
+            DeleteDetailLineButton.Name = "DeleteDetailLineButton";
+            DeleteDetailLineButton.Size = new Size(75, 23);
+            DeleteDetailLineButton.TabIndex = 52;
+            DeleteDetailLineButton.Text = "Delete Line";
+            DeleteDetailLineButton.UseVisualStyleBackColor = true;
+            DeleteDetailLineButton.Click += DeleteDetailLineButton_Click;
+            // 
+            // ClearCheckButton
+            // 
+            ClearCheckButton.Location = new Point(1195, 580);
+            ClearCheckButton.Name = "ClearCheckButton";
+            ClearCheckButton.Size = new Size(75, 23);
+            ClearCheckButton.TabIndex = 53;
+            ClearCheckButton.Text = "Clear";
+            ClearCheckButton.UseVisualStyleBackColor = true;
+            ClearCheckButton.Click += ClearCheckButton_Click;
+            // 
+            // CurrentBalanceTextLabel
+            // 
+            CurrentBalanceTextLabel.AutoSize = true;
+            CurrentBalanceTextLabel.Location = new Point(1195, 139);
+            CurrentBalanceTextLabel.Name = "CurrentBalanceTextLabel";
+            CurrentBalanceTextLabel.Size = new Size(91, 15);
+            CurrentBalanceTextLabel.TabIndex = 54;
+            CurrentBalanceTextLabel.Text = "Current Balance";
+            // 
+            // CurrentBalanceLabel
+            // 
+            CurrentBalanceLabel.AutoSize = true;
+            CurrentBalanceLabel.BackColor = SystemColors.HighlightText;
+            CurrentBalanceLabel.Location = new Point(1204, 161);
+            CurrentBalanceLabel.Name = "CurrentBalanceLabel";
+            CurrentBalanceLabel.Size = new Size(38, 15);
+            CurrentBalanceLabel.TabIndex = 55;
+            CurrentBalanceLabel.Text = "label1";
+            // 
             // WriteCheckForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1277, 582);
+            ClientSize = new Size(1312, 615);
+            Controls.Add(CurrentBalanceLabel);
+            Controls.Add(CurrentBalanceTextLabel);
+            Controls.Add(ClearCheckButton);
+            Controls.Add(DeleteDetailLineButton);
             Controls.Add(label3);
             Controls.Add(DoneButton);
             Controls.Add(PrintBatchButton);
@@ -433,5 +480,9 @@
         private Button DoneButton;
         private DateTimePicker DateTimePicker;
         private Label label3;
+        private Button DeleteDetailLineButton;
+        private Button ClearCheckButton;
+        private Label CurrentBalanceTextLabel;
+        private Label CurrentBalanceLabel;
     }
 }

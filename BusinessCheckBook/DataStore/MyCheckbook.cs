@@ -646,7 +646,10 @@ namespace BusinessCheckBook.DataStore
                 return Int32.Parse(CompanyInformation.GetParameter(CompanyParameters.FirstInvoiceNumber.Name));
             return LastInvoiceNumber + 1;
         }
-
+        internal decimal GetCurrentBalance()
+        {
+            return CurrentTransactionLedger.GetCurrentBalance();
+        }
 
 
         internal void WriteCheckBook(XLWorkbook CurrentWorkbook)
