@@ -875,7 +875,7 @@ namespace BusinessCheckBook
         {
             if (Payee != null)
             {
-                ToWhomTextBox.Text = Payee.BusinessName;
+                ToWhomTextBox.Text = Payee.PrintAs;
                 ToWhomNameLabel.Text = Payee.BusinessName;
 
                 // write mailing address on the check
