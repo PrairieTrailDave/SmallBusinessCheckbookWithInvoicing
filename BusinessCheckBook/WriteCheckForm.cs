@@ -418,10 +418,17 @@ namespace BusinessCheckBook
         {
             int Col = e.ColumnIndex;
             int WhichBreakdown = e.RowIndex;
+            if (WhichBreakdown < 0) return;
+            if (WhichBreakdown >= CurrentCheckToPrint.Breakdown.Count) return;
             if (Col == 1)
             {
                 UpdateBreakdownTotal();
-                CurrentCheckToPrint.Breakdown[WhichBreakdown].Amount = Decimal.Parse(CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[1].Value.ToString() ?? "0.00");
+                decimal LineAmount;
+                if (Decimal.TryParse((string?)CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[1].Value.ToString() ?? "0.00", out LineAmount))
+                    CurrentCheckToPrint.Breakdown[WhichBreakdown].Amount = LineAmount;
+                else
+                    CurrentCheckToPrint.Breakdown[WhichBreakdown].Amount = 0.00M;
+
             }
             if (CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[2].Value != null)
                 CurrentCheckToPrint.Breakdown[WhichBreakdown].Memo = CheckBreakdownDataGridView.Rows[WhichBreakdown].Cells[2].Value.ToString()!.Trim() ?? "";
