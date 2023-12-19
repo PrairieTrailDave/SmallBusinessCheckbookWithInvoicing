@@ -81,6 +81,7 @@ namespace BusinessCheckBook
         {
             if (ValidateInputs())
             {
+                Invoice InvoiceToSave = new();
                 CurrentInvoice = new();
                 // before allowing an invoice to be printed, make sure that there is an invoice to print
 
@@ -117,7 +118,8 @@ namespace BusinessCheckBook
                             PrintDocument pd = new();
                             pd.PrintPage += new PrintPageEventHandler(this.Pd_PrintPage);
                             pd.Print();
-                            ActiveBook.CurrentInvoices.AddInvoice(CurrentInvoice);
+                            BuildInvoiceToSave(InvoiceToSave);
+                            ActiveBook.CurrentInvoices.AddInvoice(InvoiceToSave);
                             InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
                             ResetScreen();
                         }
@@ -137,9 +139,9 @@ namespace BusinessCheckBook
         {
             if (ValidateInputs())
             {
-                CurrentInvoice = new();
-                BuildInvoiceToSave(CurrentInvoice);
-                InvoiceBatch.Add(CurrentInvoice);
+                Invoice InvoiceToSave = new();
+                BuildInvoiceToSave(InvoiceToSave);
+                InvoiceBatch.Add(InvoiceToSave);
                 InvoiceNumber++;
                 ResetScreen();
             }
