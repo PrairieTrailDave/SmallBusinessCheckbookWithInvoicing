@@ -13,6 +13,7 @@ namespace BusinessCheckBook.Settings
     {
         public ChartOfAccounts CurrentAccounts = new();
         Account ThisAccount = new();
+        string ErrorMessage;
 
         public ChartOfAccountForm()
         {
@@ -109,6 +110,8 @@ namespace BusinessCheckBook.Settings
                 ThisAccount.SubAccountOf = SubAccountComboBox.Text;
                 ThisAccount.Fed1120Mapping = Fed1120MappingComboBox.Text;
             }
+            else
+                MessageBox.Show("Invalid Entry " + ErrorMessage);
         }
 
         private void DisableButton_Click(object sender, EventArgs e)
@@ -148,7 +151,8 @@ namespace BusinessCheckBook.Settings
                 AccountNameTextBox.Text,
                 AccountDescriptionTextBox.Text,
                 SubAccountComboBox.Text,
-                Fed1120MappingComboBox.Text
+                Fed1120MappingComboBox.Text,
+                out ErrorMessage
                 );
         }
 
