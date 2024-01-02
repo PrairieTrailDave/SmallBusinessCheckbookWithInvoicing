@@ -20,6 +20,7 @@ namespace BusinessCheckBook.DataStore
         internal PayToList ToPayTo { get; set; } = new();
         internal CompanyParameters CompanyInformation { get; set; } = new();
 
+        internal bool Changed;
 
         // other variables
 
@@ -27,11 +28,15 @@ namespace BusinessCheckBook.DataStore
 
         public MyCheckbook()
         {
+            Changed = false;
         }
         public MyCheckbook(ActivityLogger myLog)
         {
             Logger = myLog;
         }
+
+        public bool IfChanged() {  return  Changed; }
+        public void HasChanged () { Changed = true; }   
 
 
         internal void CreateNewCheckBook(decimal InitialBalance, int FirstCheckNumber, int FirstInvoiceNumber)
