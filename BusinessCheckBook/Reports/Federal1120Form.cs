@@ -121,54 +121,66 @@ namespace BusinessCheckBook.Reports
                     foreach (LedgerEntry LE in PriorYearTransactions)
                     {
                         string EntryAccount = LE.GetPrimaryAccount();
-                        Account TAccount = (from tcc in AccountList
-                                            where tcc.Name == EntryAccount
-                                            select tcc).First();
-                        if (TAccount.Fed1120Mapping == FormField)
-                        {
-                            RL = new ReportLine()
+                        Account? TAccount;
+                        if (EntryAccount == "Split")
+                            TAccount = new Account()
                             {
-                                WhatWhen = LE.When.ToShortDateString(),
-                                TransactionID = LE.CheckNumber,
-                                ToWhom = LE.ToWhom
+                                Fed1120Mapping = ""
                             };
-                            if (LE.Debit > 0.00M)
+                        else
+                        {
+                            TAccount = (from tcc in AccountList
+                                        where tcc.Name == EntryAccount
+                                        select tcc).FirstOrDefault();
+                        }
+                        if (TAccount != null)
+                        {
+                            if (TAccount.Fed1120Mapping == FormField)
                             {
-                                RL.Amount = LE.Debit.ToString("0.00");
-                                FieldTotal += LE.Debit;
+                                RL = new ReportLine()
+                                {
+                                    WhatWhen = LE.When.ToShortDateString(),
+                                    TransactionID = LE.CheckNumber,
+                                    ToWhom = LE.ToWhom
+                                };
+                                if (LE.Debit > 0.00M)
+                                {
+                                    RL.Amount = LE.Debit.ToString("0.00");
+                                    FieldTotal += LE.Debit;
+                                }
+                                else
+                                {
+                                    RL.Amount = LE.Credit.ToString("0.00");
+                                    FieldTotal += LE.Credit;
+                                }
+                                TaxForm1120Report.Add(RL);
                             }
                             else
                             {
-                                RL.Amount = LE.Credit.ToString("0.00");
-                                FieldTotal += LE.Credit;
-                            }
-                            TaxForm1120Report.Add(RL);
-                        }
-                        else
-                        {
-                            if (LE.SubAccounts.Count > 0)
-                            {
-                                foreach (var SubAcc in LE.SubAccounts)
+                                if (LE.SubAccounts.Count > 0)
                                 {
-                                    EntryAccount = SubAcc.AccountName;
-
-                                    TAccount = (from tcc in AccountList
-                                                where tcc.Name == EntryAccount
-                                                select tcc).First();
-                                    if (TAccount.Fed1120Mapping == FormField)
+                                    foreach (var SubAcc in LE.SubAccounts)
                                     {
-                                        RL = new ReportLine()
-                                        {
-                                            WhatWhen = LE.When.ToShortDateString(),
-                                            TransactionID = LE.CheckNumber,
-                                            ToWhom = (SubAcc.Memo.Length > 0 ? LE.ToWhom + ":" + SubAcc.Memo : LE.ToWhom),
-                                            Amount = SubAcc.Amount.ToString("0.00")
-                                        };
-                                        TaxForm1120Report.Add(RL);
-                                        FieldTotal += SubAcc.Amount;
-                                    }
-                                }
+                                        EntryAccount = SubAcc.AccountName;
 
+                                        TAccount = (from tcc in AccountList
+                                                    where tcc.Name == EntryAccount
+                                                    select tcc).First();
+                                        if (TAccount.Fed1120Mapping == FormField)
+                                        {
+                                            RL = new ReportLine()
+                                            {
+                                                WhatWhen = LE.When.ToShortDateString(),
+                                                TransactionID = LE.CheckNumber,
+                                                ToWhom = (SubAcc.Memo.Length > 0 ? LE.ToWhom + ":" + SubAcc.Memo : LE.ToWhom),
+                                                Amount = SubAcc.Amount.ToString("0.00")
+                                            };
+                                            TaxForm1120Report.Add(RL);
+                                            FieldTotal += SubAcc.Amount;
+                                        }
+                                    }
+
+                                }
                             }
                         }
                     }
@@ -184,6 +196,41 @@ namespace BusinessCheckBook.Reports
                     }
                 }
             }
+
+            // want a section of items not found above.
+            RL = new ReportLine()
+            {
+                WhatWhen = "Items not properly categorized"
+            };
+            TaxForm1120Report.Add(RL);
+
+            foreach (LedgerEntry LE in PriorYearTransactions)
+            {
+                string EntryAccount = LE.GetPrimaryAccount();
+                Account? TAccount;
+                if (EntryAccount == "Split")
+                    TAccount = new Account()
+                    {
+                        Fed1120Mapping = ""
+                    };
+                else
+                {
+                    TAccount = (from tcc in AccountList
+                                where tcc.Name == EntryAccount
+                                select tcc).FirstOrDefault();
+                }
+                if (TAccount == null)
+                {
+                    RL = new ReportLine()
+                    {
+                        WhatWhen = LE.When.ToShortDateString(),
+                        TransactionID = LE.CheckNumber,
+                        ToWhom = LE.ToWhom
+                    };
+                    TaxForm1120Report.Add(RL);
+                }
+            }
+
             ReportDataGridView.DataSource = TaxForm1120Report;
             ReportDataGridView.AutoResizeColumn(2);
         }

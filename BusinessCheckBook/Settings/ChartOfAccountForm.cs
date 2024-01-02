@@ -34,6 +34,18 @@ namespace BusinessCheckBook.Settings
             Fed1120MappingComboBox.DataSource = Fed1120.F1120Fields;
         }
 
+
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            AccountNameTextBox.Text = "";
+            AccountDescriptionTextBox.Text = "";
+            AccountTypeComboBox.Text = "";
+            Fed1120MappingComboBox.Text = "";
+            SaveChangesButton.Enabled = false;
+            AddButton.Enabled = true;
+            AccountNameTextBox.Focus();
+        }
+
         private void CurrentAccountsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int CurrentRow = e.RowIndex;
@@ -110,6 +122,14 @@ namespace BusinessCheckBook.Settings
         }
 
 
+        private void DoneButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
+
+
         private void SetMainAccountsDropDown()
         {
             List<string> MainAccounts = new();
@@ -131,7 +151,6 @@ namespace BusinessCheckBook.Settings
                 Fed1120MappingComboBox.Text
                 );
         }
-
 
     }
 }

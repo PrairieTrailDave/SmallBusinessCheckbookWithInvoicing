@@ -286,19 +286,19 @@ namespace BusinessCheckBook.DataStore
 
 
         // used on user entry
-        internal static bool ValidAccountFields(SheetFormat ChartOfAccountsFormat, string AccountType, string AccountName, string AccountDescription, string AccountSubField, string AccountFedField)
+        internal static bool ValidAccountFields(SheetFormat ChartOfAccountsFormat, string AccountType, string AccountName, string AccountDescription, string AccountSubField, string AccountFedField, out string ErrorMessage)
         {
             ColumnFormat ThisColumn = ChartOfAccountsFormat.Column(XLTypeOfAccount)!;
             if (AccountType.Length == 0)
             {
-                MessageBox.Show("Please select a valid account type");
+                ErrorMessage = "Please select a valid account type";
                 return false;
             }
 
             // test first for text validity
             if (!ThisColumn.Valid(AccountType))
             {
-                MessageBox.Show("Invalid type of account " + AccountType);
+                ErrorMessage = "Invalid type of account " + AccountType;
                 return false;
             }
 
@@ -307,7 +307,7 @@ namespace BusinessCheckBook.DataStore
             ThisColumn = ChartOfAccountsFormat.Column(XLAccountName)!;
             if (!ThisColumn.Valid(AccountName))
             {
-                MessageBox.Show("Invalid account name " + AccountName);
+                ErrorMessage = "Invalid account name " + AccountName;
                 return false;
             }
 
@@ -316,7 +316,7 @@ namespace BusinessCheckBook.DataStore
             ThisColumn = ChartOfAccountsFormat.Column(XLDescription)!;
             if (!ThisColumn.Valid(AccountDescription))
             {
-                MessageBox.Show("Invalid account description " + AccountDescription);
+                ErrorMessage = "Invalid account description " + AccountDescription;
                 return false;
             }
 
@@ -329,7 +329,7 @@ namespace BusinessCheckBook.DataStore
                 {
                     if (!ThisColumn.Valid(AccountSubField))
                     {
-                        MessageBox.Show("Invalid account subfield " + AccountSubField);
+                        ErrorMessage = "Invalid account subfield " + AccountSubField;
                         return false;
                     }
                 }
@@ -344,12 +344,12 @@ namespace BusinessCheckBook.DataStore
                 {
                     if (!ThisColumn.Valid(AccountFedField))
                     {
-                        MessageBox.Show("Invalid federal 1120 mapping " + AccountFedField);
+                        ErrorMessage = "Invalid federal 1120 mapping " + AccountFedField;
                         return false;
                     }
                 }
             }
-
+            ErrorMessage = "";
             return true;
         }
 

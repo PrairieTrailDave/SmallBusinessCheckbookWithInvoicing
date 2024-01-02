@@ -383,9 +383,9 @@ namespace BusinessCheckBook.DataStore
 
 
         // used on user entry
-        internal bool ValidAccountFields(string AccountType, string AccountName, string AccountDescription, string AccountSubField, string AccountFedField)
+        internal bool ValidAccountFields(string AccountType, string AccountName, string AccountDescription, string AccountSubField, string AccountFedField, out string ErrorMessage)
         {
-            return Account.ValidAccountFields(ChartOfAccountsFormat, AccountType, AccountName, AccountDescription, AccountSubField, AccountFedField);
+            return Account.ValidAccountFields(ChartOfAccountsFormat, AccountType, AccountName, AccountDescription, AccountSubField, AccountFedField, out ErrorMessage);
         }
         internal bool ValidIIFAccountFields(string[] fields, out string ErrorMessage)
         {
