@@ -28,16 +28,29 @@ namespace BusinessCheckBook.DataStore
         //string sAccountModified = "Account Modified";
         string sAccount = "Account";
 
+        private bool Changed;
+
+
+
         public ChartOfAccounts()
         {
             Initialize();
+            Changed = false;
         }
 
         public ChartOfAccounts(ActivityLogger logger)
         {
             Logger = logger;
             Initialize();
+            Changed = false;
         }
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
+
 
         internal void Initialize()
         {
@@ -95,6 +108,7 @@ namespace BusinessCheckBook.DataStore
             if (IIFAccount.ParseIIFRow(fields) != null)
             {
                 CurrentAccounts.Add(IIFAccount);
+                HasChanged();
                 Logger?.LogObject(sNewAccount, sAccount, IIFAccount);
             }
         }
@@ -111,6 +125,7 @@ namespace BusinessCheckBook.DataStore
                 case Account.Type.CheckingAccount:
                     // put as the first account in the list
                     CurrentAccounts.Insert(0, NewAccount);
+                    HasChanged();
                     Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
                 case Account.Type.Income:
@@ -124,6 +139,7 @@ namespace BusinessCheckBook.DataStore
                         if (Acc.WhatType != Account.Type.Income)
                         {
                             CurrentAccounts.Insert (i, NewAccount);
+                            HasChanged();
                             Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                             Inserted = true;
                             break;
@@ -131,6 +147,7 @@ namespace BusinessCheckBook.DataStore
                         if (string.Compare(NewAccount.Name, Acc.Name,StringComparison.CurrentCulture) < 0)
                         {
                             CurrentAccounts.Insert(i, NewAccount);
+                            HasChanged();
                             Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                             Inserted = true;
                             break;
@@ -141,6 +158,7 @@ namespace BusinessCheckBook.DataStore
                     if (!Inserted)
                     {
                         CurrentAccounts.Add(NewAccount);
+                        HasChanged();
                         Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     }
                     break;
@@ -157,6 +175,7 @@ namespace BusinessCheckBook.DataStore
                             if (string.Compare(NewAccount.Name, Acc.Name, StringComparison.CurrentCulture) < 0)
                             {
                                 CurrentAccounts.Insert(i, NewAccount);
+                                HasChanged();
                                 Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                 Inserted = true;
                                 break;
@@ -167,6 +186,7 @@ namespace BusinessCheckBook.DataStore
                     if (!Inserted)
                     {
                         CurrentAccounts.Add(NewAccount);
+                        HasChanged();
                         Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     }
                     break;
@@ -189,6 +209,7 @@ namespace BusinessCheckBook.DataStore
                                     if (Acc.WhatType !=  Account.Type.SubAccount)
                                     {
                                         CurrentAccounts.Insert(j, NewAccount);
+                                        HasChanged();
                                         Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                         Inserted = true;
                                         break;
@@ -196,6 +217,7 @@ namespace BusinessCheckBook.DataStore
                                     if (string.Compare(NewAccount.Name, Acc.Name, StringComparison.CurrentCulture) < 0)
                                     {
                                         CurrentAccounts.Insert(j, NewAccount);
+                                        HasChanged();
                                         Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                         Inserted = true;
                                         break;
@@ -204,6 +226,7 @@ namespace BusinessCheckBook.DataStore
                                 if (!Inserted)
                                 {
                                     CurrentAccounts.Add(NewAccount);
+                                    HasChanged();
                                     Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                                 }
                             }
@@ -212,10 +235,12 @@ namespace BusinessCheckBook.DataStore
                     break;
                 case Account.Type.Withholdings:
                     CurrentAccounts.Add(NewAccount);
+                    HasChanged();
                     Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
                 default:
                     CurrentAccounts.Add(NewAccount);
+                    HasChanged();
                     Logger?.LogObject(sNewAccount, sAccount, NewAccount);
                     break;
             }
@@ -415,6 +440,7 @@ namespace BusinessCheckBook.DataStore
                     TAccount.ParseExcelRow(XRow, ChartOfAccountsFormat);
                     InsertAccount(TAccount);
                 }
+                Changed = false;  // because the reading and putting in order sets the changed flag, reset it here
                 return true;
             }
             return false;

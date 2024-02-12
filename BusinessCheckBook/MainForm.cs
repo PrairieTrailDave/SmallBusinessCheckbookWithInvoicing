@@ -26,6 +26,16 @@ namespace BusinessCheckBook
             ActiveBook = new MyCheckbook();
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ActiveBook.IfChanged())
+            {
+                if (MessageBox.Show("The file has changed. Do you really want to close without saving?", "Dirty File", MessageBoxButtons.YesNo) != DialogResult.Yes) 
+                { 
+                    e.Cancel = true;
+                }
+            }
+        }
 
         // Menu Item Clicks
 
@@ -353,6 +363,7 @@ namespace BusinessCheckBook
             ActiveBook.WriteCheckBook(CurrentWorkbook);
 
             CurrentWorkbook.SaveAs(FileName);
+            ActiveBook.ClearChanged();
         }
 
 
@@ -365,5 +376,7 @@ namespace BusinessCheckBook
             ShowInvoicesButton.Enabled = true;
 
         }
+
+
     }
 }

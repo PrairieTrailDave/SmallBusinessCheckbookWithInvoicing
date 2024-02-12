@@ -18,11 +18,23 @@ namespace BusinessCheckBook.DataStore
         // what the Excel sheet is supposed to look like
         internal SheetFormat InvoiceListFormat { get; set; } = new();
 
+        private bool Changed;
+
+
+
         public Invoices() 
         {
             CurrentInvoices = new();
             SetSheetFormat();
+            Changed = false;
         }
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
+
 
         internal Invoice GetInvoice(int InvNum)
         {
@@ -87,6 +99,7 @@ namespace BusinessCheckBook.DataStore
                     break;
                 }
             }
+            HasChanged();
         }
 
         internal void ApplyPaymentToInvoice (int InvoiceNum, decimal Payment)
@@ -99,6 +112,7 @@ namespace BusinessCheckBook.DataStore
                 Inv.AmountPaid += Payment;
                 if (Inv.AmountPaid == Inv.Total)
                     Inv.Paid = true;
+                HasChanged();
             }
         }
 
@@ -117,6 +131,7 @@ namespace BusinessCheckBook.DataStore
         internal void AddInvoice (Invoice inv)
         {
             CurrentInvoices.Add(inv);
+            HasChanged();
         }
 
 
@@ -141,6 +156,7 @@ namespace BusinessCheckBook.DataStore
                             CurrentInvoices.Remove(Entry);
 
                             Handled = true;
+                            HasChanged();
                             break;
                         }
                     }
@@ -149,6 +165,7 @@ namespace BusinessCheckBook.DataStore
             if (!Handled)
             {
                 CurrentInvoices.Add(Inv);
+                HasChanged();
             }
         }
 
@@ -279,6 +296,7 @@ namespace BusinessCheckBook.DataStore
 
                     CurrentInvoices.Add(NInvoice);
                 }
+                ClearChanged();
                 return true;
             }
             return false;

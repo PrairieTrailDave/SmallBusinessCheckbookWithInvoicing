@@ -18,13 +18,24 @@ namespace BusinessCheckBook.DataStore
 
         readonly string SInitialBalance = "Initial Balance";
 
+        private bool Changed;
+
+
+
         public TransactionLedger()
         {
             CurrentLedger = new List<LedgerEntry>();
             SetSheetFormat(0);
+            Changed = false;
 
             FirstCheckNumber = 0;
         }
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
 
         // the problem is that when we declare a new ledger,
         // we wipe out the breakdown formats that were built when
@@ -49,6 +60,7 @@ namespace BusinessCheckBook.DataStore
                 IBalance.Account = "InitialBalance";
                 IBalance.Balance = InitialBalance;
                 CurrentLedger.Add(IBalance);
+                HasChanged();
             }
             else
                 throw new Exception("Trying to add an initial balance when transactions already exist in ledger");
@@ -59,11 +71,15 @@ namespace BusinessCheckBook.DataStore
             if (CurrentLedger.Count == 0)
             {
                 FirstCheckNumber = nFirstCheckNumber;
+                HasChanged();
             }
             else
             {
                 if (CurrentLedger[0].ToWhom == SInitialBalance)
+                {
                     FirstCheckNumber = nFirstCheckNumber;
+                    HasChanged();
+                }
                 else
                     throw new Exception("Trying to set the first check number when transactions already exist in ledger");
             }
@@ -179,6 +195,7 @@ namespace BusinessCheckBook.DataStore
             {
                 newEntry.Balance = newEntry.Credit - newEntry.Debit;
                 CurrentLedger.Add(newEntry);
+                HasChanged();
                 return CurrentLedger.Count - 1;
             }
             else
@@ -206,6 +223,7 @@ namespace BusinessCheckBook.DataStore
                 {
                     newEntry.Balance = CurrentLedger[LedgerIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                     CurrentLedger.Add(newEntry);
+                    HasChanged();
                     return newEntry.ID;
                 }
                 else
@@ -218,6 +236,7 @@ namespace BusinessCheckBook.DataStore
                         newEntry.Balance = CurrentLedger[LedgerIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                         CurrentLedger.Insert(LedgerIndex, newEntry);
                         UpdateFollowingTransactionBalances(LedgerIndex);
+                        HasChanged();
                         return newEntry.ID;
                     }
                     else
@@ -261,6 +280,7 @@ namespace BusinessCheckBook.DataStore
                                 {
                                     newEntry.Balance = CurrentLedger[secondIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                                     CurrentLedger.Add(newEntry);
+                                    HasChanged();
                                     return newEntry.ID;
                                 }
                                 else
@@ -268,6 +288,7 @@ namespace BusinessCheckBook.DataStore
                                     newEntry.Balance = CurrentLedger[secondIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                                     CurrentLedger.Insert(secondIndex, newEntry);
                                     UpdateFollowingTransactionBalances(secondIndex);
+                                    HasChanged();
                                     return newEntry.ID;
                                 }
 
@@ -298,6 +319,7 @@ namespace BusinessCheckBook.DataStore
                             {
                                 newEntry.Balance = CurrentLedger[secondIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                                 CurrentLedger.Add(newEntry);
+                                HasChanged();
                                 return newEntry.ID;
                             }
                             else
@@ -305,6 +327,7 @@ namespace BusinessCheckBook.DataStore
                                 newEntry.Balance = CurrentLedger[secondIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                                 CurrentLedger.Insert(secondIndex, newEntry);
                                 UpdateFollowingTransactionBalances(secondIndex);
+                                HasChanged();
                                 return newEntry.ID;
                             }
                         }
@@ -312,6 +335,7 @@ namespace BusinessCheckBook.DataStore
                     // don't think it should get here, but if it does, simply add to end
                     newEntry.Balance = CurrentLedger[LedgerIndex - 1].Balance + newEntry.Credit - newEntry.Debit;
                     CurrentLedger.Add(newEntry);
+                    HasChanged();
                     return newEntry.ID;
                 }
             }
@@ -339,6 +363,7 @@ namespace BusinessCheckBook.DataStore
                         else
                             CurrentLedger[EntryNumber].Balance = 0.00M;
                         UpdateFollowingTransactionBalances(EntryNumber);
+                        HasChanged();
                         break;
                     }
                 }
@@ -378,6 +403,7 @@ namespace BusinessCheckBook.DataStore
                                                                        + CurrentLedger[EntryNumber].Credit
                                                                        - CurrentLedger[EntryNumber].Debit;
                         UpdateFollowingTransactionBalances(EntryNumber);
+                        HasChanged();
                         break;
                     }
                 }
@@ -391,7 +417,10 @@ namespace BusinessCheckBook.DataStore
                 if (CurrentLedger[index].ID == IDToReconcile)
                 {
                     if (Cleared != CurrentLedger[index].Cleared)
+                    {
                         CurrentLedger[index].Cleared = Cleared;
+                        HasChanged();
+                    }
                     break;
                 }
             }
@@ -683,6 +712,7 @@ namespace BusinessCheckBook.DataStore
 
                     CurrentLedger.Add(NEntry);
                 }
+                Changed = false; // if we just read in a file, don't mark as changed
                 return true;
             }
             return false;
@@ -710,6 +740,7 @@ namespace BusinessCheckBook.DataStore
                             CurrentLedger.Insert(LedgerIndex, LE);
                             CurrentLedger.Remove(Entry);
                             UpdateFollowingTransactionBalances(LedgerIndex);
+                            HasChanged();
 
                             Handled = true;
                             break;
@@ -723,12 +754,14 @@ namespace BusinessCheckBook.DataStore
                 {
                     LE.ID = CurrentLedger.Count;
                     InsertTransaction(LE);
+                    HasChanged();
                 }
                 else
                 {
                     LE.Balance = CurrentLedger[^1].Balance + LE.Credit - LE.Debit;
                     LE.ID = CurrentLedger.Count;
                     CurrentLedger.Add(LE);
+                    HasChanged();
                 }
             }
         }

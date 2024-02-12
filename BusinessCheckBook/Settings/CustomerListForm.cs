@@ -123,6 +123,7 @@ namespace BusinessCheckBook.Settings
                 TCustomer.EmailAddress = EmailAddressTextBox.Text;
                 TCustomer.Taxable = SalesTaxCheckBox.Checked;
                 TCustomer.TaxID = TaxIDTextBox.Text;
+                ActiveBook.Customers.HasChanged();
             }
         }
 

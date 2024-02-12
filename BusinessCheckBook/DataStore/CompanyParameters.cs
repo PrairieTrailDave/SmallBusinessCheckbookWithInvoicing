@@ -15,6 +15,8 @@ namespace BusinessCheckBook.DataStore
 
         // what the Excel sheet is supposed to look like
         private SheetFormat ParameterFormat { get; set; } = new();
+        private bool Changed;
+
 
         // Excel column names
         // Column names and header values
@@ -66,7 +68,19 @@ namespace BusinessCheckBook.DataStore
                 CheckFormat,
                 FirstInvoiceNumber
             };
+            Changed = false;
         }
+
+
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
+
+
+
 
 
         internal void Clear()
@@ -76,6 +90,7 @@ namespace BusinessCheckBook.DataStore
             {
                 ParameterList.Add(pn.Name, pn.DefaultValue);
             }
+            HasChanged();
         }
 
         internal string GetAddressLine(int LineNumber)
@@ -122,6 +137,7 @@ namespace BusinessCheckBook.DataStore
         internal void PutParameter(string parameterName, string newValue)
         {
             ParameterList[parameterName] = newValue;
+            HasChanged();
         }
 
 

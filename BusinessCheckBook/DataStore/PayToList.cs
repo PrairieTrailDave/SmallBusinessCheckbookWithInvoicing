@@ -17,12 +17,21 @@ namespace BusinessCheckBook.DataStore
 
         // what the Excel sheet is supposed to look like
         private SheetFormat PayToListFormat { get; set; } = new();
+        private bool Changed;
 
         public PayToList()
         {
             PayTos = new();
             SetSheetFormat();
+            Changed = false;
         }
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
+
 
         internal static PayTo CreateNewPayTo(string PayToName) =>
             new()
@@ -34,6 +43,7 @@ namespace BusinessCheckBook.DataStore
         internal void AddPayTo(PayTo TPayTo)
         {
             PayTos.Add(TPayTo);
+            HasChanged();
         }
         internal List<PayTo> GetCurrentList()
         {
@@ -223,6 +233,7 @@ namespace BusinessCheckBook.DataStore
 
                     PayTos.Add(NPayTo);
                 }
+                ClearChanged();
                 return true;
             }
             return false;

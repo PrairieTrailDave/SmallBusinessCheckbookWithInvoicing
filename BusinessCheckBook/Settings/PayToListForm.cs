@@ -96,6 +96,7 @@ namespace BusinessCheckBook.Settings
                     TPayTo.Taxable = TaxableCheckBox.Checked;
                     TPayTo.Send1099 = Send1099CheckBox.Checked;
                     TPayTo.TaxID = TaxIDTextBox.Text;
+                    ActiveBook.ToPayTo.HasChanged();
                 }
             }
         }

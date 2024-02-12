@@ -266,7 +266,7 @@
             // 
             ShowInvoicesButton.Enabled = false;
             ShowInvoicesButton.Location = new Point(117, 325);
-            ShowInvoicesButton.Margin = new Padding(2, 2, 2, 2);
+            ShowInvoicesButton.Margin = new Padding(2);
             ShowInvoicesButton.Name = "ShowInvoicesButton";
             ShowInvoicesButton.Size = new Size(143, 20);
             ShowInvoicesButton.TabIndex = 5;
@@ -281,7 +281,7 @@
             label3.Name = "label3";
             label3.Size = new Size(218, 15);
             label3.TabIndex = 7;
-            label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
+            label3.Text = "Copyright 2024 Prarie Trail Software, Inc.";
             label3.Visible = false;
             // 
             // MainForm
@@ -299,6 +299,7 @@
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Business Checking";
+            FormClosing += MainForm_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

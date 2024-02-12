@@ -109,6 +109,7 @@ namespace BusinessCheckBook.Settings
                 ThisAccount.WhatType = Account.ParseType(AccountTypeComboBox.Text);
                 ThisAccount.SubAccountOf = SubAccountComboBox.Text;
                 ThisAccount.Fed1120Mapping = Fed1120MappingComboBox.Text;
+                CurrentAccounts.HasChanged();
             }
             else
                 MessageBox.Show("Invalid Entry " + ErrorMessage);

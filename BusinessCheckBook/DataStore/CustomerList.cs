@@ -17,6 +17,7 @@ namespace BusinessCheckBook.DataStore
 
         // what the Excel sheet is supposed to look like
         internal SheetFormat CustomerListFormat { get; set; } = new();
+        private bool Changed;
 
 
 
@@ -25,11 +26,22 @@ namespace BusinessCheckBook.DataStore
         {
             Customers = new();
             SetSheetFormat();
+            Changed = false;
         }
+
+        public bool IfChanged() { return Changed; }
+        public void HasChanged() { Changed = true; }
+        public void ClearChanged() { Changed = false; }
+
+
+
+
+
 
         internal void AddCustomer (Customer customer)
         {
             Customers.Add(customer);
+            HasChanged();
         }
         internal List<Customer> GetCurrentList()
         { 
@@ -205,6 +217,7 @@ namespace BusinessCheckBook.DataStore
 
                     Customers.Add(NCustomer);
                 }
+                ClearChanged();
                 return true;
             }
             return false;
