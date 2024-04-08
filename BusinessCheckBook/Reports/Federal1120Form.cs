@@ -18,6 +18,7 @@ namespace BusinessCheckBook.Reports
             public string WhatWhen { get; set; } = string.Empty;
             public string TransactionID { get; set; } = string.Empty;
             public string ToWhom { get; set; } = string.Empty;
+            public string Account { get; set;} = string.Empty;
             public string Amount { get; set; } = string.Empty;
         }
 
@@ -172,7 +173,8 @@ namespace BusinessCheckBook.Reports
                                             {
                                                 WhatWhen = LE.When.ToShortDateString(),
                                                 TransactionID = LE.CheckNumber,
-                                                ToWhom = (SubAcc.Memo.Length > 0 ? LE.ToWhom + ":" + SubAcc.Memo : LE.ToWhom),
+                                                ToWhom = LE.ToWhom,
+                                                Account = (SubAcc.AccountName.Length > 0 ? (SubAcc.Memo.Length > 0 ? SubAcc.AccountName + ":" + SubAcc.Memo : SubAcc.AccountName) : LE.ToWhom),
                                                 Amount = SubAcc.Amount.ToString("0.00")
                                             };
                                             TaxForm1120Report.Add(RL);
