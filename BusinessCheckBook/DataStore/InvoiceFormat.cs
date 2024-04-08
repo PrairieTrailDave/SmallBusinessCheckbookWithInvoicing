@@ -46,8 +46,9 @@ namespace BusinessCheckBook.DataStore
             {
                 string LogoFileName = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.InvoiceLogo.Name);
                 System.Drawing.Image img = System.Drawing.Image.FromFile(LogoFileName);
-                GraphicsUnit GU = GraphicsUnit.Pixel;
-                RectangleF imgRex = img.GetBounds(ref GU);
+                //GraphicsUnit GU = GraphicsUnit.Pixel;
+                //RectangleF imgRex = img.GetBounds(ref GU); // <-- want to use the logo size here. but it doesn't fit properly.
+
                 Rectangle Rex = new(CurrentPrintLayout.LogoFileName.XPos,
                     CurrentPrintLayout.LogoFileName.YPos,
                     CurrentPrintLayout.LogoFileName.Width,
