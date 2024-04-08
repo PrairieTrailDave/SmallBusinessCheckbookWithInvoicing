@@ -50,6 +50,7 @@ namespace BusinessCheckBook.DataStore
         readonly internal static ParameterName ParmCompanyEIN = new("EIN", true, "");
         readonly internal static ParameterName CheckFormat = new("CheckFormat", false, "Laser 1PT");
         readonly internal static ParameterName FirstInvoiceNumber = new("FirstInvoice", true, "1");
+        readonly internal static ParameterName InvoiceLogo = new("InvoiceLogo", false, "PTS.BMP");
 
 
         internal CompanyParameters() 
@@ -66,7 +67,8 @@ namespace BusinessCheckBook.DataStore
                 ParmCompanyPhone,
                 ParmCompanyEIN,
                 CheckFormat,
-                FirstInvoiceNumber
+                FirstInvoiceNumber,
+                InvoiceLogo
             };
             Changed = false;
         }

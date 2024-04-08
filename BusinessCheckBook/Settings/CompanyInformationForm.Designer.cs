@@ -46,8 +46,14 @@
             SaveButton = new Button();
             label6 = new Label();
             label7 = new Label();
+            groupBox3 = new GroupBox();
+            CompanyLogoTextBox = new TextBox();
+            label8 = new Label();
+            BrowseForLogoButton = new Button();
+            findLogoFileDialog = new OpenFileDialog();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -212,11 +218,54 @@
             label7.Text = "Copyright 2023 Prarie Trail Software, Inc.";
             label7.Visible = false;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(BrowseForLogoButton);
+            groupBox3.Controls.Add(CompanyLogoTextBox);
+            groupBox3.Controls.Add(label8);
+            groupBox3.Location = new Point(367, 258);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(423, 100);
+            groupBox3.TabIndex = 8;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Invoice Settings";
+            // 
+            // CompanyLogoTextBox
+            // 
+            CompanyLogoTextBox.Location = new Point(24, 43);
+            CompanyLogoTextBox.Name = "CompanyLogoTextBox";
+            CompanyLogoTextBox.Size = new Size(301, 23);
+            CompanyLogoTextBox.TabIndex = 1;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(24, 19);
+            label8.Name = "label8";
+            label8.Size = new Size(89, 15);
+            label8.TabIndex = 0;
+            label8.Text = "Company Logo";
+            // 
+            // BrowseForLogoButton
+            // 
+            BrowseForLogoButton.Location = new Point(342, 43);
+            BrowseForLogoButton.Name = "BrowseForLogoButton";
+            BrowseForLogoButton.Size = new Size(75, 23);
+            BrowseForLogoButton.TabIndex = 2;
+            BrowseForLogoButton.Text = "Browse";
+            BrowseForLogoButton.UseVisualStyleBackColor = true;
+            BrowseForLogoButton.Click += BrowseForLogoButton_Click;
+            // 
+            // findLogoFileDialog
+            // 
+            findLogoFileDialog.FileName = "openFileDialog1";
+            // 
             // CompanyInformationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(841, 504);
+            Controls.Add(groupBox3);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(SaveButton);
@@ -229,6 +278,8 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -253,5 +304,10 @@
         private Label label5;
         private Label label6;
         private Label label7;
+        private GroupBox groupBox3;
+        private TextBox CompanyLogoTextBox;
+        private Label label8;
+        private Button BrowseForLogoButton;
+        private OpenFileDialog findLogoFileDialog;
     }
 }

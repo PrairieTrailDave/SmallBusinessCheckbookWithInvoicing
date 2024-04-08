@@ -44,7 +44,10 @@ namespace BusinessCheckBook.DataStore
 
             if (CurrentPrintLayout.LogoFileName.IfToPrintThisItem)
             {
-                System.Drawing.Image img = System.Drawing.Image.FromFile(CurrentPrintLayout.LogoFileName.VariableNameToPrint);
+                string LogoFileName = ActiveBook.CompanyInformation.GetParameter(CompanyParameters.InvoiceLogo.Name);
+                System.Drawing.Image img = System.Drawing.Image.FromFile(LogoFileName);
+                GraphicsUnit GU = GraphicsUnit.Pixel;
+                RectangleF imgRex = img.GetBounds(ref GU);
                 Rectangle Rex = new(CurrentPrintLayout.LogoFileName.XPos,
                     CurrentPrintLayout.LogoFileName.YPos,
                     CurrentPrintLayout.LogoFileName.Width,
@@ -219,7 +222,7 @@ namespace BusinessCheckBook.DataStore
             CurrentPrintLayout.LogoFileName = new()
             {
                 IfToPrintThisItem = true,
-                VariableNameToPrint = "Logo.BMP",
+                VariableNameToPrint = "Logo.BMP", // replace this with actual name during the print.
                 YPos = 70,
                 XPos = 40,
                 Height = 40,

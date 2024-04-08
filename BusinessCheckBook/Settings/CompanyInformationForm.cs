@@ -36,6 +36,7 @@ namespace BusinessCheckBook.Settings
             CompanyZipTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyZip.Name);
             CompanyPhoneTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyPhone.Name);
             CompanyEINTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.ParmCompanyEIN.Name);
+            CompanyLogoTextBox.Text = CompanyInformation.GetParameter(CompanyParameters.InvoiceLogo.Name);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace BusinessCheckBook.Settings
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyZip.Name, CompanyZipTextBox.Text);
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyPhone.Name, CompanyPhoneTextBox.Text);
                 CompanyInformation.PutParameter(CompanyParameters.ParmCompanyEIN.Name, CompanyEINTextBox.Text);
+                CompanyInformation.PutParameter(CompanyParameters.InvoiceLogo.Name, CompanyLogoTextBox.Text);
                 Close();
             }
         }
@@ -151,6 +153,14 @@ namespace BusinessCheckBook.Settings
                 return false;
             }
             return true;
+        }
+
+        private void BrowseForLogoButton_Click(object sender, EventArgs e)
+        {
+            if (findLogoFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                CompanyLogoTextBox.Text = findLogoFileDialog.FileName;
+            }
         }
     }
 }
