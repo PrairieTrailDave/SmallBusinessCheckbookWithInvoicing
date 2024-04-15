@@ -227,7 +227,7 @@ namespace BusinessCheckBook.DataStore
                 YPos = 70,
                 XPos = 40,
                 Height = 40,
-                Width = 535
+                Width = 520
             };
 
             // company information items
