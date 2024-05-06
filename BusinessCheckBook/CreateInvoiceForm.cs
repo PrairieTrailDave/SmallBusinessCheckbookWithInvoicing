@@ -264,7 +264,7 @@ namespace BusinessCheckBook
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string? CustomerSelected = CustomerComboBox.SelectedItem.ToString();
+            string? CustomerSelected = CustomerComboBox.SelectedItem?.ToString();
             if (CustomerSelected != null)
             {
                 Customer? ChosenCustomer = ActiveBook.Customers.GetCustomerByName(CustomerSelected);
@@ -516,7 +516,7 @@ namespace BusinessCheckBook
         }
         internal void BuildInvoiceToSave(Invoice ToSave)
         {
-            DropDownItem SelectededCustomer = (DropDownItem)CustomerComboBox.SelectedItem;
+            DropDownItem SelectededCustomer = (DropDownItem)CustomerComboBox.SelectedItem!;
             ToSave.CustomerIdentifier = SelectededCustomer.Value;
             ToSave.BillingAddress1 = BillToAddress1TextBox.Text;
             ToSave.BillingAddress2 = BillToAddress2TextBox.Text;

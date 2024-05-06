@@ -468,7 +468,7 @@ namespace BusinessCheckBook
                 TransactionCredit,
                 ResultingBalance,
                 CheckAmount,
-                (string)CategoriesComboBox.SelectedItem,
+                (string)CategoriesComboBox.SelectedItem!,
                 TBreakdown
             );
 

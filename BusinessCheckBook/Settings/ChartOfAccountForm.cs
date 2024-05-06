@@ -13,7 +13,7 @@ namespace BusinessCheckBook.Settings
     {
         public ChartOfAccounts CurrentAccounts = new();
         Account ThisAccount = new();
-        string ErrorMessage;
+        string ErrorMessage = string.Empty;
 
         public ChartOfAccountForm()
         {
