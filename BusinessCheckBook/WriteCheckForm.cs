@@ -1038,7 +1038,7 @@ namespace BusinessCheckBook
                     results += NumberWord[Number * 10 + Number2];
                 }
                 else
-                    results += TenWords[Number] + " " + NumberWord[Number2];
+                    results += TenWords[Number] + (Number2 > 0 ? " " + NumberWord[Number2] : "");
             }
             else
                 results += NumberWord[Number2];
