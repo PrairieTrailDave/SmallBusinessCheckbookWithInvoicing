@@ -1035,7 +1035,7 @@ namespace BusinessCheckBook
                 // deal with teens
                 if (Number == 1)
                 {
-                    results += NumberWord[Number + Number2];
+                    results += NumberWord[Number * 10 + Number2];
                 }
                 else
                     results += TenWords[Number] + " " + NumberWord[Number2];
