@@ -58,15 +58,7 @@ namespace BusinessCheckBook
             DropDownItem SelectedCustomer = (DropDownItem)CustomerComboBox.SelectedItem;
             CurrentPayer = SelectedCustomer.Value;
 
-            // build the current balance from all invoices minus all payments
-
-            OutstandingInvoices = ActiveBook.CurrentInvoices.GetOutstandingInvoicesForACustomer(CurrentPayer);
-            decimal CurrentBalance = 0.00M;
-            foreach (Invoice inv in OutstandingInvoices)
-            {
-                CurrentBalance += inv.Total - inv.AmountPaid;
-            }
-            CurrnetBalanceTextBox.Text = CurrentBalance.ToString();
+            ShowCurrentCustomerBalance();
 
             // show outstanding invoices
             DispInvoices = new();
@@ -93,6 +85,11 @@ namespace BusinessCheckBook
 
         private void PostPaymentButton_Click(object sender, EventArgs e)
         {
+            if (!Decimal.TryParse(AmountPaidTextBox.Text, out _))
+            {
+                MessageBox.Show("Invalid amount in the Amount Paid box");
+                return;
+            }
             if (CurrentPayer != null)
             {
                 AmountPaid = Decimal.Parse(AmountPaidTextBox.Text);
@@ -114,6 +111,7 @@ namespace BusinessCheckBook
                         // mark invoice on screen as paid
 
                         UpdateDisplayInvoice(Inv.InvoiceNumber, AmountPaid, true);
+                        ShowCurrentCustomerBalance();
                         return;
                     }
                 }
@@ -139,8 +137,12 @@ namespace BusinessCheckBook
                         AmountPaid -= BalanceDue;
                     }
                     if (AmountPaid == 0.00M)
+                    {
+                        ShowCurrentCustomerBalance();
                         return;
+                    }
                 }
+                ShowCurrentCustomerBalance();
                 if (AmountPaid > 0)
                 {
                     MessageBox.Show("You have more payment than outstanding invoices. Give the customer credit.");
@@ -164,9 +166,23 @@ namespace BusinessCheckBook
                 // mark invoice on screen as paid
 
                 UpdateDisplayInvoice(Inv.InvoiceNumber, AmountPaid, false);
+                ShowCurrentCustomerBalance();
             }
         }
 
+        private void ShowCurrentCustomerBalance()
+        {
+            // build the current balance from all invoices minus all payments
+
+            OutstandingInvoices = ActiveBook.CurrentInvoices.GetOutstandingInvoicesForACustomer(CurrentPayer);
+            decimal CurrentBalance = 0.00M;
+            foreach (Invoice inv in OutstandingInvoices)
+            {
+                CurrentBalance += inv.Total - inv.AmountPaid;
+            }
+            CurrentBalanceTextBox.Text = CurrentBalance.ToString();
+
+        }
         private void DoneButton_Click(object sender, EventArgs e)
         {
             Close();

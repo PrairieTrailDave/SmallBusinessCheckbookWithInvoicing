@@ -33,7 +33,7 @@
             PostingDateTimePicker = new DateTimePicker();
             label2 = new Label();
             label3 = new Label();
-            CurrnetBalanceTextBox = new TextBox();
+            CurrentBalanceTextBox = new TextBox();
             label4 = new Label();
             AmountPaidTextBox = new TextBox();
             SaveButton = new Button();
@@ -47,81 +47,80 @@
             // CustomerComboBox
             // 
             CustomerComboBox.FormattingEnabled = true;
-            CustomerComboBox.Location = new Point(166, 72);
+            CustomerComboBox.Location = new Point(237, 120);
+            CustomerComboBox.Margin = new Padding(4, 5, 4, 5);
             CustomerComboBox.Name = "CustomerComboBox";
-            CustomerComboBox.Size = new Size(152, 23);
+            CustomerComboBox.Size = new Size(215, 33);
             CustomerComboBox.TabIndex = 0;
             CustomerComboBox.SelectedIndexChanged += CustomerComboBox_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(45, 75);
+            label1.Location = new Point(64, 125);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(77, 15);
+            label1.Size = new Size(117, 25);
             label1.TabIndex = 1;
             label1.Text = "From Whom:";
             // 
             // PostingDateTimePicker
             // 
             PostingDateTimePicker.Format = DateTimePickerFormat.Short;
-            PostingDateTimePicker.Location = new Point(460, 72);
+            PostingDateTimePicker.Location = new Point(657, 120);
+            PostingDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             PostingDateTimePicker.Name = "PostingDateTimePicker";
-            PostingDateTimePicker.Size = new Size(200, 23);
+            PostingDateTimePicker.Size = new Size(284, 31);
             PostingDateTimePicker.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(359, 76);
+            label2.Location = new Point(513, 127);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(77, 15);
+            label2.Size = new Size(117, 25);
             label2.TabIndex = 3;
             label2.Text = "Posting Date:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(369, 323);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(527, 538);
             label3.Name = "label3";
-            label3.Size = new Size(91, 15);
+            label3.Size = new Size(134, 25);
             label3.TabIndex = 4;
             label3.Text = "Current Balance";
             // 
-            // CurrnetBalanceTextBox
+            // CurrentBalanceTextBox
             // 
-            CurrnetBalanceTextBox.Location = new Point(490, 322);
-            CurrnetBalanceTextBox.Margin = new Padding(2);
-            CurrnetBalanceTextBox.Name = "CurrnetBalanceTextBox";
-            CurrnetBalanceTextBox.Size = new Size(122, 23);
-            CurrnetBalanceTextBox.TabIndex = 5;
+            CurrentBalanceTextBox.Location = new Point(700, 537);
+            CurrentBalanceTextBox.Name = "CurrentBalanceTextBox";
+            CurrentBalanceTextBox.Size = new Size(173, 31);
+            CurrentBalanceTextBox.TabIndex = 5;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(45, 118);
-            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Location = new Point(64, 197);
             label4.Name = "label4";
-            label4.Size = new Size(77, 15);
+            label4.Size = new Size(115, 25);
             label4.TabIndex = 6;
             label4.Text = "Amount Paid";
             // 
             // AmountPaidTextBox
             // 
-            AmountPaidTextBox.Location = new Point(166, 118);
-            AmountPaidTextBox.Margin = new Padding(2);
+            AmountPaidTextBox.Location = new Point(237, 197);
             AmountPaidTextBox.Name = "AmountPaidTextBox";
-            AmountPaidTextBox.Size = new Size(122, 23);
+            AmountPaidTextBox.Size = new Size(173, 31);
             AmountPaidTextBox.TabIndex = 7;
             AmountPaidTextBox.KeyPress += AmountPaidTextBox_KeyPress;
             // 
             // SaveButton
             // 
-            SaveButton.Location = new Point(310, 118);
-            SaveButton.Margin = new Padding(2);
+            SaveButton.Location = new Point(443, 197);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(100, 23);
+            SaveButton.Size = new Size(143, 38);
             SaveButton.TabIndex = 9;
             SaveButton.Text = "Post Payment";
             SaveButton.UseVisualStyleBackColor = true;
@@ -129,10 +128,9 @@
             // 
             // DoneButton
             // 
-            DoneButton.Location = new Point(666, 395);
-            DoneButton.Margin = new Padding(2);
+            DoneButton.Location = new Point(951, 658);
             DoneButton.Name = "DoneButton";
-            DoneButton.Size = new Size(78, 20);
+            DoneButton.Size = new Size(111, 33);
             DoneButton.TabIndex = 10;
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
@@ -140,10 +138,9 @@
             // 
             // PartialPaymentButton
             // 
-            PartialPaymentButton.Location = new Point(449, 118);
-            PartialPaymentButton.Margin = new Padding(2);
+            PartialPaymentButton.Location = new Point(641, 197);
             PartialPaymentButton.Name = "PartialPaymentButton";
-            PartialPaymentButton.Size = new Size(168, 23);
+            PartialPaymentButton.Size = new Size(240, 38);
             PartialPaymentButton.TabIndex = 11;
             PartialPaymentButton.Text = "Accept Partial Payment";
             PartialPaymentButton.UseVisualStyleBackColor = true;
@@ -152,27 +149,30 @@
             // OutstandingInvoicesDataGridView
             // 
             OutstandingInvoicesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OutstandingInvoicesDataGridView.Location = new Point(140, 158);
+            OutstandingInvoicesDataGridView.Location = new Point(200, 263);
+            OutstandingInvoicesDataGridView.Margin = new Padding(4, 5, 4, 5);
             OutstandingInvoicesDataGridView.Name = "OutstandingInvoicesDataGridView";
+            OutstandingInvoicesDataGridView.RowHeadersWidth = 62;
             OutstandingInvoicesDataGridView.RowTemplate.Height = 25;
-            OutstandingInvoicesDataGridView.Size = new Size(557, 150);
+            OutstandingInvoicesDataGridView.Size = new Size(796, 250);
             OutstandingInvoicesDataGridView.TabIndex = 12;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 9);
+            label5.Location = new Point(17, 15);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(218, 15);
+            label5.Size = new Size(331, 25);
             label5.TabIndex = 13;
             label5.Text = "Copyright 2023 Prarie Trail Software, Inc.";
             label5.Visible = false;
             // 
             // ReceivePaymentsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(806, 436);
+            ClientSize = new Size(1151, 727);
             Controls.Add(label5);
             Controls.Add(OutstandingInvoicesDataGridView);
             Controls.Add(PartialPaymentButton);
@@ -180,12 +180,13 @@
             Controls.Add(SaveButton);
             Controls.Add(AmountPaidTextBox);
             Controls.Add(label4);
-            Controls.Add(CurrnetBalanceTextBox);
+            Controls.Add(CurrentBalanceTextBox);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(PostingDateTimePicker);
             Controls.Add(label1);
             Controls.Add(CustomerComboBox);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ReceivePaymentsForm";
             Text = "Receive Payment";
             ((System.ComponentModel.ISupportInitialize)OutstandingInvoicesDataGridView).EndInit();
@@ -200,7 +201,7 @@
         private DateTimePicker PostingDateTimePicker;
         private Label label2;
         private Label label3;
-        private TextBox CurrnetBalanceTextBox;
+        private TextBox CurrentBalanceTextBox;
         private Label label4;
         private TextBox AmountPaidTextBox;
         private Button SaveButton;
