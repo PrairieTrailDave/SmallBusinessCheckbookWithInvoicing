@@ -92,45 +92,48 @@
             panel1.Controls.Add(CompanyAddress2Label);
             panel1.Controls.Add(CompanyAddressLabel);
             panel1.Controls.Add(CompanyNameLabel);
-            panel1.Location = new Point(39, 55);
+            panel1.Location = new Point(56, 92);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1138, 322);
+            panel1.Size = new Size(1625, 535);
             panel1.TabIndex = 0;
             // 
             // DateTimePicker
             // 
             DateTimePicker.Format = DateTimePickerFormat.Short;
-            DateTimePicker.Location = new Point(894, 55);
+            DateTimePicker.Location = new Point(1277, 92);
+            DateTimePicker.Margin = new Padding(4, 5, 4, 5);
             DateTimePicker.Name = "DateTimePicker";
-            DateTimePicker.Size = new Size(200, 23);
+            DateTimePicker.Size = new Size(284, 31);
             DateTimePicker.TabIndex = 1;
             // 
             // CheckNumberLabel
             // 
             CheckNumberLabel.AutoSize = true;
-            CheckNumberLabel.Location = new Point(966, 16);
+            CheckNumberLabel.Location = new Point(1380, 27);
+            CheckNumberLabel.Margin = new Padding(4, 0, 4, 0);
             CheckNumberLabel.Name = "CheckNumberLabel";
-            CheckNumberLabel.Size = new Size(47, 15);
+            CheckNumberLabel.Size = new Size(70, 25);
             CheckNumberLabel.TabIndex = 95;
             CheckNumberLabel.Text = "Check#";
             // 
             // CompanyAddress4Label
             // 
             CompanyAddress4Label.AutoSize = true;
-            CompanyAddress4Label.Location = new Point(46, 76);
+            CompanyAddress4Label.Location = new Point(66, 127);
+            CompanyAddress4Label.Margin = new Padding(4, 0, 4, 0);
             CompanyAddress4Label.Name = "CompanyAddress4Label";
-            CompanyAddress4Label.Size = new Size(38, 15);
+            CompanyAddress4Label.Size = new Size(59, 25);
             CompanyAddress4Label.TabIndex = 94;
             CompanyAddress4Label.Text = "label1";
             // 
             // MatchingListBox
             // 
             MatchingListBox.FormattingEnabled = true;
-            MatchingListBox.ItemHeight = 15;
-            MatchingListBox.Location = new Point(178, 144);
-            MatchingListBox.Margin = new Padding(2);
+            MatchingListBox.ItemHeight = 25;
+            MatchingListBox.Location = new Point(254, 240);
             MatchingListBox.Name = "MatchingListBox";
-            MatchingListBox.Size = new Size(416, 79);
+            MatchingListBox.Size = new Size(593, 129);
             MatchingListBox.TabIndex = 18;
             MatchingListBox.Visible = false;
             MatchingListBox.Click += MatchingListBox_Click;
@@ -138,105 +141,117 @@
             // DollarLabel
             // 
             DollarLabel.AutoSize = true;
-            DollarLabel.Location = new Point(1034, 159);
+            DollarLabel.Location = new Point(1477, 265);
+            DollarLabel.Margin = new Padding(4, 0, 4, 0);
             DollarLabel.Name = "DollarLabel";
-            DollarLabel.Size = new Size(57, 15);
+            DollarLabel.Size = new Size(89, 25);
             DollarLabel.TabIndex = 16;
             DollarLabel.Text = "DOLLARS";
             // 
             // OrderOfLabel
             // 
             OrderOfLabel.AutoSize = true;
-            OrderOfLabel.Location = new Point(16, 124);
+            OrderOfLabel.Location = new Point(23, 207);
+            OrderOfLabel.Margin = new Padding(4, 0, 4, 0);
             OrderOfLabel.Name = "OrderOfLabel";
-            OrderOfLabel.Size = new Size(62, 15);
+            OrderOfLabel.Size = new Size(98, 25);
             OrderOfLabel.TabIndex = 15;
             OrderOfLabel.Text = "ORDER OF";
             // 
             // PayToTheOrderOfLabel
             // 
             PayToTheOrderOfLabel.AutoSize = true;
-            PayToTheOrderOfLabel.Location = new Point(16, 105);
+            PayToTheOrderOfLabel.Location = new Point(23, 175);
+            PayToTheOrderOfLabel.Margin = new Padding(4, 0, 4, 0);
             PayToTheOrderOfLabel.Name = "PayToTheOrderOfLabel";
-            PayToTheOrderOfLabel.Size = new Size(68, 15);
+            PayToTheOrderOfLabel.Size = new Size(105, 25);
             PayToTheOrderOfLabel.TabIndex = 14;
             PayToTheOrderOfLabel.Text = "PAY TO THE";
             // 
             // AmountWordsLabel
             // 
             AmountWordsLabel.AutoSize = true;
-            AmountWordsLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            AmountWordsLabel.Location = new Point(59, 159);
+            AmountWordsLabel.Font = new Font("Segoe UI", 10F);
+            AmountWordsLabel.Location = new Point(84, 265);
+            AmountWordsLabel.Margin = new Padding(4, 0, 4, 0);
             AmountWordsLabel.Name = "AmountWordsLabel";
-            AmountWordsLabel.Size = new Size(45, 19);
+            AmountWordsLabel.Size = new Size(65, 28);
             AmountWordsLabel.TabIndex = 13;
             AmountWordsLabel.Text = "label1";
             // 
             // MemoTextBox
             // 
-            MemoTextBox.Location = new Point(78, 276);
+            MemoTextBox.Location = new Point(111, 460);
+            MemoTextBox.Margin = new Padding(4, 5, 4, 5);
             MemoTextBox.Name = "MemoTextBox";
-            MemoTextBox.Size = new Size(304, 23);
+            MemoTextBox.Size = new Size(433, 31);
             MemoTextBox.TabIndex = 4;
             // 
             // MemoNameLabel
             // 
             MemoNameLabel.AutoSize = true;
-            MemoNameLabel.Location = new Point(27, 279);
+            MemoNameLabel.Location = new Point(39, 465);
+            MemoNameLabel.Margin = new Padding(4, 0, 4, 0);
             MemoNameLabel.Name = "MemoNameLabel";
-            MemoNameLabel.Size = new Size(45, 15);
+            MemoNameLabel.Size = new Size(68, 25);
             MemoNameLabel.TabIndex = 11;
             MemoNameLabel.Text = "Memo:";
             // 
             // ToWhomAddress3Label
             // 
             ToWhomAddress3Label.AutoSize = true;
-            ToWhomAddress3Label.Location = new Point(78, 242);
+            ToWhomAddress3Label.Location = new Point(111, 403);
+            ToWhomAddress3Label.Margin = new Padding(4, 0, 4, 0);
             ToWhomAddress3Label.Name = "ToWhomAddress3Label";
-            ToWhomAddress3Label.Size = new Size(38, 15);
+            ToWhomAddress3Label.Size = new Size(59, 25);
             ToWhomAddress3Label.TabIndex = 99;
             ToWhomAddress3Label.Text = "label1";
             // 
             // ToWhomAddress2Label
             // 
             ToWhomAddress2Label.AutoSize = true;
-            ToWhomAddress2Label.Location = new Point(78, 227);
+            ToWhomAddress2Label.Location = new Point(111, 378);
+            ToWhomAddress2Label.Margin = new Padding(4, 0, 4, 0);
             ToWhomAddress2Label.Name = "ToWhomAddress2Label";
-            ToWhomAddress2Label.Size = new Size(38, 15);
+            ToWhomAddress2Label.Size = new Size(59, 25);
             ToWhomAddress2Label.TabIndex = 98;
             ToWhomAddress2Label.Text = "label1";
             // 
             // ToWhomAddress1Label
             // 
             ToWhomAddress1Label.AutoSize = true;
-            ToWhomAddress1Label.Location = new Point(78, 212);
+            ToWhomAddress1Label.Location = new Point(111, 353);
+            ToWhomAddress1Label.Margin = new Padding(4, 0, 4, 0);
             ToWhomAddress1Label.Name = "ToWhomAddress1Label";
-            ToWhomAddress1Label.Size = new Size(38, 15);
+            ToWhomAddress1Label.Size = new Size(59, 25);
             ToWhomAddress1Label.TabIndex = 97;
             ToWhomAddress1Label.Text = "label1";
             // 
             // ToWhomNameLabel
             // 
             ToWhomNameLabel.AutoSize = true;
-            ToWhomNameLabel.Location = new Point(78, 197);
+            ToWhomNameLabel.Location = new Point(111, 328);
+            ToWhomNameLabel.Margin = new Padding(4, 0, 4, 0);
             ToWhomNameLabel.Name = "ToWhomNameLabel";
-            ToWhomNameLabel.Size = new Size(38, 15);
+            ToWhomNameLabel.Size = new Size(59, 25);
             ToWhomNameLabel.TabIndex = 96;
             ToWhomNameLabel.Text = "label1";
             // 
             // AmountTextBox
             // 
-            AmountTextBox.Location = new Point(976, 116);
+            AmountTextBox.Location = new Point(1394, 193);
+            AmountTextBox.Margin = new Padding(4, 5, 4, 5);
             AmountTextBox.Name = "AmountTextBox";
-            AmountTextBox.Size = new Size(118, 23);
+            AmountTextBox.Size = new Size(167, 31);
             AmountTextBox.TabIndex = 3;
             AmountTextBox.Leave += AmountTextBox_Leave;
             // 
             // ToWhomTextBox
             // 
-            ToWhomTextBox.Location = new Point(90, 116);
+            ToWhomTextBox.Location = new Point(129, 193);
+            ToWhomTextBox.Margin = new Padding(4, 5, 4, 5);
             ToWhomTextBox.Name = "ToWhomTextBox";
-            ToWhomTextBox.Size = new Size(789, 23);
+            ToWhomTextBox.Size = new Size(1125, 31);
             ToWhomTextBox.TabIndex = 2;
             ToWhomTextBox.KeyPress += ToWhomTextBox_KeyPress;
             ToWhomTextBox.PreviewKeyDown += ToWhomTextBox_PreviewKeyDown;
@@ -244,36 +259,40 @@
             // CompanyAddress3Label
             // 
             CompanyAddress3Label.AutoSize = true;
-            CompanyAddress3Label.Location = new Point(46, 61);
+            CompanyAddress3Label.Location = new Point(66, 102);
+            CompanyAddress3Label.Margin = new Padding(4, 0, 4, 0);
             CompanyAddress3Label.Name = "CompanyAddress3Label";
-            CompanyAddress3Label.Size = new Size(38, 15);
+            CompanyAddress3Label.Size = new Size(59, 25);
             CompanyAddress3Label.TabIndex = 93;
             CompanyAddress3Label.Text = "label1";
             // 
             // CompanyAddress2Label
             // 
             CompanyAddress2Label.AutoSize = true;
-            CompanyAddress2Label.Location = new Point(46, 46);
+            CompanyAddress2Label.Location = new Point(66, 77);
+            CompanyAddress2Label.Margin = new Padding(4, 0, 4, 0);
             CompanyAddress2Label.Name = "CompanyAddress2Label";
-            CompanyAddress2Label.Size = new Size(38, 15);
+            CompanyAddress2Label.Size = new Size(59, 25);
             CompanyAddress2Label.TabIndex = 92;
             CompanyAddress2Label.Text = "label1";
             // 
             // CompanyAddressLabel
             // 
             CompanyAddressLabel.AutoSize = true;
-            CompanyAddressLabel.Location = new Point(46, 31);
+            CompanyAddressLabel.Location = new Point(66, 52);
+            CompanyAddressLabel.Margin = new Padding(4, 0, 4, 0);
             CompanyAddressLabel.Name = "CompanyAddressLabel";
-            CompanyAddressLabel.Size = new Size(38, 15);
+            CompanyAddressLabel.Size = new Size(59, 25);
             CompanyAddressLabel.TabIndex = 91;
             CompanyAddressLabel.Text = "label1";
             // 
             // CompanyNameLabel
             // 
             CompanyNameLabel.AutoSize = true;
-            CompanyNameLabel.Location = new Point(46, 16);
+            CompanyNameLabel.Location = new Point(66, 27);
+            CompanyNameLabel.Margin = new Padding(4, 0, 4, 0);
             CompanyNameLabel.Name = "CompanyNameLabel";
-            CompanyNameLabel.Size = new Size(38, 15);
+            CompanyNameLabel.Size = new Size(59, 25);
             CompanyNameLabel.TabIndex = 90;
             CompanyNameLabel.Text = "label1";
             // 
@@ -283,54 +302,62 @@
             panel2.Controls.Add(DetailTotalTextBox);
             panel2.Controls.Add(DetailTotalLabel);
             panel2.Controls.Add(CheckBreakdownDataGridView);
-            panel2.Location = new Point(39, 392);
+            panel2.Location = new Point(56, 653);
+            panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1138, 186);
+            panel2.Size = new Size(1626, 310);
             panel2.TabIndex = 1;
             // 
             // CategoryListBox
             // 
             CategoryListBox.FormattingEnabled = true;
-            CategoryListBox.ItemHeight = 15;
-            CategoryListBox.Location = new Point(3, 64);
+            CategoryListBox.ItemHeight = 25;
+            CategoryListBox.Location = new Point(4, 107);
+            CategoryListBox.Margin = new Padding(4, 5, 4, 5);
             CategoryListBox.Name = "CategoryListBox";
-            CategoryListBox.Size = new Size(292, 109);
+            CategoryListBox.Size = new Size(415, 179);
             CategoryListBox.TabIndex = 3;
             CategoryListBox.Visible = false;
             CategoryListBox.SelectedIndexChanged += CategoryListBox_SelectedIndexChanged;
             // 
             // DetailTotalTextBox
             // 
-            DetailTotalTextBox.Location = new Point(93, 6);
+            DetailTotalTextBox.Location = new Point(133, 10);
+            DetailTotalTextBox.Margin = new Padding(4, 5, 4, 5);
             DetailTotalTextBox.Name = "DetailTotalTextBox";
-            DetailTotalTextBox.Size = new Size(109, 23);
+            DetailTotalTextBox.Size = new Size(154, 31);
             DetailTotalTextBox.TabIndex = 89;
             // 
             // DetailTotalLabel
             // 
             DetailTotalLabel.AutoSize = true;
-            DetailTotalLabel.Location = new Point(46, 9);
+            DetailTotalLabel.Location = new Point(66, 15);
+            DetailTotalLabel.Margin = new Padding(4, 0, 4, 0);
             DetailTotalLabel.Name = "DetailTotalLabel";
-            DetailTotalLabel.Size = new Size(41, 15);
+            DetailTotalLabel.Size = new Size(64, 25);
             DetailTotalLabel.TabIndex = 1;
             DetailTotalLabel.Text = "Total $";
             // 
             // CheckBreakdownDataGridView
             // 
             CheckBreakdownDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CheckBreakdownDataGridView.Location = new Point(46, 36);
+            CheckBreakdownDataGridView.Location = new Point(66, 60);
+            CheckBreakdownDataGridView.Margin = new Padding(4, 5, 4, 5);
             CheckBreakdownDataGridView.Name = "CheckBreakdownDataGridView";
+            CheckBreakdownDataGridView.RowHeadersWidth = 62;
             CheckBreakdownDataGridView.RowTemplate.Height = 25;
-            CheckBreakdownDataGridView.Size = new Size(1089, 122);
+            CheckBreakdownDataGridView.Size = new Size(1556, 203);
             CheckBreakdownDataGridView.TabIndex = 0;
+            CheckBreakdownDataGridView.CellClick += CheckBreakdownDataGridView_CellClick;
             CheckBreakdownDataGridView.CellEnter += CheckBreakdownDataGridView_CellEnter;
             CheckBreakdownDataGridView.CellValueChanged += CheckBreakdownDataGridView_CellValueChanged;
             // 
             // PrintCheckButton
             // 
-            PrintCheckButton.Location = new Point(80, 12);
+            PrintCheckButton.Location = new Point(114, 20);
+            PrintCheckButton.Margin = new Padding(4, 5, 4, 5);
             PrintCheckButton.Name = "PrintCheckButton";
-            PrintCheckButton.Size = new Size(105, 23);
+            PrintCheckButton.Size = new Size(150, 38);
             PrintCheckButton.TabIndex = 20;
             PrintCheckButton.Text = "Print Check";
             PrintCheckButton.UseVisualStyleBackColor = true;
@@ -342,9 +369,10 @@
             // 
             // AddToBatchButton
             // 
-            AddToBatchButton.Location = new Point(298, 12);
+            AddToBatchButton.Location = new Point(426, 20);
+            AddToBatchButton.Margin = new Padding(4, 5, 4, 5);
             AddToBatchButton.Name = "AddToBatchButton";
-            AddToBatchButton.Size = new Size(97, 23);
+            AddToBatchButton.Size = new Size(139, 38);
             AddToBatchButton.TabIndex = 21;
             AddToBatchButton.Text = "Add To Batch";
             AddToBatchButton.UseVisualStyleBackColor = true;
@@ -352,9 +380,10 @@
             // 
             // PrintBatchButton
             // 
-            PrintBatchButton.Location = new Point(524, 12);
+            PrintBatchButton.Location = new Point(749, 20);
+            PrintBatchButton.Margin = new Padding(4, 5, 4, 5);
             PrintBatchButton.Name = "PrintBatchButton";
-            PrintBatchButton.Size = new Size(75, 23);
+            PrintBatchButton.Size = new Size(107, 38);
             PrintBatchButton.TabIndex = 22;
             PrintBatchButton.Text = "Print Batch";
             PrintBatchButton.UseVisualStyleBackColor = true;
@@ -362,9 +391,10 @@
             // 
             // DoneButton
             // 
-            DoneButton.Location = new Point(995, 12);
+            DoneButton.Location = new Point(1421, 20);
+            DoneButton.Margin = new Padding(4, 5, 4, 5);
             DoneButton.Name = "DoneButton";
-            DoneButton.Size = new Size(75, 23);
+            DoneButton.Size = new Size(107, 38);
             DoneButton.TabIndex = 50;
             DoneButton.Text = "Done";
             DoneButton.UseVisualStyleBackColor = true;
@@ -373,18 +403,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(2, 37);
+            label3.Location = new Point(3, 62);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(218, 15);
+            label3.Size = new Size(331, 25);
             label3.TabIndex = 51;
             label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
             label3.Visible = false;
             // 
             // DeleteDetailLineButton
             // 
-            DeleteDetailLineButton.Location = new Point(1195, 506);
+            DeleteDetailLineButton.Location = new Point(1707, 843);
+            DeleteDetailLineButton.Margin = new Padding(4, 5, 4, 5);
             DeleteDetailLineButton.Name = "DeleteDetailLineButton";
-            DeleteDetailLineButton.Size = new Size(75, 23);
+            DeleteDetailLineButton.Size = new Size(107, 38);
             DeleteDetailLineButton.TabIndex = 52;
             DeleteDetailLineButton.Text = "Delete Line";
             DeleteDetailLineButton.UseVisualStyleBackColor = true;
@@ -392,9 +424,10 @@
             // 
             // ClearCheckButton
             // 
-            ClearCheckButton.Location = new Point(1195, 580);
+            ClearCheckButton.Location = new Point(1707, 967);
+            ClearCheckButton.Margin = new Padding(4, 5, 4, 5);
             ClearCheckButton.Name = "ClearCheckButton";
-            ClearCheckButton.Size = new Size(75, 23);
+            ClearCheckButton.Size = new Size(107, 38);
             ClearCheckButton.TabIndex = 53;
             ClearCheckButton.Text = "Clear";
             ClearCheckButton.UseVisualStyleBackColor = true;
@@ -403,9 +436,10 @@
             // CurrentBalanceTextLabel
             // 
             CurrentBalanceTextLabel.AutoSize = true;
-            CurrentBalanceTextLabel.Location = new Point(1195, 139);
+            CurrentBalanceTextLabel.Location = new Point(1707, 232);
+            CurrentBalanceTextLabel.Margin = new Padding(4, 0, 4, 0);
             CurrentBalanceTextLabel.Name = "CurrentBalanceTextLabel";
-            CurrentBalanceTextLabel.Size = new Size(91, 15);
+            CurrentBalanceTextLabel.Size = new Size(134, 25);
             CurrentBalanceTextLabel.TabIndex = 54;
             CurrentBalanceTextLabel.Text = "Current Balance";
             // 
@@ -413,17 +447,18 @@
             // 
             CurrentBalanceLabel.AutoSize = true;
             CurrentBalanceLabel.BackColor = SystemColors.HighlightText;
-            CurrentBalanceLabel.Location = new Point(1204, 161);
+            CurrentBalanceLabel.Location = new Point(1720, 268);
+            CurrentBalanceLabel.Margin = new Padding(4, 0, 4, 0);
             CurrentBalanceLabel.Name = "CurrentBalanceLabel";
-            CurrentBalanceLabel.Size = new Size(38, 15);
+            CurrentBalanceLabel.Size = new Size(59, 25);
             CurrentBalanceLabel.TabIndex = 55;
             CurrentBalanceLabel.Text = "label1";
             // 
             // WriteCheckForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1312, 615);
+            ClientSize = new Size(1874, 1025);
             Controls.Add(CurrentBalanceLabel);
             Controls.Add(CurrentBalanceTextLabel);
             Controls.Add(ClearCheckButton);
@@ -435,6 +470,7 @@
             Controls.Add(PrintCheckButton);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "WriteCheckForm";
             Text = "WriteCheckForm";
             panel1.ResumeLayout(false);

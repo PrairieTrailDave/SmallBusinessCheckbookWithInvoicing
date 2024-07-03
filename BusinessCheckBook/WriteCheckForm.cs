@@ -308,6 +308,11 @@ namespace BusinessCheckBook
             Close();
         }
 
+
+
+
+
+
         // Event Handler
         // The PrintPage event is raised for each page to be printed.
         private void Pd_PrintPage(object sender, PrintPageEventArgs ev)
@@ -340,6 +345,12 @@ namespace BusinessCheckBook
                 BatchCheckNum = 0;
             }
         }
+
+
+
+
+
+
 
 
 
@@ -386,7 +397,8 @@ namespace BusinessCheckBook
 
         }
 
-        private void CheckBreakdownDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void CheckBreakdownDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int Col = e.ColumnIndex;
             if (Col == 0)
@@ -406,6 +418,16 @@ namespace BusinessCheckBook
             }
             else
                 CategoryListBox.Visible = false;
+            if (Col == 1 || Col == 2)
+                CategoryListBox.Visible = false;
+
+        }
+
+
+
+        private void CheckBreakdownDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int Col = e.ColumnIndex;
             if (Col == 1 || Col == 2)
                 CheckBreakdownDataGridView.BeginEdit(true);
         }
@@ -1178,7 +1200,6 @@ namespace BusinessCheckBook
                 Height = 12
             };
         }
-
 
     }
 }
