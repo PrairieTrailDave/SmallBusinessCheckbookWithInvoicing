@@ -26,12 +26,18 @@ namespace BusinessCheckBook
             ActiveBook = new MyCheckbook();
         }
 
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            OpenTheDataFile();
+        }
+
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ActiveBook.IfChanged())
             {
-                if (MessageBox.Show("The file has changed. Do you really want to close without saving?", "Dirty File", MessageBoxButtons.YesNo) != DialogResult.Yes) 
-                { 
+                if (MessageBox.Show("The file has changed. Do you really want to close without saving?", "Dirty File", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
                     e.Cancel = true;
                 }
             }
@@ -69,33 +75,9 @@ namespace BusinessCheckBook
             }
         }
 
-        private async void FileOpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FileOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog.FileName = "*.xlsx";
-            openFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    this.UseWaitCursor = true;
-                    Application.DoEvents();
-                    CurrentActiveFile = openFileDialog.SafeFileName;
-                    InputFolder = Path.GetDirectoryName(openFileDialog.FileName) ?? "";
-                    if (await ReadDataFile(openFileDialog.FileName))
-                    {
-                        MessageBox.Show("File read"); ;
-                        EnableButtons();
-                    }
-                    this.Cursor = Cursors.Default;
-                    this.UseWaitCursor = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occured " + ex.Message);
-                    ShowWarningIncomplete();
-                }
-            }
+            OpenTheDataFile();
         }
 
 
@@ -300,6 +282,35 @@ namespace BusinessCheckBook
         // Support Routines
 
 
+        private async void OpenTheDataFile()
+        {
+            openFileDialog.FileName = "*.xlsx";
+            openFileDialog.Filter = "CheckBook files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    this.UseWaitCursor = true;
+                    Application.DoEvents();
+                    CurrentActiveFile = openFileDialog.SafeFileName;
+                    InputFolder = Path.GetDirectoryName(openFileDialog.FileName) ?? "";
+                    if (await ReadDataFile(openFileDialog.FileName))
+                    {
+                        MessageBox.Show("File read"); ;
+                        EnableButtons();
+                    }
+                    this.Cursor = Cursors.Default;
+                    this.UseWaitCursor = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occured " + ex.Message);
+                    ShowWarningIncomplete();
+                }
+            }
+        }
+
         private void ShowWarningIncomplete()
         {
             MessageBox.Show("The operation was incomplete. The file in memory is likely to be corrupted. Please restart.");
@@ -376,7 +387,6 @@ namespace BusinessCheckBook
             ShowInvoicesButton.Enabled = true;
 
         }
-
 
     }
 }

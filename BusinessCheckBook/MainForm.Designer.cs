@@ -300,6 +300,7 @@
             Name = "MainForm";
             Text = "Business Checking";
             FormClosing += MainForm_FormClosing;
+            Shown += MainForm_Shown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
