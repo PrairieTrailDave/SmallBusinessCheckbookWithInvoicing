@@ -24,7 +24,7 @@ namespace BusinessCheckBook.DataStore
 
         public Invoices() 
         {
-            CurrentInvoices = new();
+            CurrentInvoices = [];
             SetSheetFormat();
             Changed = false;
         }
@@ -308,7 +308,7 @@ namespace BusinessCheckBook.DataStore
 
         internal void WriteXLInvoices(XLWorkbook CheckBookXlsx)
         {
-            // add the chart of accounts worksheet
+            // add the invoices worksheet
             CheckBookXlsx.AddWorksheet(InvoiceListFormat.SheetName);
             IXLWorksheet InvoicesWorksheet = CheckBookXlsx.Worksheet(InvoiceListFormat.SheetName);
 
