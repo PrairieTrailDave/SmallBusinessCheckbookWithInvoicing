@@ -42,6 +42,18 @@ namespace BusinessCheckBook.Reports
             CurrentYearTextBox.Text = CurrentYear.ToString();
             PriorYearTextBox.Text = PriorYear.ToString();
             ShowReport(CurrentYear, PriorYear);
+
+            if (ActiveBook.PastBusinessActivities.AnyActivitiesToWrite())
+            {
+                UpdateBusinessActivityButton.Enabled = true;
+                UpdateBusinessActivityButton.Visible = true;
+            }
+            else
+            {
+                UpdateBusinessActivityButton.Enabled = false;
+                UpdateBusinessActivityButton.Visible = false;
+            }
+
         }
 
 
@@ -114,6 +126,27 @@ namespace BusinessCheckBook.Reports
                 {
                     csvFile.WriteRecords(ComparisonReport);
                 }
+            }
+        }
+
+        private void UpdateBusinessActivityButton_Click(object sender, EventArgs e)
+        {
+            if (ComparisonReport.Count > 0)
+            {
+                YearlyBusinessActivity YBA = new();
+                int month = 1;
+                foreach (ReportLine RL in ComparisonReport)
+                {
+                    MonthlyBusinessActivity MBA = new()
+                    {
+                        Year = DateTime.Now.Year,
+                        Month = month++,
+                        CashIn = Decimal.Parse(RL.ThisYearsCashIn),
+                        Invoices = Decimal.Parse(RL.ThisYearsInvoice)
+                    };
+                    YBA.MonthlyBusinessActivities.Add(MBA);
+                }
+                ActiveBook.PastBusinessActivities.UpdateThisYear(YBA);
             }
         }
     }

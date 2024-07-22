@@ -19,6 +19,7 @@ namespace BusinessCheckBook.DataStore
         internal CustomerList Customers { get; set; } = new();
         internal PayToList ToPayTo { get; set; } = new();
         internal CompanyParameters CompanyInformation { get; set; } = new();
+        internal BusinessActivities PastBusinessActivities { get; set; } = new();
 
         private bool Changed;
 
@@ -68,6 +69,7 @@ namespace BusinessCheckBook.DataStore
             ToPayTo = new();
             CompanyInformation = new();
             CompanyInformation.PutParameter(CompanyParameters.FirstInvoiceNumber.Name, FirstInvoiceNumber.ToString());
+            PastBusinessActivities = new();
         }
 
         public bool FileIsValid(XLWorkbook CurrentWorkbook, out string ErrorMessage)
@@ -107,6 +109,11 @@ namespace BusinessCheckBook.DataStore
                 return false;
             }
 
+            if (!PastBusinessActivities.Validate(CurrentWorkbook, out ErrorMessage))
+            {
+                ErrorMessage = "The Past Business Activity is not valid " + ErrorMessage;
+                return false;   
+            }
             return true;
         }
 
@@ -133,6 +140,8 @@ namespace BusinessCheckBook.DataStore
                 CurrentInvoices.ReadFromExcelFile(CurrentWorkbook);
                 ToPayTo.ReadFromExcelFile(CurrentWorkbook);
                 CompanyInformation.ReadFromExcelFile(CurrentWorkbook) ;
+
+                PastBusinessActivities.ReadFromExcelFile(CurrentWorkbook) ;
 
                 CheckFileForConsistency();
                 return true;
@@ -688,6 +697,10 @@ namespace BusinessCheckBook.DataStore
             ToPayTo.WriteXLPayToList(CurrentWorkbook);
             CompanyInformation.SetSheetFormat();
             CompanyInformation.WriteXLParameterList(CurrentWorkbook);
+
+            // don't write this worksheet if no activities in memory
+            if (PastBusinessActivities.AnyActivitiesToWrite())
+                PastBusinessActivities.WriteToXLFile(CurrentWorkbook);
         }
     }
 }

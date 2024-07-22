@@ -35,6 +35,7 @@
             ReportDataGridView = new DataGridView();
             RefreshButton = new Button();
             label3 = new Label();
+            UpdateBusinessActivityButton = new Button();
             ((System.ComponentModel.ISupportInitialize)ReportDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             // CurrentYearTextBox
             // 
             CurrentYearTextBox.Location = new Point(114, 26);
-            CurrentYearTextBox.Margin = new Padding(2, 2, 2, 2);
+            CurrentYearTextBox.Margin = new Padding(2);
             CurrentYearTextBox.Name = "CurrentYearTextBox";
             CurrentYearTextBox.Size = new Size(78, 23);
             CurrentYearTextBox.TabIndex = 1;
@@ -69,7 +70,7 @@
             // PriorYearTextBox
             // 
             PriorYearTextBox.Location = new Point(288, 26);
-            PriorYearTextBox.Margin = new Padding(2, 2, 2, 2);
+            PriorYearTextBox.Margin = new Padding(2);
             PriorYearTextBox.Name = "PriorYearTextBox";
             PriorYearTextBox.Size = new Size(106, 23);
             PriorYearTextBox.TabIndex = 3;
@@ -78,7 +79,7 @@
             // 
             ReportDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ReportDataGridView.Location = new Point(52, 65);
-            ReportDataGridView.Margin = new Padding(2, 2, 2, 2);
+            ReportDataGridView.Margin = new Padding(2);
             ReportDataGridView.Name = "ReportDataGridView";
             ReportDataGridView.RowHeadersWidth = 62;
             ReportDataGridView.RowTemplate.Height = 33;
@@ -88,7 +89,7 @@
             // RefreshButton
             // 
             RefreshButton.Location = new Point(464, 25);
-            RefreshButton.Margin = new Padding(2, 2, 2, 2);
+            RefreshButton.Margin = new Padding(2);
             RefreshButton.Name = "RefreshButton";
             RefreshButton.Size = new Size(78, 20);
             RefreshButton.TabIndex = 5;
@@ -105,11 +106,22 @@
             label3.Text = "Copyright 2023 Prarie Trail Software, Inc.";
             label3.Visible = false;
             // 
+            // UpdateBusinessActivityButton
+            // 
+            UpdateBusinessActivityButton.Location = new Point(614, 92);
+            UpdateBusinessActivityButton.Name = "UpdateBusinessActivityButton";
+            UpdateBusinessActivityButton.Size = new Size(155, 23);
+            UpdateBusinessActivityButton.TabIndex = 7;
+            UpdateBusinessActivityButton.Text = "Update Business Activity";
+            UpdateBusinessActivityButton.UseVisualStyleBackColor = true;
+            UpdateBusinessActivityButton.Click += UpdateBusinessActivityButton_Click;
+            // 
             // CompareReportForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(814, 452);
+            Controls.Add(UpdateBusinessActivityButton);
             Controls.Add(label3);
             Controls.Add(RefreshButton);
             Controls.Add(ReportDataGridView);
@@ -117,7 +129,7 @@
             Controls.Add(label2);
             Controls.Add(CurrentYearTextBox);
             Controls.Add(label1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "CompareReportForm";
             Text = "CompareReportForm";
             ((System.ComponentModel.ISupportInitialize)ReportDataGridView).EndInit();
@@ -134,5 +146,6 @@
         private DataGridView ReportDataGridView;
         private Button RefreshButton;
         private Label label3;
+        private Button UpdateBusinessActivityButton;
     }
 }
