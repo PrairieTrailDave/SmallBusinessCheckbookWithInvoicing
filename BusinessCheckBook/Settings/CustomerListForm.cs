@@ -49,34 +49,34 @@ namespace BusinessCheckBook.Settings
             int RowNum = e.RowIndex;
             if (RowNum > -1)
             {
-                TCustomer = ActiveBook.Customers.GetThisCustomer(RowNum);
-                DisplayThisCustomer(TCustomer);
+                string customerID = (string)CustDataGridView.Rows[RowNum].Cells[0].Value;
+                TCustomer = ActiveBook.Customers.GetCustomerByID(customerID)!;
+                if (TCustomer != null)
+                    DisplayThisCustomer(TCustomer);
+                else
+                    ClearCustomerDisplay();                    
             }
         }
 
 
         // button clicks
 
-        private void ClearButton_Click(object sender, EventArgs e)
+        private void ShowAllCustomersButton_Click(object sender, EventArgs e)
         {
-            CustomerIDTextBox.Text = "";
-            AccountNameTextBox.Text = "";
-            BusinessNameTextBox.Text = "";
-            AddressTextBox.Text = "";
-            Address2TextBox.Text = "";
-            CityTextBox.Text = "";
-            StateComboBox.Text = "";
-            ZipCodeTextBox.Text = "";
-            ContactPersonTextBox.Text = "";
-            PhoneTextBox.Text = "";
-            EmailAddressTextBox.Text = "";
-            SalesTaxCheckBox.Checked = false;
-            TaxIDTextBox.Text = "";
+            ShowAllCurrentCustomerList();
         }
 
-        private void DisableButton_Click(object sender, EventArgs e)
+        private void ClearButton_Click(object sender, EventArgs e)
         {
-            TCustomer.IsActive = false;
+            ClearCustomerDisplay();
+        }
+
+        private void InActiveButton_Click(object sender, EventArgs e)
+        {
+            if (TCustomer.IsActive) TCustomer.IsActive = false;
+            else TCustomer.IsActive = true;
+            ActiveBook.Customers.HasChanged();
+            ShowCurrentCustomerList();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -133,6 +133,23 @@ namespace BusinessCheckBook.Settings
 
         // Support Routines
 
+        private void ClearCustomerDisplay()
+        {
+            CustomerIDTextBox.Text = "";
+            AccountNameTextBox.Text = "";
+            BusinessNameTextBox.Text = "";
+            AddressTextBox.Text = "";
+            Address2TextBox.Text = "";
+            CityTextBox.Text = "";
+            StateComboBox.Text = "";
+            ZipCodeTextBox.Text = "";
+            ContactPersonTextBox.Text = "";
+            PhoneTextBox.Text = "";
+            EmailAddressTextBox.Text = "";
+            SalesTaxCheckBox.Checked = false;
+            TaxIDTextBox.Text = "";
+
+        }
         private void ShowCurrentCustomerList()
         {
             CustomerList Customers = ActiveBook.Customers;
@@ -152,7 +169,28 @@ namespace BusinessCheckBook.Settings
                 }
             }
             CustDataGridView.DataSource = DisplayList;
-            CustDataGridView.AutoResizeColumns();
+            CustDataGridView.AutoResizeColumn(1);
+            CustDataGridView.AutoResizeColumn(2);
+        }
+
+        private void ShowAllCurrentCustomerList()
+        {
+            CustomerList Customers = ActiveBook.Customers;
+            List<CustList> DisplayList = new();
+            foreach (var Customer in Customers.GetCurrentList())
+            {
+                    CustList DisplayCust = new()
+                    {
+                        CustomerIdentifier = Customer.CustomerIdentifier,
+                        AccountName = Customer.AccountName,
+                        BusinessName = Customer.BusinessName,
+                        City = Customer.City
+                    };
+                    DisplayList.Add(DisplayCust);
+            }
+            CustDataGridView.DataSource = DisplayList;
+            CustDataGridView.AutoResizeColumn(1);
+            CustDataGridView.AutoResizeColumn(2);
         }
 
         private void DisplayThisCustomer(Customer TCust)
@@ -170,6 +208,14 @@ namespace BusinessCheckBook.Settings
             EmailAddressTextBox.Text = TCust.EmailAddress;
             SalesTaxCheckBox.Checked = TCust.Taxable;
             TaxIDTextBox.Text = TCust.TaxID;
+            if (TCust.IsActive)
+            {
+                InActiveButton.Text = "Make InActive";
+            }
+            else 
+            {
+                InActiveButton.Text = "Make Active";
+            }
         }
 
         private bool ValidateCustomerEntry()
@@ -238,4 +284,5 @@ namespace BusinessCheckBook.Settings
             return true;
         }
     }
+
 }
