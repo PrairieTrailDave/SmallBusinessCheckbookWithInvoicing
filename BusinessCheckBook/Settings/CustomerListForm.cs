@@ -35,8 +35,13 @@ namespace BusinessCheckBook.Settings
         internal void SetUp(MyCheckbook PassedActiveBook)
         {
             ActiveBook = PassedActiveBook;
+        }
+
+        private void CustomerListForm_Shown(object sender, EventArgs e)
+        {
             ShowCurrentCustomerList();
         }
+
 
         internal void PutPassedCustomerOnScreen(Customer TCust)
         {
@@ -54,7 +59,7 @@ namespace BusinessCheckBook.Settings
                 if (TCustomer != null)
                     DisplayThisCustomer(TCustomer);
                 else
-                    ClearCustomerDisplay();                    
+                    ClearCustomerDisplay();
             }
         }
 
@@ -69,6 +74,7 @@ namespace BusinessCheckBook.Settings
         private void ClearButton_Click(object sender, EventArgs e)
         {
             ClearCustomerDisplay();
+            TCustomer = new();
         }
 
         private void InActiveButton_Click(object sender, EventArgs e)
@@ -129,6 +135,26 @@ namespace BusinessCheckBook.Settings
 
 
 
+        // Field edit routines
+
+        private void CustomerIDTextBox_Leave(object sender, EventArgs e)
+        {
+            if (TCustomer != null)
+            {
+                if (TCustomer.CustomerIdentifier.Length > 0)
+                {
+                    if (TCustomer.CustomerIdentifier != CustomerIDTextBox.Text)
+                    {
+                        if (MessageBox.Show("This may cause problems matching up data. Are you sure?",
+                            "Changing This?", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            CustomerIDTextBox.Text = TCustomer.CustomerIdentifier;
+                        }
+                    }
+                }
+            }
+        }
+
 
 
         // Support Routines
@@ -179,14 +205,14 @@ namespace BusinessCheckBook.Settings
             List<CustList> DisplayList = new();
             foreach (var Customer in Customers.GetCurrentList())
             {
-                    CustList DisplayCust = new()
-                    {
-                        CustomerIdentifier = Customer.CustomerIdentifier,
-                        AccountName = Customer.AccountName,
-                        BusinessName = Customer.BusinessName,
-                        City = Customer.City
-                    };
-                    DisplayList.Add(DisplayCust);
+                CustList DisplayCust = new()
+                {
+                    CustomerIdentifier = Customer.CustomerIdentifier,
+                    AccountName = Customer.AccountName,
+                    BusinessName = Customer.BusinessName,
+                    City = Customer.City
+                };
+                DisplayList.Add(DisplayCust);
             }
             CustDataGridView.DataSource = DisplayList;
             CustDataGridView.AutoResizeColumn(1);
@@ -212,7 +238,7 @@ namespace BusinessCheckBook.Settings
             {
                 InActiveButton.Text = "Make InActive";
             }
-            else 
+            else
             {
                 InActiveButton.Text = "Make Active";
             }
@@ -283,6 +309,7 @@ namespace BusinessCheckBook.Settings
 
             return true;
         }
+
     }
 
 }

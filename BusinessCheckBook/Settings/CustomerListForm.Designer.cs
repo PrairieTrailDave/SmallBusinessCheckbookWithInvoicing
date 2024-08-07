@@ -112,6 +112,7 @@
             CustomerIDTextBox.Name = "CustomerIDTextBox";
             CustomerIDTextBox.Size = new Size(595, 31);
             CustomerIDTextBox.TabIndex = 4;
+            CustomerIDTextBox.Leave += CustomerIDTextBox_Leave;
             // 
             // label3
             // 
@@ -395,6 +396,7 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "CustomerListForm";
             Text = "CustomerListForm";
+            Shown += CustomerListForm_Shown;
             ((System.ComponentModel.ISupportInitialize)CustDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
