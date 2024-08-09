@@ -144,22 +144,25 @@ namespace BusinessCheckBook.DataStore
 
         public bool WriteToXLFile(XLWorkbook CheckBookXlsx)
         {
+            // as this is an optional sheet.
+            // Don't write it if nothing in memory
 
-            
-            // add the business history worksheet
-            CheckBookXlsx.AddWorksheet(BusinessHistoryFormat.SheetName);
-            IXLWorksheet BusinessHistoryWorksheet = CheckBookXlsx.Worksheet(BusinessHistoryFormat.SheetName);
-
-            // for each year saved, write it out
-
-            int WhichYear = 0;
-            foreach (YearlyBusinessActivity YBA in BusinessHistory)
+            if (BusinessHistory.Count > 0)
             {
-                SheetFormat YearlyColumnsFormat = BusinessHistoryFormat.SubFormats[WhichYear];
-                YBA.WriteYearlyActivity(BusinessHistoryWorksheet, YearlyColumnsFormat);
-                WhichYear++;
-            }
+                // add the business history worksheet
+                CheckBookXlsx.AddWorksheet(BusinessHistoryFormat.SheetName);
+                IXLWorksheet BusinessHistoryWorksheet = CheckBookXlsx.Worksheet(BusinessHistoryFormat.SheetName);
 
+                // for each year saved, write it out
+
+                int WhichYear = 0;
+                foreach (YearlyBusinessActivity YBA in BusinessHistory)
+                {
+                    SheetFormat YearlyColumnsFormat = BusinessHistoryFormat.SubFormats[WhichYear];
+                    YBA.WriteYearlyActivity(BusinessHistoryWorksheet, YearlyColumnsFormat);
+                    WhichYear++;
+                }
+            }
             return true;
         }
 
