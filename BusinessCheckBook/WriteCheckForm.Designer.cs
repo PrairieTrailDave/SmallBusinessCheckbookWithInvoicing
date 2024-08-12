@@ -50,7 +50,6 @@
             CompanyAddressLabel = new Label();
             CompanyNameLabel = new Label();
             panel2 = new Panel();
-            CategoryListBox = new ListBox();
             DetailTotalTextBox = new TextBox();
             DetailTotalLabel = new Label();
             CheckBreakdownDataGridView = new DataGridView();
@@ -298,7 +297,6 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(CategoryListBox);
             panel2.Controls.Add(DetailTotalTextBox);
             panel2.Controls.Add(DetailTotalLabel);
             panel2.Controls.Add(CheckBreakdownDataGridView);
@@ -307,18 +305,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1626, 310);
             panel2.TabIndex = 1;
-            // 
-            // CategoryListBox
-            // 
-            CategoryListBox.FormattingEnabled = true;
-            CategoryListBox.ItemHeight = 25;
-            CategoryListBox.Location = new Point(4, 107);
-            CategoryListBox.Margin = new Padding(4, 5, 4, 5);
-            CategoryListBox.Name = "CategoryListBox";
-            CategoryListBox.Size = new Size(415, 179);
-            CategoryListBox.TabIndex = 3;
-            CategoryListBox.Visible = false;
-            CategoryListBox.SelectedIndexChanged += CategoryListBox_SelectedIndexChanged;
             // 
             // DetailTotalTextBox
             // 
@@ -348,7 +334,6 @@
             CheckBreakdownDataGridView.RowTemplate.Height = 25;
             CheckBreakdownDataGridView.Size = new Size(1556, 203);
             CheckBreakdownDataGridView.TabIndex = 0;
-            CheckBreakdownDataGridView.CellClick += CheckBreakdownDataGridView_CellClick;
             CheckBreakdownDataGridView.CellEnter += CheckBreakdownDataGridView_CellEnter;
             CheckBreakdownDataGridView.CellValueChanged += CheckBreakdownDataGridView_CellValueChanged;
             // 
@@ -510,7 +495,6 @@
         private Button PrintCheckButton;
         private Label CheckNumberLabel;
         private PrintDialog PrintCheckDialog;
-        private ListBox CategoryListBox;
         private Button AddToBatchButton;
         private Button PrintBatchButton;
         private Button DoneButton;

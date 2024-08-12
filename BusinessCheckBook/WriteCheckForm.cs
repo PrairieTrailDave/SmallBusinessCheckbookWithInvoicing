@@ -89,11 +89,6 @@ namespace BusinessCheckBook
             WriteCompanyInformation();
             ClearOtherLabelsOnCheck();
             CreateSubCategoryList();
-            CategoryListBox.Items.Clear();
-            foreach (string CategoryName in ActiveBook.CurrentAccounts.GetListOfAccounts())
-            {
-                CategoryListBox.Items.Add(CategoryName);
-            }
             CurrentCheckNumber = ActiveBook.CurrentTransactionLedger.GetLastCheckNumber() + 1;
             CheckNumberLabel.Text = CurrentCheckNumber.ToString();
             CurrentLedgerBalance = ActiveBook.GetCurrentBalance();
@@ -398,30 +393,6 @@ namespace BusinessCheckBook
         }
 
 
-        private void CheckBreakdownDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int Col = e.ColumnIndex;
-            if (Col == 0)
-            {
-                // show only when a check is being written
-                if (ToWhomTextBox.Text.Length > 0)
-                {
-                    int Row = e.RowIndex;
-                    string? CellContents = CheckBreakdownDataGridView.Rows[Row].Cells[0].Value.ToString();
-                    if (CellContents != null) { CategoryListBox.SelectedValue = CellContents; }
-                    CategoryListBox.Visible = true;
-                    CategoryListBox.Focus();
-                    CategoryRow = Row;
-                }
-                else
-                    CategoryListBox.Visible = false;
-            }
-            else
-                CategoryListBox.Visible = false;
-            if (Col == 1 || Col == 2)
-                CategoryListBox.Visible = false;
-
-        }
 
 
 
@@ -458,20 +429,20 @@ namespace BusinessCheckBook
                 CurrentCheckToPrint.Breakdown[WhichBreakdown].Memo = "";
         }
 
-        private void CategoryListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string Account = CategoryListBox.SelectedItem!.ToString()!.Trim();
-            if (Account.Contains(':'))
-            {
-                Account = Account.Split(':')[1];
-            }
-            CheckBreakdownDataGridView.Rows[CategoryRow].Cells[0].Value = Account;
-            CurrentCheckToPrint.Breakdown[CategoryRow].AccountName = Account;
-            CheckBreakdownDataGridView.CurrentCell = CheckBreakdownDataGridView.Rows[CategoryRow].Cells[1];
-            CategoryListBox.Visible = false;
-            CheckBreakdownDataGridView.InvalidateRow(CategoryRow);
-            CheckBreakdownDataGridView.Update();
-        }
+        //private void CategoryListBox_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string Account = CategoryListBox.SelectedItem!.ToString()!.Trim();
+        //    if (Account.Contains(':'))
+        //    {
+        //        Account = Account.Split(':')[1];
+        //    }
+        //    CheckBreakdownDataGridView.Rows[CategoryRow].Cells[0].Value = Account;
+        //    CurrentCheckToPrint.Breakdown[CategoryRow].AccountName = Account;
+        //    CheckBreakdownDataGridView.CurrentCell = CheckBreakdownDataGridView.Rows[CategoryRow].Cells[1];
+        //    CategoryListBox.Visible = false;
+        //    CheckBreakdownDataGridView.InvalidateRow(CategoryRow);
+        //    CheckBreakdownDataGridView.Update();
+        //}
 
 
 
@@ -573,6 +544,17 @@ namespace BusinessCheckBook
         {
             ClearBreakdown(CurrentCheckToPrint);
             CheckBreakdownDataGridView.DataSource = CurrentCheckToPrint.Breakdown;
+
+            // manually create the combobox in the breakdown
+
+            CheckBreakdownDataGridView.Columns.Remove("AccountName");
+            List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfAccounts();
+            DataGridViewComboBoxColumn WhichAccount = new DataGridViewComboBoxColumn();
+            WhichAccount.DataSource = Accounts;
+            WhichAccount.HeaderText = "Account";
+            WhichAccount.DataPropertyName = "AccountName";
+            CheckBreakdownDataGridView.Columns.Insert(0, WhichAccount);
+
             CheckBreakdownDataGridView.Columns[0].Width = 300;
             CheckBreakdownDataGridView.Columns[1].Width = 150;
             CheckBreakdownDataGridView.Columns[2].Width = 550;
