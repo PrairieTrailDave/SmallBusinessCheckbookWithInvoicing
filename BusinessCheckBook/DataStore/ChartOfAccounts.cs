@@ -274,6 +274,32 @@ namespace BusinessCheckBook.DataStore
             }
             return results;
         }
+        internal List<string> GetListOfIncomeAccounts()
+        {
+            List<string> results = new();
+            foreach (Account account in CurrentAccounts)
+            {
+                if (account.IsActive && account.WhatType == Account.Type.Income)
+                {
+                    if (account.SubAccountOf?.Length > 0)
+                    {
+                        string fullname = account.SubAccountOf + ":" + account.Name;
+                        Account? parentAccount = CurrentAccounts.FirstOrDefault(c => c.Name == account.SubAccountOf);
+                        while ((parentAccount != null) && (parentAccount.SubAccountOf?.Length > 0))
+                        {
+                            fullname = parentAccount.SubAccountOf + ":" + fullname;
+                            parentAccount = CurrentAccounts.FirstOrDefault(c => c.Name == parentAccount.SubAccountOf);
+                        }
+                        results.Add(fullname);
+                    }
+                    else
+                    {
+                        results.Add(account.Name);
+                    }
+                }
+            }
+            return results;
+        }
         internal string? GetFirstExpenseAccount()
         {
             return (from act in CurrentAccounts

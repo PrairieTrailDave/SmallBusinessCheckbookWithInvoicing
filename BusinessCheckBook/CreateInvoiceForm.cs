@@ -66,10 +66,6 @@ namespace BusinessCheckBook
             }
             InvoiceNumber = ActiveBook.GetNextInvoiceNumber();
             InvoiceNumberTextBox.Text = InvoiceNumber.ToString();
-            List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfAccounts();
-            AccountListBox.Items.Clear();
-            foreach (string account in Accounts)
-                AccountListBox.Items.Add(account);
 
             CurrentInvoiceFormat = new(ActiveBook);
 
@@ -339,22 +335,22 @@ namespace BusinessCheckBook
         }
 
 
-        private void InvoiceDetailDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            int ColumnEntered = e.ColumnIndex;
-            CurrentBreakdownRow = e.RowIndex;
-            if (ColumnEntered == 0)
-            {
-                if (CustomerComboBox.Text.Length > 0)
-                {
-                    AccountListBox.Visible = true;
-                    AccountListBox.Focus();
-                }
-            }
-            else
-                AccountListBox.Visible = false;
+        //private void InvoiceDetailDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    int ColumnEntered = e.ColumnIndex;
+        //    CurrentBreakdownRow = e.RowIndex;
+        //    if (ColumnEntered == 0)
+        //    {
+        //        if (CustomerComboBox.Text.Length > 0)
+        //        {
+        //            AccountListBox.Visible = true;
+        //            AccountListBox.Focus();
+        //        }
+        //    }
+        //    else
+        //        AccountListBox.Visible = false;
 
-        }
+        //}
 
 
         private void AccountListBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -369,25 +365,25 @@ namespace BusinessCheckBook
 
         private void AccountListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CurrentBreakdownRow > -1)
-            {
-                InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
-                    AccountListBox.Text;
-                AccountListBox.Visible = false;
-                InvoiceDetailDataGridView.Focus();
-                InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[1].Selected = true;
-                InvoiceDetailDataGridView.BeginEdit(true);
-            }
+            //if (CurrentBreakdownRow > -1)
+            //{
+            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
+            //        AccountListBox.Text;
+            //    AccountListBox.Visible = false;
+            //    InvoiceDetailDataGridView.Focus();
+            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[1].Selected = true;
+            //    InvoiceDetailDataGridView.BeginEdit(true);
+            //}
         }
 
         private void AccountListBox_Leave(object sender, EventArgs e)
         {
-            if (CurrentBreakdownRow > -1)
-            {
-                InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
-                    AccountListBox.Text;
-                AccountListBox.Visible = false;
-            }
+            //if (CurrentBreakdownRow > -1)
+            //{
+            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
+            //        AccountListBox.Text;
+            //    AccountListBox.Visible = false;
+            //}
         }
 
 
@@ -435,7 +431,19 @@ namespace BusinessCheckBook
                 new InvoiceItem(),
                 new InvoiceItem()
             };
+
+            // manually build the combobox on the detail grid
+            List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfIncomeAccounts();
+            DataGridViewComboBoxColumn WhichAccount = new DataGridViewComboBoxColumn();
+            WhichAccount.DataSource = Accounts;
+            WhichAccount.HeaderText = "Account";
+            WhichAccount.DataPropertyName = "Account";
+
+
             InvoiceDetailDataGridView.DataSource = CurrentInvoice.InvoiceBreakdown;
+            InvoiceDetailDataGridView.Columns.Remove("Account");
+            InvoiceDetailDataGridView.Columns.Insert(0, WhichAccount);
+
             int DetailWindowSize = InvoiceDetailDataGridView.Width;
             InvoiceDetailDataGridView.Columns["ItemDescription"].Width = DetailWindowSize / 2;
             InvoiceDetailDataGridView.Columns["ItemCost"].Width = DetailWindowSize / 12;
