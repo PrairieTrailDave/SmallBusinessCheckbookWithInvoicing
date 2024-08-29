@@ -82,7 +82,7 @@ Reconciliation Screen
 ![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/19e8f51a-6424-4fb2-99a6-6d2a3d3fa109)
 
 Time Sheet Entry
-![image](https://github.com/user-attachments/assets/74b68808-0212-4bd7-8aa1-530baed84ece)
+![image](https://github.com/user-attachments/assets/7eeba386-c80c-491c-b21b-93014ec1468b)
 
 Reports
 
