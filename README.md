@@ -1,8 +1,8 @@
 # Small Business Checking with invoicing and tax reports
-A Business Checkbook application with user interface, prints checks, manages invoices and produces 1120 and 1099 reports using an Excel database.
+A Business Checkbook application with user interface, prints checks, manages invoices, track project time, and produces 1120 and 1099 reports using an Excel database.
 
 This is a quick and dirty checkbook program that I wrote to replace my old QuickBooks program. I was tired of QuickBooks constantly telling me to upgrade and I didn't want to pay for the latest version. No, I'm not buying the online version either.
-This is NOT AN ACCOUNTING PACKAGE. It is a checkbook program. This is useful only for CASH ONLY business.
+This is NOT AN ACCOUNTING PACKAGE. It is a checkbook program. This is useful only for small business CASH ONLY business.
 This program is NOT a multi-user program. It is a single user program.
 
 
@@ -18,13 +18,20 @@ Right now, the functions include
 1. Create a new company
 2. Read the current database
 3. Import from Quickbooks journal xlsx file
-4. Create and print a check
-5. Create and print an invoice
-6. Receive payments and mark the invoice as paid
-7. Reconcile with bank statement
-8. Create compare this year with last year report
-9. Create 1120 report
-10. Create 1099 report
+4. Manage a chart of accounts
+5. Manage a customer list for projects and invoicing
+6. Manage a list of payees (vendors and others)
+7. Manage business information for printing on checks and invoices 
+8. Create and print a check
+9. Create and print an invoice
+10. Receive payments and mark the invoice as paid
+11. Reconcile with bank statement
+12. Manage projects for customers
+13. Manage list of people for time sheet tracking
+14. Enter timesheet data
+15. Create compare this year with last year report
+16. Create 1120 report
+17. Create 1099 report
 
 
 Here are some words to try to keep lawyer type people from coming after me for letting anyone else use this.
@@ -44,10 +51,10 @@ Here are many of the screens:
 
 The menu options on the main screen at this time are:
 
-            File                        Settings                Reconcile          Reports
-              New                         Chart of Accounts                          Compare Income
-              Open                        Customer List                              Federal 1120
-              Import                      List of Pay To's                           1099 / 1096
+            File                        Settings                Reconcile          Reports           Time Tracking
+              New                         Chart of Accounts                          Compare Income    Manage People
+              Open                        Customer List                              Federal 1120      Manage Projects
+              Import                      List of Pay To's                           1099 / 1096       Enter Time Sheets
                  IIF file                 Business Data
                  Journal Excel file       Invoice Settings
               Save
@@ -56,7 +63,7 @@ The menu options on the main screen at this time are:
 
 
 Main screen 
-![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/f589c15e-7122-480e-859f-d881cee06f26)
+![image](https://github.com/user-attachments/assets/251863b5-1881-44c6-8c46-8b55dce93a2c)
 
 
 Create a check
@@ -73,6 +80,9 @@ Receive Payments
 
 Reconciliation Screen
 ![image](https://github.com/PrairieTrailDave/BusinessCheckBook/assets/16313413/19e8f51a-6424-4fb2-99a6-6d2a3d3fa109)
+
+Time Sheet Entry
+![image](https://github.com/user-attachments/assets/74b68808-0212-4bd7-8aa1-530baed84ece)
 
 Reports
 
