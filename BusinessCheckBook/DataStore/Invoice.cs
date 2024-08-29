@@ -56,7 +56,7 @@ namespace BusinessCheckBook.DataStore
         }
 
 
-        internal static bool ValidateColumnHeaders(IXLWorksheet TransactionsWorksheet, SheetFormat InvoiceListFormat, out string ErrorMessage)
+        internal static bool ValidateColumnHeaders(IXLWorksheet InvoiceWorksheet, SheetFormat InvoiceListFormat, out string ErrorMessage)
         {
             string HeaderValue;
             ErrorMessage = "";
@@ -72,7 +72,7 @@ namespace BusinessCheckBook.DataStore
 
                 if (WhichWorksheetColumn > 0)
                 {
-                    HeaderValue = TransactionsWorksheet.Cell(1, WhichWorksheetColumn).GetString().Trim();
+                    HeaderValue = InvoiceWorksheet.Cell(1, WhichWorksheetColumn).GetString().Trim();
                     if (col.Name.ToUpper() == HeaderValue.ToUpper())
                         continue;
                 }
@@ -81,8 +81,8 @@ namespace BusinessCheckBook.DataStore
 
                 for (int ColNum = 1; ColNum <= InvoiceListFormat.Count(); ColNum++)
                 {
-                    if (ColNum > TransactionsWorksheet.ColumnsUsed().Count()) break;
-                    HeaderValue = TransactionsWorksheet.Cell(1, ColNum).GetString().Trim();
+                    if (ColNum > InvoiceWorksheet.ColumnsUsed().Count()) break;
+                    HeaderValue = InvoiceWorksheet.Cell(1, ColNum).GetString().Trim();
                     if (col.Name.ToUpper() == HeaderValue.ToUpper())
                     {
                         headerNotFound = false;
@@ -92,7 +92,7 @@ namespace BusinessCheckBook.DataStore
                 }
                 if (headerNotFound)
                 {
-                    ErrorMessage = "The column " + col.Name + " is not in the Transaction Sheet";
+                    ErrorMessage = "The column " + col.Name + " is not in the Invoices Sheet";
                     return false;
                 }
 
@@ -103,9 +103,9 @@ namespace BusinessCheckBook.DataStore
 
             InvoiceListFormat.SubFormats = new();
             int LastColumn = InvoiceListFormat.Count();
-            while (LastColumn < TransactionsWorksheet.ColumnsUsed().Count())
+            while (LastColumn < InvoiceWorksheet.ColumnsUsed().Count())
             {
-                HeaderValue = TransactionsWorksheet.Cell(1, LastColumn + 1).GetString().Trim();
+                HeaderValue = InvoiceWorksheet.Cell(1, LastColumn + 1).GetString().Trim();
                 if (HeaderValue.Length > 0)
                 {
                     // add another set of breakdown formats
@@ -115,7 +115,7 @@ namespace BusinessCheckBook.DataStore
                     InvoiceListFormat.SubFormats.Add(BreakdownColumnsFormat);
 
                     // and validate against those formats
-                    if (!InvoiceItem.ValidateInvoiceItemHeader(TransactionsWorksheet, LastColumn, BreakdownColumnsFormat, out ErrorMessage, out int BreakdownColumnCount))
+                    if (!InvoiceItem.ValidateInvoiceItemHeader(InvoiceWorksheet, LastColumn, BreakdownColumnsFormat, out ErrorMessage, out int BreakdownColumnCount))
                         return false;
                     LastColumn += BreakdownColumnCount;
                 }

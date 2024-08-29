@@ -279,6 +279,7 @@ namespace BusinessCheckBook
                         BillToAddress4TextBox.Text = "";
                     }
                     GetCustomerHistoryAndOpenBalance(ChosenCustomer);
+                    CheckForUnInvoicedTimeSheets(ChosenCustomer);
                 }
                 else
                     MessageBox.Show("Unable to find that customer");
@@ -335,56 +336,6 @@ namespace BusinessCheckBook
         }
 
 
-        //private void InvoiceDetailDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    int ColumnEntered = e.ColumnIndex;
-        //    CurrentBreakdownRow = e.RowIndex;
-        //    if (ColumnEntered == 0)
-        //    {
-        //        if (CustomerComboBox.Text.Length > 0)
-        //        {
-        //            AccountListBox.Visible = true;
-        //            AccountListBox.Focus();
-        //        }
-        //    }
-        //    else
-        //        AccountListBox.Visible = false;
-
-        //}
-
-
-        private void AccountListBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //if (e.KeyCode == Keys.Tab)
-            //{
-            //    InvoiceDetailDataGridView.Focus();
-            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[1].Selected = true;
-            //    InvoiceDetailDataGridView.BeginEdit(true);
-            //}
-        }
-
-        private void AccountListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (CurrentBreakdownRow > -1)
-            //{
-            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
-            //        AccountListBox.Text;
-            //    AccountListBox.Visible = false;
-            //    InvoiceDetailDataGridView.Focus();
-            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[1].Selected = true;
-            //    InvoiceDetailDataGridView.BeginEdit(true);
-            //}
-        }
-
-        private void AccountListBox_Leave(object sender, EventArgs e)
-        {
-            //if (CurrentBreakdownRow > -1)
-            //{
-            //    InvoiceDetailDataGridView.Rows[CurrentBreakdownRow].Cells[0].Value =
-            //        AccountListBox.Text;
-            //    AccountListBox.Visible = false;
-            //}
-        }
 
 
 
@@ -574,6 +525,86 @@ namespace BusinessCheckBook
                 ToSave.InvoiceBreakdown.Add(IIT);
             }
         }
+        internal void CheckForUnInvoicedTimeSheets(Customer ChosenCustomer)
+        {
+            int DisplayRow = 0;
 
+            // first find any projects for this customer
+
+            List<Project> CustomerProjects = ActiveBook.CurrentProjects.GetCustomerProjects(ChosenCustomer.CustomerIdentifier);
+
+            // then get all uninvoiced timesheets for those projects
+
+            foreach (Project CustomerProject in CustomerProjects)
+            {
+                List<TimeSheetEntry> UninvoicedTimeSheets =
+                    ActiveBook.CurrentTimeSheets.GetProjectBillableTimeSheets(CustomerProject.ProjectID);
+
+
+                // Add these to the invoice
+
+                foreach (TimeSheetEntry entry in UninvoicedTimeSheets)
+                {
+                    switch (entry.WhichType)
+                    {
+                        case TimeSheetEntry.TimeEntryType.Time:
+                            // for hourly entry
+                            TimeSpan Interval = entry.EndTime - entry.StartTime;
+                            Decimal ComputedTime = Interval.Hours + Interval.Minutes / 60;
+
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells[0].Value =
+                                CustomerProject.AllocatedAccount;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemDescription"].Value =
+                                entry.Action;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemCost"].Value =
+                                CustomerProject.BillRate;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemQuantity"].Value =
+                                ComputedTime;
+                            // don't have the tax rate stored - possibly by customer and which account is taxable
+                            //InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemTax"].Value =
+                            //    ComputedTime * CustomerProject.BillRate;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemPrice"].Value =
+                                ComputedTime * CustomerProject.BillRate;
+
+                            entry.HasBeenInvoiced = true;
+                            DisplayRow++;
+                            break;
+
+                        case TimeSheetEntry.TimeEntryType.SubContractor:
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells[0].Value =
+                                CustomerProject.AllocatedAccount;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemDescription"].Value =
+                                entry.SubcontractorName;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemCost"].Value =
+                                entry.SubcontractorAmount;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemQuantity"].Value =
+                                1;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemPrice"].Value =
+                                entry.SubcontractorAmount;
+
+                            entry.HasBeenInvoiced = true;
+                            DisplayRow++;
+                            break;
+
+                        case TimeSheetEntry.TimeEntryType.OtherExpense:
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells[0].Value =
+                                CustomerProject.AllocatedAccount;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemDescription"].Value =
+                                entry.OtherExpenseDescription;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemCost"].Value =
+                                entry.OtherExpenseAmount;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemQuantity"].Value =
+                                1;
+                            InvoiceDetailDataGridView.Rows[DisplayRow].Cells["ItemPrice"].Value =
+                                entry.OtherExpenseAmount;
+
+                            entry.HasBeenInvoiced = true;
+                            DisplayRow++;
+                            break;
+
+                    }
+                }
+            }
+        }
     }
 }

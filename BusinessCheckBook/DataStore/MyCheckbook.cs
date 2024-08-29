@@ -1,8 +1,15 @@
 ﻿//**********************************************************************
 //
-//          Copyright © 2023 Prairie Trail Software, Inc.
+//          Copyright © 2024 Prairie Trail Software, Inc.
 //
 //**********************************************************************
+
+
+// This system assumes that all data can be potentially bad.
+// It verifies every data cell read from the file and every input by the user.
+//
+// todo: move all messagebox out of this class. It should return the errormessage to the calling
+// and the display is done in the form class
 
 using ClosedXML.Excel;
 
@@ -21,6 +28,10 @@ namespace BusinessCheckBook.DataStore
         internal CompanyParameters CompanyInformation { get; set; } = new();
         internal BusinessActivities PastBusinessActivities { get; set; } = new();
 
+        internal Projects CurrentProjects { get; set; } = new();
+        internal Persons CurrentPersons { get; set; } = new();
+        internal TimeSheets CurrentTimeSheets { get; set; } = new();
+
         private bool Changed;
 
         // other variables
@@ -36,13 +47,18 @@ namespace BusinessCheckBook.DataStore
             Logger = myLog;
         }
 
-        public bool IfChanged() { return Changed
+        public bool IfChanged() {
+            return Changed
                                         || CurrentTransactionLedger.IfChanged()
                                         || CurrentAccounts.IfChanged()
                                         || CurrentInvoices.IfChanged()
                                         || Customers.IfChanged()
                                         || ToPayTo.IfChanged()
-                                        || CompanyInformation.IfChanged(); 
+                                        || CompanyInformation.IfChanged()
+                                        || CurrentProjects.IfChanged()
+                                        || CurrentPersons.IfChanged()
+                                        || CurrentTimeSheets.IfChanged();
+
                                 }
         public void HasChanged () { Changed = true; }   
         public void ClearChanged()
@@ -54,6 +70,9 @@ namespace BusinessCheckBook.DataStore
             Customers.ClearChanged();
             ToPayTo.ClearChanged();
             CompanyInformation.ClearChanged();
+            CurrentProjects.ClearChanged();
+            CurrentPersons.ClearChanged();
+            CurrentTimeSheets.ClearChanged();
         }
 
 
@@ -70,6 +89,9 @@ namespace BusinessCheckBook.DataStore
             CompanyInformation = new();
             CompanyInformation.PutParameter(CompanyParameters.FirstInvoiceNumber.Name, FirstInvoiceNumber.ToString());
             PastBusinessActivities = new();
+            CurrentProjects = new();
+            CurrentPersons = new();
+            CurrentTimeSheets = new();
         }
 
         public bool FileIsValid(XLWorkbook CurrentWorkbook, out string ErrorMessage)
@@ -114,6 +136,21 @@ namespace BusinessCheckBook.DataStore
                 ErrorMessage = "The Past Business Activity is not valid " + ErrorMessage;
                 return false;   
             }
+            if (!CurrentProjects.Validate(CurrentWorkbook, out ErrorMessage))
+            {
+                ErrorMessage = "The Project List is not valid " + ErrorMessage;
+                return false;
+            }
+            if (!CurrentPersons.Validate(CurrentWorkbook, out ErrorMessage))
+            {
+                ErrorMessage = "The List of People is not valid " + ErrorMessage;
+                return false;
+            }
+            if (!CurrentTimeSheets.Validate(CurrentWorkbook, out ErrorMessage))
+            {
+                ErrorMessage = "The Time Sheets are not valid " + ErrorMessage;
+                return false;
+            }
             return true;
         }
 
@@ -125,8 +162,9 @@ namespace BusinessCheckBook.DataStore
 
 
 
-        public bool ReadExcelFile(XLWorkbook CurrentWorkbook)
+        public bool ReadExcelFile(XLWorkbook CurrentWorkbook, out string ErrorMessage)
         {
+            ErrorMessage = string.Empty;
             try
             {
                 CurrentTransactionLedger = new();
@@ -142,13 +180,16 @@ namespace BusinessCheckBook.DataStore
                 CompanyInformation.ReadFromExcelFile(CurrentWorkbook) ;
 
                 PastBusinessActivities.ReadFromExcelFile(CurrentWorkbook) ;
-
-                CheckFileForConsistency();
+                CurrentProjects.ReadFromExcelFile(CurrentWorkbook);
+                CurrentPersons.ReadFromExcelFile(CurrentWorkbook);
+                CurrentTimeSheets.ReadFromExcelFile(CurrentWorkbook);
+                if (!CheckFileForConsistency(out ErrorMessage))
+                    return false;
                 return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("We had an error in reading the file" + ex.Message);
+                ErrorMessage = "We had an error in reading the file" + ex.Message;
                 return false;
             }
         }
@@ -501,7 +542,8 @@ namespace BusinessCheckBook.DataStore
             }
 
             // check file for consistency after reading
-            CheckFileForConsistency();
+            if (!CheckFileForConsistency(out ErrorMessage))
+                MessageBox.Show(ErrorMessage);
             return true;
         }
 
@@ -643,8 +685,9 @@ namespace BusinessCheckBook.DataStore
 //            return false;
 //        }
 
-        internal bool CheckFileForConsistency()
+        internal bool CheckFileForConsistency(out string ErrorMessage)
         {
+            ErrorMessage = string.Empty;    
             // check the chart of accounts to make sure all are unique names
 
             if (!CurrentAccounts.CheckForConsistency()) return false;
@@ -666,6 +709,12 @@ namespace BusinessCheckBook.DataStore
             // TBD - make sure all deposits are from some entity in the Customer list
 
             // TBD - make sure all accounts listed on an invoice are in the chart of accounts
+
+            // make sure that all projects are for existing customers
+
+            if (!CurrentProjects.CheckAgainstCustomerList(Customers.GetCurrentList(), out ErrorMessage))
+                return false;
+            
 
             return true;
         }
@@ -698,9 +747,12 @@ namespace BusinessCheckBook.DataStore
             CompanyInformation.SetSheetFormat();
             CompanyInformation.WriteXLParameterList(CurrentWorkbook);
 
-            // don't write this worksheet if no activities in memory
-            if (PastBusinessActivities.AnyActivitiesToWrite())
-                PastBusinessActivities.WriteToXLFile(CurrentWorkbook);
+            // the following sheets are optional and do not write if no data is stored
+
+            PastBusinessActivities.WriteToXLFile(CurrentWorkbook);
+            CurrentProjects.WriteXLProjects(CurrentWorkbook);
+            CurrentPersons.WriteXLPersons(CurrentWorkbook);
+            CurrentTimeSheets.WriteXLTimeSheets(CurrentWorkbook);
         }
     }
 }

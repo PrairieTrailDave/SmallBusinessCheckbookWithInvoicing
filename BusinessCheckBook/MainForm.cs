@@ -9,7 +9,7 @@ using BusinessCheckBook.Reports;
 using BusinessCheckBook.Settings;
 using ClosedXML.Excel;
 using System.Windows.Forms;
-
+using BusinessCheckBook.TimeTracking;
 
 namespace BusinessCheckBook
 {
@@ -205,6 +205,27 @@ namespace BusinessCheckBook
 
         }
 
+        // Time Tracking Menu Items
+
+        private void ManagePeopleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManagePeopleForm MPF = new(ActiveBook);
+            MPF.ShowDialog();
+        }
+
+        private void ManageProjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageProjectForm MPF = new(ActiveBook);
+            MPF.ShowDialog();
+        }
+
+        private void EnterTimeSheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageTimeForm MTF = new(ActiveBook);
+            MTF.ShowDialog();
+        }
+
+
 
         // Reconcile
 
@@ -330,8 +351,10 @@ namespace BusinessCheckBook
 
                     if (ActiveBook.FileIsValid(CurrentWorkbook, out ErrorMessage))
                     {
-                        if (ActiveBook.ReadExcelFile(CurrentWorkbook))
+                        if (ActiveBook.ReadExcelFile(CurrentWorkbook, out ErrorMessage))
                             FileRead = true;
+                        else
+                            MessageBox.Show(ErrorMessage);
                     }
                     else
                     {
@@ -387,6 +410,7 @@ namespace BusinessCheckBook
             ShowInvoicesButton.Enabled = true;
 
         }
+
 
     }
 }
