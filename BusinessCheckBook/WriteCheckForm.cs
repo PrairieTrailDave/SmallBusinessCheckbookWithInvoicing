@@ -30,7 +30,6 @@ namespace BusinessCheckBook
         List<CheckToPrint> CheckBatch = new();
         CheckPrintLayout CurrentPrintLayout = new();
 
-        int CategoryRow;
         int CurrentCheckNumber;
         int BatchCheckNum;
 
@@ -77,7 +76,6 @@ namespace BusinessCheckBook
         public WriteCheckForm()
         {
             InitializeComponent();
-            CategoryRow = 0;
         }
 
         // called from main menu
@@ -540,6 +538,12 @@ namespace BusinessCheckBook
             DetailTotalTextBox.Text = "";
         }
 
+        class CategoryElement
+        {
+            public string text { get; set; }  = string.Empty;
+            public string value { get; set; } = string.Empty;
+        }
+
         private void CreateSubCategoryList()
         {
             ClearBreakdown(CurrentCheckToPrint);
@@ -547,12 +551,27 @@ namespace BusinessCheckBook
 
             // manually create the combobox in the breakdown
 
-            CheckBreakdownDataGridView.Columns.Remove("AccountName");
-            List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfAccounts();
+            // when done twice, the second time, the name is not found
+            //CheckBreakdownDataGridView.Columns.Remove("AccountName");
+            DataGridViewColumn ToRemove = CheckBreakdownDataGridView.Columns[0];
+            CheckBreakdownDataGridView.Columns.Remove(ToRemove);
+
+           
+            List<CategoryElement> AccountsToList = new ();
+            foreach (string CategoryName in ActiveBook.CurrentAccounts.GetListOfAccounts())
+            {
+                if (CategoryName.Contains(':'))
+                    AccountsToList.Add(new CategoryElement { text = CategoryName, value =  CategoryName.Split(':')[1] });
+                else
+                    AccountsToList.Add(new CategoryElement { text = CategoryName, value = CategoryName });
+            }
+            //List<string> Accounts = ActiveBook.CurrentAccounts.GetListOfAccounts();
             DataGridViewComboBoxColumn WhichAccount = new DataGridViewComboBoxColumn();
-            WhichAccount.DataSource = Accounts;
+            WhichAccount.DataSource = AccountsToList;
             WhichAccount.HeaderText = "Account";
             WhichAccount.DataPropertyName = "AccountName";
+            WhichAccount.ValueMember = "value";
+            WhichAccount.DisplayMember = "text";
             CheckBreakdownDataGridView.Columns.Insert(0, WhichAccount);
 
             CheckBreakdownDataGridView.Columns[0].Width = 300;
@@ -802,6 +821,8 @@ namespace BusinessCheckBook
                         int subi = 0;
                         DetailSubTotal = 0.00M;
                         List<LedgerEntryBreakdown> tSubAccounts = new();
+
+                        // we had a problem where the saved account name was not matching the accounts set for the dropdown.
 
                         while (subi < LastTransaction.SubAccounts.Count)
                         {
