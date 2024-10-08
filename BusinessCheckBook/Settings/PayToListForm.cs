@@ -30,7 +30,10 @@ namespace BusinessCheckBook.Settings
             PayToList TList = ActiveBook.ToPayTo;
             PayToDataGridView.DataSource = TList.GetCurrentList();
         }
-
+        internal void SetBusinessName(string NewBusinessName)
+        {
+            BusinessNameTextBox.Text = NewBusinessName;
+        }
 
 
         private void ClearButton_Click(object sender, EventArgs e)

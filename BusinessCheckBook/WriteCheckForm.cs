@@ -7,7 +7,7 @@
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using BusinessCheckBook.DataStore;
-using DocumentFormat.OpenXml.Vml;
+using BusinessCheckBook.Settings;
 
 namespace BusinessCheckBook
 {
@@ -885,6 +885,10 @@ namespace BusinessCheckBook
                     == DialogResult.Yes)
                 {
                     // show the screen to add this person now
+                    PayToListForm PTLF = new();
+                    PTLF.SetUp(ActiveBook);
+                    PTLF.SetBusinessName(EnteredName);
+                    PTLF.ShowDialog();
                 }
                 else
                 {
