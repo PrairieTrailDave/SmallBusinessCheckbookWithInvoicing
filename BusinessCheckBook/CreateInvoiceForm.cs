@@ -389,6 +389,7 @@ namespace BusinessCheckBook
             WhichAccount.DataSource = Accounts;
             WhichAccount.HeaderText = "Account";
             WhichAccount.DataPropertyName = "Account";
+            WhichAccount.Name = "Account";
 
 
             InvoiceDetailDataGridView.DataSource = CurrentInvoice.InvoiceBreakdown;
