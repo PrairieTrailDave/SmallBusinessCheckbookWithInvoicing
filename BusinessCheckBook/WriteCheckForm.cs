@@ -173,7 +173,10 @@ namespace BusinessCheckBook
             if ((ToWhomTextBox.Text.Length > 0) && (AmountTextBox.Text.Length > 0))
             {
                 // check if the breakdown total matches the check amount
-                decimal breakdownTotal = Decimal.Parse(DetailTotalTextBox.Text ?? "0.00");
+
+                if (DetailTotalTextBox.Text == null) DetailTotalTextBox.Text = "0.00";
+                if (DetailTotalTextBox.Text.Length == 0) DetailTotalTextBox.Text = "0.00";
+                decimal breakdownTotal = Decimal.Parse(DetailTotalTextBox.Text);
                 decimal checkTotal = Decimal.Parse(AmountTextBox.Text ?? "0.00");
                 if (checkTotal == 0.00M)
                 {

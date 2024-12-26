@@ -439,12 +439,14 @@ namespace BusinessCheckBook.DataStore
 
 
         // check the ledger for date and check number consistency
-        internal bool CheckForConsistency()
+        internal bool CheckForConsistency(out string ErrorMessage)
         {
             decimal RunningBalance;
             bool consistency = true;
+            ErrorMessage = "";
 
             // only act if there are any transactions in the ledger
+            // Note: we could have multiple errors in the ledger. Thus, report all of them in one pass.
 
             if (CurrentLedger.Count > 0)
             {
@@ -458,13 +460,22 @@ namespace BusinessCheckBook.DataStore
                     if (LE.When < LastLedgerEntry.When)
                     {
                         MessageBox.Show("Transaction " + LE.ID + " is out of order date wise", "Inconsistent Ledger");
+                        ErrorMessage = "Inconsistent Ledger";
+                        consistency = false;
+                    }
+                    if ((LE.Credit > 0.00M) && (LE.Debit > 0.00M))
+                    {
+                        MessageBox.Show("Transaction " + LE.ID + " has both credit of " + LE.Credit.ToString("0.00") + 
+                            " and debit of " + LE.Debit.ToString("0.00"), "Inconsistent Ledger");
+                        ErrorMessage = "Inconsistent Ledger";
                         consistency = false;
                     }
                     RunningBalance = LastLedgerEntry.Balance + LE.Credit - LE.Debit;
                     if (LE.Balance != RunningBalance)
                     {
                         MessageBox.Show("Balance for transaction " + LE.ID + " does not match running balance "
-                            + LE.Balance.ToString("0.00") + " != " + RunningBalance.ToString("0.00"));
+                            + LE.Balance.ToString("0.00") + " != " + RunningBalance.ToString("0.00"), "Inconsistent Ledger");
+                        ErrorMessage = "Inconsistent Ledger";
                         consistency = false;
                     }
                 }

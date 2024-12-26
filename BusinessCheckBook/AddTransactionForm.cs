@@ -174,6 +174,10 @@ namespace BusinessCheckBook
                     TransactionDebit = Amount;
                     CheckAmountTextBox.Text = Amount.ToString("0.00");
                     CurrentBalanceTextBox.Text = (PriorBalance - Amount).ToString("C");
+                    if (Amount > 0.00M)
+                    {
+                        DepositTextBox.Text = "";
+                    }
                 }
             }
         }
@@ -430,6 +434,11 @@ namespace BusinessCheckBook
                 CurrentBalanceTextBox.Text = ResultingBalance.ToString("C");
             }
 
+            if ((TransactionCredit > 0.00M) && (TransactionDebit > 0.00M))
+            {
+                MessageBox.Show("Transaction has both credit and debit, please choose which");
+                return;
+            }
             if (TransactionDebit == 0.00M)
                 CheckAmount = TransactionCredit;
             else

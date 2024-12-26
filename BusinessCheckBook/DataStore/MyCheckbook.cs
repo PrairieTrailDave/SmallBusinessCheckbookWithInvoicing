@@ -694,7 +694,7 @@ namespace BusinessCheckBook.DataStore
 
             // check if all transactions are in sequential date order
             // check if all transaction balances match running total to that point
-            if (!CurrentTransactionLedger.CheckForConsistency()) return false;
+            if (!CurrentTransactionLedger.CheckForConsistency(out ErrorMessage)) return false;
 
             // make sure all amounts are allocated to an account
             // insure all accounts are found in the Chart of Accounts
